@@ -13,8 +13,8 @@ public class Game {
 	private int nbPlayers;
 
 	public void play() {
-		//createPlayers();
-		initialiseBoards();
+		createPlayers();
+		initialiseKingdoms();
 		try {
 			initialiseDrawPile();
 		} catch (FileNotFoundException e) {
@@ -27,9 +27,13 @@ public class Game {
 
 		Scanner scanner = new Scanner(System.in);
 		System.out.println("Saisir nombre de joueur : ");
-		nbPlayers= scanner.nextInt();
+		nbPlayers = scanner.nextInt();
 		scanner.nextLine();
-		for(int i = 1; i<nbPlayers; i++) {
+
+		Player[] players = new Player[4];
+
+		// Noms et couleurs des joueurs :
+		for(int i = 1; i<=nbPlayers; i++) {
 			System.out.println("Saisir nom joueur " + i + " : ");
 			String name = scanner.nextLine();
 
@@ -62,10 +66,13 @@ public class Game {
 		}
 
 		currentPlayer = players[0];
+		System.out.println("Les joueurs ont bien été créés.");
 	}
 	
-	public void initialiseBoards() {
+	public void initialiseKingdoms() {
+		for(int i = 1; i<=nbPlayers; i++) {
 
+		}
 	}
 
 	public void initialiseDrawPile() throws FileNotFoundException {
@@ -100,6 +107,8 @@ public class Game {
 
 		// Mélange des dominos
 		Collections.shuffle(drawPile);
+
+		System.out.println("La pioche a été mélangée.");
 	}
 
 }
