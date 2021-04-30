@@ -38,14 +38,22 @@ public class Game {
 				String color_input = scanner.nextLine();
 
 				switch (color_input) {
-					case "rouge" -> color = 1;
-					case "bleu" -> color = 2;
-					case "vert" -> color = 3;
-					case "jaune" -> color = 4;
-					default -> {
+					case "rouge":
+						color = 1;
+						break;
+					case "bleu":
+						color = 2;
+						break;
+					case "vert":
+						color = 3;
+						break;
+					case "jaune":
+						color = 4;
+						break;
+					default:
 						color = 0;
 						System.out.println("Saisir une couleur valide : ");
-					}
+						break;
 				}
 
 			} while (color == 0);
@@ -57,7 +65,7 @@ public class Game {
 	}
 	
 	public void initialiseBoards() {
-		
+
 	}
 
 	public void initialiseDrawPile() throws FileNotFoundException {
@@ -93,7 +101,5 @@ public class Game {
 		// Mélange des dominos
 		Collections.shuffle(drawPile);
 	}
-
-
 
 }
