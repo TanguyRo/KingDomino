@@ -10,6 +10,7 @@ public class Game {
 	private Player[] players;
 	private Player currentPlayer;
 	private Kingdom[] kingdoms;
+	private King[] kings;
 	private LinkedList<Domino> drawPile;
 	private int nbPlayers;
 
@@ -32,6 +33,7 @@ public class Game {
 		scanner.nextLine();
 
 		Player[] players = new Player[nbPlayers];
+		King[] kings = new King[4];
 
 		// Noms et couleurs des joueurs :
 		for(int i = 1; i<=nbPlayers; i++) {
@@ -64,6 +66,8 @@ public class Game {
 			} while (color == 0);
 
 			players[i] = new Player(name, color);
+
+			// Création des rois en fonction du nombre de joueurs
 		}
 
 		currentPlayer = players[0];
@@ -74,7 +78,7 @@ public class Game {
 		Kingdom[] kingdoms = new Kingdom[nbPlayers];
 
 		for(int i = 0; i<nbPlayers; i++) {
-			Kingdom kingdom = new Kingdom(1,players[i]);
+			Kingdom kingdom = new Kingdom(1,players[i]);	// taille 1 car uniquement le château au départ
 		}
 	}
 
