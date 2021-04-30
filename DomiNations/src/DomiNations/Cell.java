@@ -5,6 +5,7 @@ public class Cell {
     private boolean isEmpty;
     private LandPiece currentLandPiece;
 
+
     public Cell(Position position, boolean isEmpty, LandPiece currentLandPiece) {
         this.position = position;
         this.isEmpty = isEmpty;
