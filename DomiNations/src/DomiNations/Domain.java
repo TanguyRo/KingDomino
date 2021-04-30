@@ -2,7 +2,7 @@ package DomiNations;
 
 public class Domain {
 	private final Kingdom kingdom = new Kingdom();
-	private final String type = "";
+	private final String type;
 	private int totalCrownNumber;
 	
 	public void setCrownNumber(int totalCrownNumber) {
