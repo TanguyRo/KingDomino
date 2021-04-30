@@ -9,6 +9,7 @@ import java.util.Scanner;
 public class Game {
 	private Player[] players;
 	private Player currentPlayer;
+	private Kingdom[] kingdoms;
 	private LinkedList<Domino> drawPile;
 	private int nbPlayers;
 
@@ -30,7 +31,7 @@ public class Game {
 		nbPlayers = scanner.nextInt();
 		scanner.nextLine();
 
-		Player[] players = new Player[4];
+		Player[] players = new Player[nbPlayers];
 
 		// Noms et couleurs des joueurs :
 		for(int i = 1; i<=nbPlayers; i++) {
@@ -70,8 +71,10 @@ public class Game {
 	}
 	
 	public void initialiseKingdoms() {
-		for(int i = 1; i<=nbPlayers; i++) {
+		Kingdom[] kingdoms = new Kingdom[nbPlayers];
 
+		for(int i = 0; i<nbPlayers; i++) {
+			Kingdom kingdom = new Kingdom(1,players[i]);
 		}
 	}
 
