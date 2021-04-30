@@ -6,6 +6,7 @@ public class Game {
 	private Player[] players;
 	private Player currentPlayer;
 	private Domino[] drawPile;
+	private int nbPlayers;
 
 	public void play() {
 		createPlayers();
@@ -17,8 +18,8 @@ public class Game {
 
 		Scanner scanner = new Scanner(System.in);
 		System.out.println("Saisir nombre de joueur : ");
-		int nbr_joueur = scanner.nextInt();
-		for(int i = 1; i<nbr_joueur; i++) {
+		nbPlayers= scanner.nextInt();
+		for(int i = 1; i<nbPlayers; i++) {
 			System.out.println("Saisir nom joueur " + i + " : ");
 			String name = scanner.nextLine();
 
