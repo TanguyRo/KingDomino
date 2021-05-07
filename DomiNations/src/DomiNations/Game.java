@@ -14,7 +14,11 @@ public class Game {
 	private LinkedList<Domino> drawPile;
 	private int nbPlayers;
 	private boolean piocheVide;
-	
+	private LinkedList<Domino> piocheTour;
+	private LinkedList<int> piocheTourValue;
+	private LinkedList<int> piocheTourTri;
+
+
 	public void play() {
 		createPlayers();
 		initialiseKingdoms();
@@ -23,12 +27,50 @@ public class Game {
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
-			
-		//Premier Tour
-		//Piocher autant de dominos qu'il y a de rois en jeu
-		//Disposer ces dominos face num�rot�e visible et rang�s par ordre croissant
-		//retourner ces dominos face paysage
+
+		LinkedList<Domino> piocheTour = new LinkedList<>;
+		LinkedList<int> piocheTourValue = new LinkedList<>;
+		LinkedList<Domino> piocheTourTri = new LinkedList<>;
+		//Dictionary<Domino, int> piocheTour = new Hashtable<Domino, int>();
 		do {
+			//Disposer ces dominos face num�rot�e visible et rang�s par ordre croissant (swing)
+			//retourner ces dominos face paysage (swing)
+
+			Collection.shuffle(kings); //mélanger les rois
+			for(int i; i <= kings.length; i++){
+				/**
+				 * Pioche un domino dans drawPile
+				 * Fait correspondre le domino à un roi
+				 * (déjà mélangé donc au hasard)
+				 * **/
+				drawPile[i].setKing(kings[i]);
+				//Ajoute le domino à une pile de domino en jeu
+
+				//piocheTour.put(drawPile[i], drawPile[i].getNumber());
+				piocheTour.add(drawPile[i]);
+				piocheTourValue.add(drawPile[i].getNumber);
+
+				drawPile.remove();
+				//retire le domino pioché de la pile
+			}
+			//Tri des dominos dans l'ordre croissant selon number
+			//sortValue(piocheTour);
+			Arrays.sort(piocheTourValue);
+
+			for(int i; i< kings.length; i++){
+				for(int j; j< kings.length; j++){
+					if(piocheTourValue[j] == piocheTour[i].getNumber()){
+						piocheTourTri.add(piocheTour[i]);
+					}
+				}
+			}
+			
+			//Joueurs jouent dans l'ordre croissant (numéro domino)
+			for(int i; i <= kings.length; i++) {
+				piocheTourTri[i].getKing().getPlayer();
+				//Joue
+			}
+
 			//R�cup�rer le domino sur lequel son roi se trouvait
 			//Placer ce domino dans le royaume en respectant les r�gles de connexion.
 			//S�lectionner un domino de la ligne suivante en y pla�ant son roi.
@@ -45,7 +87,19 @@ public class Game {
 		//si �galit� de domaine -> plus de couronnes gagne
 		//sinon tous gagnant
 	}
-	
+
+	public static void sortValue(int[] liste, )
+	/**
+	public static void sortValue(Hashtable<Domino, int> test){
+		ArrayList<Map.Entry<Domino, int>> l = new ArrayList(test.entrySet());
+		Collections.sort(l, new Comparator<Map.Entry<Domino, int>>()){
+			public int compare(Map.Entry<Domino, int> o1, Map.Entry<Domino, int> o2){
+				return o1.getValue().compareto(o2.getValue());
+			});
+		}
+	}
+	**/
+
 	public void createPlayers() {
 		int color = 0;
 
