@@ -13,7 +13,8 @@ public class Game {
 	private King[] kings;
 	private LinkedList<Domino> drawPile;
 	private int nbPlayers;
-
+	private boolean piocheVide;
+	
 	public void play() {
 		createPlayers();
 		initialiseKingdoms();
@@ -22,6 +23,34 @@ public class Game {
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
+		
+		//Tour par Tour
+		
+		//(dans init drawpile ?)
+		//retire 24 dominos aléatoire si deux joueurs (24 restant dans la pioche)
+		//retire 12 dominos (36 restant dans la pioche) si 3 joueurs
+		//4 joueur : tout les dominos seront utilisés
+			
+		//Premier Tour
+		//Piocher autant de dominos qu'il y a de rois en jeu
+		//Disposer ces dominos face numérotée visible et rangés par ordre croissant
+		//retourner ces dominos face paysage
+		do {
+			//Récupérer le domino sur lequel son roi se trouvait
+			//Placer ce domino dans le royaume en respectant les règles de connexion.
+			//Sélectionner un domino de la ligne suivante en y plaçant son roi.
+		}
+		while(!piocheVide)
+		//Tous les dominos ont été piochés et posés
+		//calcul des points par joueur
+		// n = nbCases * nbCouronnes
+		//nbCases nombre de cases du domaine
+		//nbCouronnes nombre de couronnes sur le domaine
+		
+		//comparaison point entre joueur
+		//si égalité -> plus grand domaine gagne
+		//si égalité de domaine -> plus de couronnes gagne
+		//sinon tous gagnant
 	}
 	
 	public void createPlayers() {
@@ -33,7 +62,7 @@ public class Game {
 		scanner.nextLine();
 
 		Player[] players = new Player[nbPlayers];
-		King[] kings = new King[4];
+		King[] kings = new King[4]
 
 		// Noms et couleurs des joueurs :
 		for(int i = 1; i<=nbPlayers; i++) {
@@ -41,20 +70,20 @@ public class Game {
 			String name = scanner.nextLine();
 
 			do {
-				System.out.println("Saisir couleur joueur " + i + " (\"rouge\", \"bleu\", \"vert\", \"jaune\") : ");
+				System.out.println("Saisir couleur joueur " + i + " (\"rose\", \"jaune\", \"vert\", \"bleu\") : ");
 				String color_input = scanner.nextLine();
 
 				switch (color_input) {
-					case "rouge":
+					case "rose":
 						color = 1;
 						break;
-					case "bleu":
+					case "jaune":
 						color = 2;
 						break;
 					case "vert":
 						color = 3;
 						break;
-					case "jaune":
+					case "bleu":
 						color = 4;
 						break;
 					default:
@@ -66,8 +95,16 @@ public class Game {
 			} while (color == 0);
 
 			players[i] = new Player(name, color);
-
+			
 			// CrÃ©ation des rois en fonction du nombre de joueurs
+			for(int i = 1; i<=nbPlayers; i++) {
+				if(nbPLayers > 2) {
+					king[i].setPlayer(players[i]);
+				}else {
+
+				}
+				
+			}
 		}
 
 		currentPlayer = players[0];
