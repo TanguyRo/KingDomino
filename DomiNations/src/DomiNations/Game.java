@@ -19,7 +19,7 @@ public class Game {
 		createPlayers();
 		initialiseKingdoms();
 		try {
-			initialiseDrawPile();
+			initialiseDrawPile(nbPlayers);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -125,7 +125,7 @@ public class Game {
 		}
 	}
 
-	public void initialiseDrawPile(nbPlayers) throws FileNotFoundException {
+	public void initialiseDrawPile(int nbPlayers) throws FileNotFoundException {
 		// scanner va lire le contenu du fichier .csv
 		Scanner scanner = new Scanner(new File("dominos.csv"));
 		scanner.nextLine();		// On saute la ligne d'en-tête
@@ -157,15 +157,16 @@ public class Game {
 
 		// Mélange des dominos
 		Collections.shuffle(drawPile);
+
 		switch(nbPlayers) {
 			case 2:
 				for(int i=1; i<24; i++) {
-					drawPile.remove(domino);
+					drawPile.remove();
 				}
 				break;
 			case 3:
 				for(int i=1; i<12; i++) {
-					drawPile.remove(domino);
+					drawPile.remove();
 				}
 				break;
 		}
