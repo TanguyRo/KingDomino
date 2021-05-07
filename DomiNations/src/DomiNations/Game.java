@@ -27,29 +27,29 @@ public class Game {
 		//Tour par Tour
 		
 		//(dans init drawpile ?)
-		//retire 24 dominos aléatoire si deux joueurs (24 restant dans la pioche)
+		//retire 24 dominos alï¿½atoire si deux joueurs (24 restant dans la pioche)
 		//retire 12 dominos (36 restant dans la pioche) si 3 joueurs
-		//4 joueur : tout les dominos seront utilisés
+		//4 joueur : tout les dominos seront utilisï¿½s
 			
 		//Premier Tour
 		//Piocher autant de dominos qu'il y a de rois en jeu
-		//Disposer ces dominos face numérotée visible et rangés par ordre croissant
+		//Disposer ces dominos face numï¿½rotï¿½e visible et rangï¿½s par ordre croissant
 		//retourner ces dominos face paysage
 		do {
-			//Récupérer le domino sur lequel son roi se trouvait
-			//Placer ce domino dans le royaume en respectant les règles de connexion.
-			//Sélectionner un domino de la ligne suivante en y plaçant son roi.
+			//Rï¿½cupï¿½rer le domino sur lequel son roi se trouvait
+			//Placer ce domino dans le royaume en respectant les rï¿½gles de connexion.
+			//Sï¿½lectionner un domino de la ligne suivante en y plaï¿½ant son roi.
 		}
-		while(!piocheVide)
-		//Tous les dominos ont été piochés et posés
+		while(!piocheVide);
+		//Tous les dominos ont ï¿½tï¿½ piochï¿½s et posï¿½s
 		//calcul des points par joueur
 		// n = nbCases * nbCouronnes
 		//nbCases nombre de cases du domaine
 		//nbCouronnes nombre de couronnes sur le domaine
 		
 		//comparaison point entre joueur
-		//si égalité -> plus grand domaine gagne
-		//si égalité de domaine -> plus de couronnes gagne
+		//si ï¿½galitï¿½ -> plus grand domaine gagne
+		//si ï¿½galitï¿½ de domaine -> plus de couronnes gagne
 		//sinon tous gagnant
 	}
 	
@@ -62,7 +62,7 @@ public class Game {
 		scanner.nextLine();
 
 		Player[] players = new Player[nbPlayers];
-		King[] kings = new King[4]
+		King[] kings = new King[4];
 
 		// Noms et couleurs des joueurs :
 		for(int i = 1; i<=nbPlayers; i++) {
@@ -94,16 +94,21 @@ public class Game {
 
 			} while (color == 0);
 
-			players[i] = new Player(name, color);
+			players[i-1] = new Player(name, color);
 			
 			// CrÃ©ation des rois en fonction du nombre de joueurs
-			for(int i = 1; i<=nbPlayers; i++) {
-				if(nbPLayers > 2) {
-					king[i].setPlayer(players[i]);
-				}else {
-
+			if (nbPlayers==3 || nbPlayers==4){
+				kings[i-1] = new King(players[i-1]);
+			}
+			else if (nbPlayers == 2){
+				if (i==1){
+					kings[0] = new King(players[i-1]);
+					kings[1] = new King(players[i-1]);
 				}
-				
+				else {
+					kings[2] = new King(players[i-1]);
+					kings[3] = new King(players[i-1]);
+				}
 			}
 		}
 
@@ -115,7 +120,7 @@ public class Game {
 		Kingdom[] kingdoms = new Kingdom[nbPlayers];
 
 		for(int i = 0; i<nbPlayers; i++) {
-			Kingdom kingdom = new Kingdom(1,players[i]);	// taille 1 car uniquement le chÃ¢teau au dÃ©part
+			kingdoms[i] = new Kingdom(1,players[i]);	// taille 1 car uniquement le chÃ¢teau au dÃ©part
 		}
 	}
 
