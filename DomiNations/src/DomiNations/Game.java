@@ -23,6 +23,7 @@ public class Game {
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
+<<<<<<< Updated upstream
 		
 		//Tour par Tour
 		
@@ -30,6 +31,8 @@ public class Game {
 		//retire 24 dominos al�atoire si deux joueurs (24 restant dans la pioche)
 		//retire 12 dominos (36 restant dans la pioche) si 3 joueurs
 		//4 joueur : tout les dominos seront utilis�s
+=======
+>>>>>>> Stashed changes
 			
 		//Premier Tour
 		//Piocher autant de dominos qu'il y a de rois en jeu
@@ -57,10 +60,12 @@ public class Game {
 		int color = 0;
 
 		Scanner scanner = new Scanner(System.in);
-		System.out.println("Saisir nombre de joueur : ");
-		nbPlayers = scanner.nextInt();
-		//Saisir un nombre de joueur valide (pas 0 ou 1)
-		scanner.nextLine();
+		do {
+			System.out.println("Saisir un nombre de joueur (minimum 2) : ");
+			nbPlayers = scanner.nextInt();
+			scanner.nextLine();
+			
+		}while(nbPlayers<2)
 
 		Player[] players = new Player[nbPlayers];
 		King[] kings = new King[4];
@@ -160,6 +165,7 @@ public class Game {
 
 		switch(nbPlayers) {
 			case 2:
+<<<<<<< Updated upstream
 				for(int i=1; i<24; i++) {
 					drawPile.remove();
 				}
@@ -168,6 +174,12 @@ public class Game {
 				for(int i=1; i<12; i++) {
 					drawPile.remove();
 				}
+=======
+				for(int i=1; i<24; i++) { drawPile.remove(); }
+				break;
+			case 3:
+				for(int i=1; i<12; i++) { drawPile.remove(); }
+>>>>>>> Stashed changes
 				break;
 		}
 		
