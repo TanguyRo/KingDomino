@@ -1,22 +1,22 @@
 package DomiNations;
 
 public class LandPiece {
-    private Position position;
+    private Cell cell;
     private final String type;
     private final int crownNumber;
 
     public LandPiece(String type, int crownNumber) {
-        this.position = null;
+        this.cell = null;
         this.type = type;
         this.crownNumber = crownNumber;
     }
 
-    public void setCurrentPosition(Position position) {
-        this.position = position;
+    public void setCurrentPosition(Cell cell) {
+        this.cell = cell;
     }
 
-    public Position getCurrentPosition() {
-        return position;
+    public Cell getCurrentCell() {
+        return cell;
     }
 
     public String getType() {

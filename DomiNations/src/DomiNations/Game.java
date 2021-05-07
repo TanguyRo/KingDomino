@@ -55,7 +55,7 @@ public class Game {
 			nbPlayers = scanner.nextInt();
 			scanner.nextLine();
 			
-		}while(nbPlayers<2)
+		}while(nbPlayers<2);
 
 		Player[] players = new Player[nbPlayers];
 		King[] kings = new King[4];
@@ -117,6 +117,21 @@ public class Game {
 
 		for(int i = 0; i<nbPlayers; i++) {
 			kingdoms[i] = new Kingdom(1,players[i]);	// taille 1 car uniquement le château au départ
+
+			Cell[][] cells = new Cell[5][5];
+
+			for (int x=0; x<5; x++){
+				for (int y=0; y<5; y++){
+					cells[x][y] = new Cell(new Position(x,y),true,null);
+				}
+			}
+
+			// Case du chateau
+			cells[2][2].setState(false);
+			cells[2][2].setCurrentLandPiece(new LandPiece("chateau",0));
+
+			kingdoms[i].setCells(cells);
+
 		}
 	}
 

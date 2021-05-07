@@ -17,4 +17,5 @@ public class Position {
 	public int getRow() {
 		return row;
 	}
+
 }
