@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 
 public class Interface extends Application {
     public static void start() {
-        launch(); // set up program as a javafx application
+        launch(); // set up program as a javafx applicaton
     }
 
     @Override
