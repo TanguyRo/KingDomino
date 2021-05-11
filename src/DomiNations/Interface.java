@@ -15,7 +15,7 @@ public class Interface extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception { // main javafx code
-        primaryStage.setTitle("Title of the window"); // set the window title
+        primaryStage.setTitle("DomiNations"); // set the window title
 
         Button button = new Button(); // create a button
         button.setText("Click me");
