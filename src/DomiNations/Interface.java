@@ -1,5 +1,7 @@
 package DomiNations;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.beans.Observable;
@@ -9,19 +11,27 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import java.util.LinkedList;
 import java.util.List;
 
 public class Interface extends Application {
+    private Player[] players;
+    private Player currentPlayer;
+    private Kingdom[] kingdoms;
+    private King[] kings;
+    private LinkedList<Domino> drawPile;
+    private int nbPlayers;
+    private boolean piocheVide;
+
     public static void start() {
         launch(); // set up program as a javafx applicaton
     }
@@ -66,12 +76,52 @@ public class Interface extends Application {
         primaryStage.show();                                                //afficher primaryStage
 
         Stage otherStage = new Stage();
-        otherStage.setTitle("Deuxieme page");
+        otherStage.setTitle("Nombre de joueurs");
         otherStage.setWidth(400);
         otherStage.setHeight(300);
         otherStage.setResizable(false);
         otherStage.show();
         otherStage.centerOnScreen();
+        Label joueurs = new Label("Nombre de joueurs : ");
+        //group
+        ToggleGroup group = new ToggleGroup();
+        group.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
+            @Override
+            public void changed(ObservableValue<? extends Toggle> ov, Toggle old_toggle, Toggle new_toggle) {
+                // Has selection.
+                if (group.getSelectedToggle() != null) {
+                    RadioButton button = (RadioButton) group.getSelectedToggle();
+                    System.out.println("Button: " + button.getText());
+                    joueurs.setText("You are " + button.getText());
+                    
+
+                }
+            }
+        });
+
+        //Radio 1 : 2 joueurs : One
+        RadioButton button2 = new RadioButton("2");
+        button2.setToggleGroup(group);
+        button2.setSelected(true);
+        RadioButton button3 = new RadioButton("3");
+        button3.setToggleGroup(group);
+        RadioButton button4 = new RadioButton("4");
+        button4.setToggleGroup(group);
+
+        Button buttonValider = new Button("Valider");
+        HBox nbJoueurs = new HBox();
+        nbJoueurs.setPadding(new Insets(10));
+        nbJoueurs.setSpacing(5);
+        nbJoueurs.getChildren().addAll(joueurs, button2, button3, button4, buttonValider);
+
+
+        Scene scene2 = new Scene(nbJoueurs, 400, 150);
+        otherStage.setScene(scene2);
+        otherStage.setTitle("Choix nombre de joueurs");
+        scene2.setRoot(nbJoueurs);
+        otherStage.show();
+
+
 
         /*new Thread(new Runnable() {
             @Override
@@ -107,14 +157,14 @@ public class Interface extends Application {
                 e.printStackTrace();
             }
         }).start();*/
-        new Thread(() -> {
+        /*new Thread(() -> {
             try {
                 Thread.sleep(5000);
                 Platform.runLater(() -> otherStage.hide());
             } catch (InterruptedException e){
                 e.printStackTrace();
             }
-        }).start();
+        }).start();*/
 
 
 
@@ -124,6 +174,7 @@ public class Interface extends Application {
             listView1.getItems().add(nom);
             observableList.add(nom);                                        //ajouter le contenu de nom à la liste ListView
         });
+
 
     }
 
