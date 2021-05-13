@@ -32,6 +32,7 @@ public class Interface extends Application {
     private int nbPlayers;
     private boolean piocheVide;
 
+
     public static void start() {
         launch(); // set up program as a javafx applicaton
     }
@@ -85,19 +86,6 @@ public class Interface extends Application {
         Label joueurs = new Label("Nombre de joueurs : ");
         //group
         ToggleGroup group = new ToggleGroup();
-        group.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
-            @Override
-            public void changed(ObservableValue<? extends Toggle> ov, Toggle old_toggle, Toggle new_toggle) {
-                // Has selection.
-                if (group.getSelectedToggle() != null) {
-                    RadioButton button = (RadioButton) group.getSelectedToggle();
-                    System.out.println("Button: " + button.getText());
-                    joueurs.setText("You are " + button.getText());
-                    
-
-                }
-            }
-        });
 
         //Radio 1 : 2 joueurs : One
         RadioButton button2 = new RadioButton("2");
@@ -109,19 +97,37 @@ public class Interface extends Application {
         button4.setToggleGroup(group);
 
         Button buttonValider = new Button("Valider");
-        HBox nbJoueurs = new HBox();
-        nbJoueurs.setPadding(new Insets(10));
-        nbJoueurs.setSpacing(5);
-        nbJoueurs.getChildren().addAll(joueurs, button2, button3, button4, buttonValider);
+        HBox HBoxNbJoueurs = new HBox();
+        HBoxNbJoueurs.setPadding(new Insets(10));
+        HBoxNbJoueurs.setSpacing(5);
+        HBoxNbJoueurs.getChildren().addAll(joueurs, button2, button3, button4, buttonValider);
 
-
-        Scene scene2 = new Scene(nbJoueurs, 400, 150);
-        otherStage.setScene(scene2);
+        Scene sceneChoixNbJoueurs = new Scene(HBoxNbJoueurs, 400, 150);
+        otherStage.setScene(sceneChoixNbJoueurs);
         otherStage.setTitle("Choix nombre de joueurs");
-        scene2.setRoot(nbJoueurs);
+        sceneChoixNbJoueurs.setRoot(HBoxNbJoueurs);
         otherStage.show();
 
+        RadioButton buttonChoixNbPlayers = (RadioButton) group.getSelectedToggle();
+        /*group.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
+            @Override
+            public void changed(ObservableValue<? extends Toggle> ov, Toggle old_toggle, Toggle new_toggle) {
+                // Has selection.
+                if (group.getSelectedToggle() != null) {
 
+                    System.out.println("Button: " + button.getText());
+                    joueurs.setText("You are " + button.getText());
+
+                }
+            }
+        });*/
+        //lors de la validation du bouton chox enregiqtré
+        buttonValider.setOnAction(e->{
+            nbPlayers = Integer.parseInt(buttonChoixNbPlayers.getText());                                       //ajouter le contenu de nom à la liste ListView
+            System.out.println(nbPlayers + " players selected");
+            otherStage.close();
+            Game.
+        });
 
         /*new Thread(new Runnable() {
             @Override
@@ -165,8 +171,6 @@ public class Interface extends Application {
                 e.printStackTrace();
             }
         }).start();*/
-
-
 
         //quand on clique sur le bouton Ajouter, on effectue un traitement
         buttonAdd.setOnAction(e->{
