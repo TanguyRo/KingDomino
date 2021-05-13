@@ -1,6 +1,7 @@
 package DomiNations;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -63,6 +64,59 @@ public class Interface extends Application {
         borderPaneRoot.setCenter(vBox1);                                    //mettre hbox1 dans BorderPane au centre
         borderPaneRoot.setTop(hBox1);                                       //metre border panel en haut
         primaryStage.show();                                                //afficher primaryStage
+
+        Stage otherStage = new Stage();
+        otherStage.setTitle("Deuxieme page");
+        otherStage.setWidth(400);
+        otherStage.setHeight(300);
+        otherStage.setResizable(false);
+        otherStage.show();
+        otherStage.centerOnScreen();
+
+        /*new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(5000);
+                    Platform.runLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            otherStage.hide();
+                        }
+                    });
+
+                }
+                catch (InterruptedException e){
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+        premiere puis deuxieme version (utilisation des lambda expressions
+        new Thread(() -> {
+            try {
+                Thread.sleep(5000);
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        otherStage.hide();
+                    }
+                });
+
+            }
+            catch (InterruptedException e){
+                e.printStackTrace();
+            }
+        }).start();*/
+        new Thread(() -> {
+            try {
+                Thread.sleep(5000);
+                Platform.runLater(() -> otherStage.hide());
+            } catch (InterruptedException e){
+                e.printStackTrace();
+            }
+        }).start();
+
+
 
         //quand on clique sur le bouton Ajouter, on effectue un traitement
         buttonAdd.setOnAction(e->{

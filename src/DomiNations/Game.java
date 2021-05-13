@@ -15,7 +15,8 @@ public class Game {
     private int nbPlayers;
     private boolean piocheVide;
 
-    public void play() {
+
+        public void play() {
 
         // Création des joueurs
         createPlayers();
