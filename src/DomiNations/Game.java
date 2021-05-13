@@ -16,7 +16,10 @@ public class Game {
     private boolean piocheVide;
 
     public void play() {
+
+        // Création des joueurs
         createPlayers();
+
         initialiseKingdoms();
         try {
             initialiseDrawPile(nbPlayers);
@@ -57,8 +60,8 @@ public class Game {
 
         }while(nbPlayers<2);
 
-        Player[] players = new Player[nbPlayers];
-        King[] kings = new King[4];
+        this.players = new Player[nbPlayers];
+        this.kings = new King[countKings(nbPlayers)];   // Taille 3 si 3 joueurs, taille 4 si 2 ou 4 joueurs
 
         // Noms et couleurs des joueurs :
         for(int i = 1; i<=nbPlayers; i++) {
@@ -110,6 +113,20 @@ public class Game {
 
         currentPlayer = players[0];
         System.out.println("Les joueurs ont bien été créés.");
+    }
+
+    // Fonction qui renvoie le nombre de rois nécéessaires en fonction du nombre de joueurs
+    public int countKings(int nbPlayers){
+        int kingsNumber;
+        switch (nbPlayers){
+            case 3 :
+                kingsNumber = 3;
+                break;
+            default :
+                kingsNumber = 4;
+                break;
+        }
+        return kingsNumber;
     }
 
     public void initialiseKingdoms() {
