@@ -20,7 +20,9 @@ public class Game {
         // Création des joueurs
         createPlayers();
 
+        // Création des royaumes 5x5 pour chaque joueur
         initialiseKingdoms();
+
         try {
             initialiseDrawPile(nbPlayers);
         } catch (FileNotFoundException e) {
@@ -130,7 +132,7 @@ public class Game {
     }
 
     public void initialiseKingdoms() {
-        Kingdom[] kingdoms = new Kingdom[nbPlayers];
+        this.kingdoms = new Kingdom[nbPlayers];
 
         for(int i = 0; i<nbPlayers; i++) {
             kingdoms[i] = new Kingdom(1,players[i]);	// taille 1 car uniquement le château au départ
@@ -150,6 +152,8 @@ public class Game {
             kingdoms[i].setCells(cells);
 
         }
+
+        System.out.println("Les " + nbPlayers + " royaumes ont bien été créés.");
     }
 
     public void initialiseDrawPile(int nbPlayers) throws FileNotFoundException {
