@@ -126,8 +126,11 @@ public class Interface extends Application {
             nbPlayers = Integer.parseInt(buttonChoixNbPlayers.getText());                                       //ajouter le contenu de nom à la liste ListView
             System.out.println(nbPlayers + " players selected");
             otherStage.close();
-            Game.
+
         });
+
+        Scene choixNoms = new Scene(HBoxNbJoueurs, 400, 150);
+        otherStage.setScene(choixNoms);
 
         /*new Thread(new Runnable() {
             @Override
