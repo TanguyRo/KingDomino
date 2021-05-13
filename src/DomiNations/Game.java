@@ -23,6 +23,7 @@ public class Game {
         // Création des royaumes 5x5 pour chaque joueur
         initialiseKingdoms();
 
+        // Création de la pioche, remplie du bon nombre de dominos et mélangée
         try {
             initialiseDrawPile(nbPlayers);
         } catch (FileNotFoundException e) {
@@ -31,23 +32,23 @@ public class Game {
 
         //Premier Tour
         //Piocher autant de dominos qu'il y a de rois en jeu
-        //Disposer ces dominos face num�rot�e visible et rang�s par ordre croissant
+        //Disposer ces dominos face numérotée visible et rangés par ordre croissant
         //retourner ces dominos face paysage
-        do {
-            //R�cup�rer le domino sur lequel son roi se trouvait
-            //Placer ce domino dans le royaume en respectant les r�gles de connexion.
-            //S�lectionner un domino de la ligne suivante en y pla�ant son roi.
+        /*do {
+            //Récupérer le domino sur lequel son roi se trouvait
+            //Placer ce domino dans le royaume en respectant les règles de connexion.
+            //Sélectionner un domino de la ligne suivante en y plaçant son roi.
         }
-        while(!piocheVide);
-        //Tous les dominos ont �t� pioch�s et pos�s
+        while(!piocheVide);*/
+        //Tous les dominos ont été piochés et posés
         //calcul des points par joueur
         // n = nbCases * nbCouronnes
         //nbCases nombre de cases du domaine
         //nbCouronnes nombre de couronnes sur le domaine
 
         //comparaison point entre joueur
-        //si �galit� -> plus grand domaine gagne
-        //si �galit� de domaine -> plus de couronnes gagne
+        //si égalité -> plus grand domaine gagne
+        //si égalité de domaine -> plus de couronnes gagne
         //sinon tous gagnant
     }
 
@@ -56,11 +57,11 @@ public class Game {
 
         Scanner scanner = new Scanner(System.in);
         do {
-            System.out.println("Saisir un nombre de joueur (minimum 2) : ");
+            System.out.println("Saisir un nombre de joueurs (2, 3 ou 4) : ");
             nbPlayers = scanner.nextInt();
             scanner.nextLine();
 
-        }while(nbPlayers<2);
+        }while(nbPlayers<2 || nbPlayers>4);
 
         this.players = new Player[nbPlayers];
         this.kings = new King[countKings(nbPlayers)];   // Taille 3 si 3 joueurs, taille 4 si 2 ou 4 joueurs
@@ -175,7 +176,7 @@ public class Game {
         String[] dominos = data.split("\n");
 
         // Création de la pile de dominos
-        LinkedList<Domino> drawPile = new LinkedList<>();
+        this.drawPile = new LinkedList<>();
 
         // Création de tous les dominos et placement dans l'ordre dans la pile drawPile
         for (int i=0; i < dominos.length; i++) {
@@ -189,17 +190,17 @@ public class Game {
         // Mélange des dominos
         Collections.shuffle(drawPile);
 
+        // Enlever les dominos en trop si 2 ou 3 joueurs
         switch(nbPlayers) {
             case 2:
-                for(int i=1; i<24; i++) { drawPile.remove(); }
+                for(int i=1; i<=24; i++) { drawPile.remove(); }
                 break;
             case 3:
-                for(int i=1; i<12; i++) { drawPile.remove(); }
+                for(int i=1; i<=12; i++) { drawPile.remove(); }
                 break;
         }
 
-
-        System.out.println("La pioche a été mélangée.");
+        System.out.println("La pioche a été mélangée et contient " + drawPile.size() + " dominos.");
     }
 
 }
