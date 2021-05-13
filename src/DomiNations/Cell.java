@@ -1,12 +1,12 @@
 package DomiNations;
 
 public class Cell {
-    private final Position position;
+    private final int[] position;
     private boolean isEmpty;
     private LandPiece currentLandPiece;
 
 
-    public Cell(Position position, boolean isEmpty, LandPiece currentLandPiece) {
+    public Cell(int[] position, boolean isEmpty, LandPiece currentLandPiece) {
         this.position = position;
         this.isEmpty = isEmpty;
         this.currentLandPiece = currentLandPiece;
@@ -21,7 +21,7 @@ public class Cell {
 
     }
 
-    public Position getPosition() {
+    public int[] getPosition() {
         return position;
     }
 

@@ -143,7 +143,7 @@ public class Game {
 
             for (int x=0; x<5; x++){
                 for (int y=0; y<5; y++){
-                    cells[x][y] = new Cell(new Position(x,y),true,null);
+                    cells[y][x] = new Cell(new int[] {x,y},true,null);
                 }
             }
 
