@@ -20,6 +20,11 @@ public class Domain {
         this.totalCrownNumber = totalCrownNumber;
     }
 
+    public void addCrowns(int crownsToAdd) {
+        this.totalCrownNumber += crownsToAdd;
+    }
+
+
     public int getCrownNumber() {
         return totalCrownNumber;
     }
