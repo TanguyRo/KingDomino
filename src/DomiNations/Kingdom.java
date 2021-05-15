@@ -51,23 +51,35 @@ public class Kingdom {
     public void move(String direction){
 
         Cell[][] newCells = new Cell[5][5];
-        for (int x=0; x<5; x++){
-            for (int y=0; y<5; y++){
-                switch (direction) {
-                    case "up":
+        switch (direction) {
+            case "up":
+                for (int x=0; x<5; x++) {
+                    for (int y = 0; y < 4; y++) {
                         newCells[y][x] = cells[y+1][x];
-                        break;
-                    case "down":
-                        newCells[y][x] = cells[y-1][x];
-                        break;
-                    case "left":
-                        newCells[y][x] = cells[y][x+1];
-                        break;
-                    case "right":
-                        newCells[y][x] = cells[y][x-1];
-                        break;
+                    }
                 }
-            }
+                break;
+            case "down":
+                for (int x=0; x<5; x++) {
+                    for (int y = 1; y < 5; y++) {
+                        newCells[y][x] = cells[y-1][x];
+                    }
+                }
+                break;
+            case "left":
+                for (int x=0; x<4; x++) {
+                    for (int y = 0; y < 5; y++) {
+                        newCells[y][x] = cells[y][x+1];
+                    }
+                }
+                break;
+            case "right":
+                for (int x=1; x<5; x++) {
+                    for (int y = 0; y < 5; y++) {
+                        newCells[y][x] = cells[y][x - 1];
+                    }
+                }
+                break;
         }
         cells = newCells;		// on remplace par le nouveau "board"
     }
@@ -79,7 +91,7 @@ public class Kingdom {
         // cells : attribut du kingdom, tableau 5x5 du joueur
 
         // TODO : Vérifications (à côté d'un domaine existant, ne dépasse pas la taille 5x5) -> return false si pas possible
-        // TODO : Déplacement du board si besoin / décalage position ?
+        // TODO : Déplacement du board si besoin et si possible / décalage position ?
 
         // Calcul des positions pour poser
         int[][] landPiecesPositions = new int[2][];
