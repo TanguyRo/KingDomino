@@ -18,16 +18,14 @@ public class Cell {
 
     public void setCurrentLandPiece(LandPiece currentLandPiece) {
         this.currentLandPiece = currentLandPiece;
-
     }
 
     public int[] getPosition() {
         return position;
     }
 
-    public boolean getState() {
+    public boolean isEmpty() {
         return isEmpty;
-
     }
 
     public LandPiece getCurrentLandPiece() {

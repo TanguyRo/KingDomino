@@ -9,11 +9,12 @@ public class Domain {
     private ArrayList<LandPiece> landpieces;
 
 
-    public Domain(Kingdom kingdom, String type, int totalCrownNumber) {
+    public Domain(Kingdom kingdom, String type, int totalCrownNumber, LandPiece firstLandPiece) {
         this.kingdom = kingdom;
         this.type = type;
         this.totalCrownNumber = totalCrownNumber;
         this.landpieces = new ArrayList<>();
+        this.landpieces.add(firstLandPiece);
     }
 
     public void setCrownNumber(int totalCrownNumber) {
@@ -23,7 +24,6 @@ public class Domain {
     public void addCrowns(int crownsToAdd) {
         this.totalCrownNumber += crownsToAdd;
     }
-
 
     public int getCrownNumber() {
         return totalCrownNumber;

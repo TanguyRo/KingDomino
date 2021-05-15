@@ -24,12 +24,16 @@ public class Domino {
         isDiscarded = discarded;
     }
 
-    public LandPiece getLandPiece1() {
-        return landPiece1;
-    }
-
-    public LandPiece getLandPiece2() {
-        return landPiece2;
+    public LandPiece getLandPiece(int number) {
+        if (number == 1){
+            return landPiece1;
+        }
+        else if (number == 2){
+            return landPiece2;
+        }
+        else {
+            return null;
+        }
     }
 
     public int getNumber() {
