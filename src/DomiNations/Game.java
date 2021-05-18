@@ -2,9 +2,7 @@ package DomiNations;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.Scanner;
+import java.util.*;
 
 public class Game {
     private Player[] players;
@@ -13,7 +11,6 @@ public class Game {
     private King[] kings;
     private LinkedList<Domino> drawPile;
     private int nbPlayers;
-    private boolean piocheVide;
 
         public void play() {
 
@@ -30,23 +27,57 @@ public class Game {
             e.printStackTrace();
         }
 
-        //Premier Tour
-        //Piocher autant de dominos qu'il y a de rois en jeu
-        //Disposer ces dominos face numérotée visible et rangés par ordre croissant
-        //retourner ces dominos face paysage
-        /*do {
-            //Récupérer le domino sur lequel son roi se trouvait
-            //Placer ce domino dans le royaume en respectant les règles de connexion.
-            //Sélectionner un domino de la ligne suivante en y plaçant son roi.
+        do {
+            //Debut de Tour
+            Domino DominoInPlay;
+            List<Domino> ListDominoInPlay = new ArrayList();
+            List<Integer> ListValueDomino = new ArrayList();
+
+            //Piocher autant de dominos qu'il y a de rois en jeu
+            for(int i=0; i<kings.length; i++){
+                DominoInPlay = drawPile.getFirst();
+                DominoInPlay.setKing(kings[i]);
+                System.out.println("Le domino pioché par le joueur " + kings[i].getPlayer().getColor()
+                        +  " (" + DominoInPlay + ") vaut "+ DominoInPlay.getNumber());
+                drawPile.remove();
+
+                ListDominoInPlay.add(i, DominoInPlay);
+                ListValueDomino.add(i, DominoInPlay.getNumber());
+            }
+            // TODO INTERFACE Disposer ces dominos face numérotée visible et rangés par ordre croissant
+            Collections.sort(ListValueDomino);
+            // TODO INTERFACE retourner ces dominos face paysage
+            //System.out.println(ListValueDomino);
+
+            List<Domino> TriDomino = new ArrayList();
+            for(int x=0; x< kings.length; x++){
+                for(int y=0; y< kings.length; y++){
+                    if(ListValueDomino.get(x)==ListDominoInPlay.get(y).getNumber()){
+                        TriDomino.add(ListDominoInPlay.get(y));
+                    }
+                }
+            }
+            System.out.println("Dominos restant : " + drawPile.size());
+            //System.out.println("Dominos en jeu : " + TriDomino);
+
+            for(int i=0; i<kings.length; i++) {
+                TriDomino.get(i).getKing().getPlayer();
+                System.out.println("Tour du joueur " + TriDomino.get(i).getKing().getPlayer().getColor());
+                //Joue
+                // TODO Récupérer le domino sur lequel son roi se trouvait
+                // TODO Placer ce domino dans le royaume en respectant les règles de connexion.
+                // TODO Sélectionner un domino de la ligne suivante en y plaçant son roi.
+            }
         }
-        while(!piocheVide);*/
+        while(!drawPile.isEmpty());
         //Tous les dominos ont été piochés et posés
-        //calcul des points par joueur
+
+        // TODO Calcul des points par joueur
         // n = nbCases * nbCouronnes
         //nbCases nombre de cases du domaine
         //nbCouronnes nombre de couronnes sur le domaine
 
-        //comparaison point entre joueur
+        // TODO comparaison point entre joueur
         //si égalité -> plus grand domaine gagne
         //si égalité de domaine -> plus de couronnes gagne
         //sinon tous gagnant
@@ -75,6 +106,7 @@ public class Game {
                 System.out.println("Saisir couleur joueur " + i + " (\"rose\", \"jaune\", \"vert\", \"bleu\") : ");
                 String color_input = scanner.nextLine();
 
+                // TODO Couleur unique (Impossible d'avoir deux joueurs de la même couleur)
                 switch (color_input) {
                     case "rose":
                         color = 1;
