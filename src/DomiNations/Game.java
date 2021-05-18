@@ -84,7 +84,9 @@ public class Game {
     }
 
     public void createPlayers() {
-        int color = 0;
+        //Utilisation d'une liste pour proposer les couleurs
+        String[] colors={"rose", "jaune", "vert", "bleu"};
+        ArrayList<String> colorsArray = new ArrayList(Arrays.asList(colors));
 
         Scanner scanner = new Scanner(System.in);
         do {
@@ -99,33 +101,34 @@ public class Game {
 
         // Noms et couleurs des joueurs :
         for(int i = 1; i<=nbPlayers; i++) {
+            int color = 0;
+
             System.out.println("Saisir nom joueur " + i + " : ");
             String name = scanner.nextLine();
 
             do {
-                System.out.println("Saisir couleur joueur " + i + " (\"rose\", \"jaune\", \"vert\", \"bleu\") : ");
+                System.out.println("Saisir couleur joueur " + i + "  -  " + colorsArray + " : ");
                 String color_input = scanner.nextLine();
 
-                // TODO Couleur unique (Impossible d'avoir deux joueurs de la même couleur)
-                switch (color_input) {
-                    case "rose":
-                        color = 1;
-                        break;
-                    case "jaune":
-                        color = 2;
-                        break;
-                    case "vert":
-                        color = 3;
-                        break;
-                    case "bleu":
-                        color = 4;
-                        break;
-                    default:
-                        color = 0;
-                        System.out.println("Saisir une couleur valide : ");
-                        break;
+                for(int y=0; y<colorsArray.size(); y++){
+                    if(color_input.equals(colorsArray.get(y))){
+                        switch (color_input) {
+                            case "rose":
+                                color = 1;
+                                break;
+                            case "jaune":
+                                color = 2;
+                                break;
+                            case "vert":
+                                color = 3;
+                                break;
+                            case "bleu":
+                                color = 4;
+                                break;
+                        }
+                        colorsArray.remove(y);
+                    }
                 }
-
             } while (color == 0);
 
             players[i-1] = new Player(name, color);
