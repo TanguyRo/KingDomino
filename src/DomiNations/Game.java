@@ -84,9 +84,12 @@ public class Game {
     }
 
     public void createPlayers() {
-        //Utilisation d'une liste pour proposer les couleurs
-        String[] colors={"rose", "jaune", "vert", "bleu"};
-        ArrayList<String> colorsArray = new ArrayList(Arrays.asList(colors));
+        //Utilisation d'un dictionnaire pour proposer les couleurs
+        String[] colors={"Rose", "Jaune", "Vert", "Bleu"};
+        HashMap<String, Integer> colorsMap = new HashMap<>();
+        for (int i=1; i<=4; i++){
+            colorsMap.put(colors[i-1],i);
+        }
 
         Scanner scanner = new Scanner(System.in);
         do {
@@ -107,28 +110,15 @@ public class Game {
             String name = scanner.nextLine();
 
             do {
-                System.out.println("Saisir couleur joueur " + i + "  -  " + colorsArray + " : ");
+                System.out.println("Saisir couleur joueur " + i + "  -  " + colorsMap.keySet() + " : ");
                 String color_input = scanner.nextLine();
 
-                for(int y=0; y<colorsArray.size(); y++){
-                    if(color_input.equals(colorsArray.get(y))){
-                        switch (color_input) {
-                            case "rose":
-                                color = 1;
-                                break;
-                            case "jaune":
-                                color = 2;
-                                break;
-                            case "vert":
-                                color = 3;
-                                break;
-                            case "bleu":
-                                color = 4;
-                                break;
-                        }
-                        colorsArray.remove(y);
-                    }
+                if (colorsMap.containsKey(color_input)) {
+                    color = colorsMap.get(color_input);
+                    colorsMap.remove(color_input);
+                    System.out.println(color);
                 }
+
             } while (color == 0);
 
             players[i-1] = new Player(name, color);
