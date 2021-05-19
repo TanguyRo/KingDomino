@@ -106,20 +106,30 @@ public class Game {
         for(int i = 1; i<=nbPlayers; i++) {
             int color = 0;
 
-            System.out.println("Saisir nom joueur " + i + " : ");
+            System.out.println("Saisir le nom du joueur " + i + " : ");
             String name = scanner.nextLine();
 
-            do {
-                System.out.println("Saisir couleur joueur " + i + "  -  " + colorsMap.keySet() + " : ");
-                String color_input = scanner.nextLine();
+            // S'il y a un choix à faire parmi plusieurs couleurs
+            if (colorsMap.size()>1) {
+                do {
+                    String listeCouleurs = String.join(", ", colorsMap.keySet()).replaceAll(", (?=[A-Za-z]*$)"," ou ");
+                    System.out.println("Saisir la couleur du joueur " + i + " parmi " + listeCouleurs + " : ");
+                    String color_input = scanner.nextLine();
 
-                if (colorsMap.containsKey(color_input)) {
-                    color = colorsMap.get(color_input);
-                    colorsMap.remove(color_input);
-                    System.out.println(color);
-                }
+                    if (colorsMap.containsKey(color_input)) {
+                        color = colorsMap.get(color_input);
+                        colorsMap.remove(color_input);
+                    }
 
-            } while (color == 0);
+                } while (color == 0);
+            }
+            // S'il n'en reste qu'une
+            else {
+                String colorName = (String) colorsMap.keySet().toArray()[0];
+                color = colorsMap.get(colorName);
+                colorsMap.remove(colorName);
+                System.out.println("Le joueur " + i + " aura la couleur " + colorName + ".");
+            }
 
             players[i-1] = new Player(name, color);
 
