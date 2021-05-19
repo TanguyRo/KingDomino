@@ -73,9 +73,9 @@ public class Game {
         //Tous les dominos ont été piochés et posés
 
         // TODO Calcul des points par joueur
-        // n = nbCases * nbCouronnes
-        //nbCases nombre de cases du domaine
-        //nbCouronnes nombre de couronnes sur le domaine
+        // n = nbCases * nbCouronnes pour chaque domaine
+        //nbCases nombre de cases du domaine = domain.landPieces.size()
+        //nbCouronnes nombre de couronnes sur le domaine = domain.landPieces.getCrownNumber()
 
         // TODO comparaison point entre joueur
         //si égalité -> plus grand domaine gagne

@@ -6,15 +6,15 @@ public class Domain {
     private final Kingdom kingdom;
     private final String type;
     private int totalCrownNumber;
-    private ArrayList<LandPiece> landpieces;
+    private ArrayList<LandPiece> landPieces;
 
 
     public Domain(Kingdom kingdom, String type, int totalCrownNumber, LandPiece firstLandPiece) {
         this.kingdom = kingdom;
         this.type = type;
         this.totalCrownNumber = totalCrownNumber;
-        this.landpieces = new ArrayList<>();
-        this.landpieces.add(firstLandPiece);
+        this.landPieces = new ArrayList<>();
+        this.landPieces.add(firstLandPiece);
     }
 
     public void setCrownNumber(int totalCrownNumber) {
@@ -38,11 +38,11 @@ public class Domain {
     }
 
     public void setLandpieces(ArrayList<LandPiece> landpieces) {
-        this.landpieces = landpieces;
+        this.landPieces = landpieces;
     }
 
     public ArrayList<LandPiece> getLandpieces() {
-        return landpieces;
+        return landPieces;
     }
 
 }

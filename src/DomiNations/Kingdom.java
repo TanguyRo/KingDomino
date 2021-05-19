@@ -141,8 +141,7 @@ public class Kingdom {
                         if (sideLandPiece.getType().equals(typeLandPiece)){                 // Si la LandPiece à côté est du même type que la LandPiece qu'on pose, alors on l'ajoute au domaine existant
                             Domain sideDomain = sideLandPiece.getParentDomain();                // On note le domaine à côté
                             if(collateralDomains.size()==1){                                    // Si le LandPiece est aussi en contact avec un premier domaine dont on s'est déjà occupé (possible au deuxième tour de boucle)
-                                Domain fusion = fusion(collateralDomains.get(0),sideDomain);        // On fusionne ces deux domaines en un seul
-                                collateralDomains.set(0,fusion);                                    // On met à jour la liste des domaines autour de la pièce à poser
+                                fusion(collateralDomains.get(0),sideDomain);                    // On fusionne ces deux domaines en un seul (celui de gauche)
                             }
                             else{                                                               // Si c'est le premier domaine collatéral qu'on vérifie, on ajoute landPiece1 à celui-ci
                                 collateralDomains.add(sideDomain);                                  // On l'ajoute à la liste des domains de même type autour
@@ -172,10 +171,24 @@ public class Kingdom {
 
     }
 
-    public Domain fusion(Domain domain1, Domain domain2){
-        // if (domain1.equals(domain2) -> rien c'est déjà bon
-        // TODO : Fonction de fusion de deux domaines
-        return domain1;
+    public void fusion(Domain domain1, Domain domain2){
+        // Kingdom et Type non-modifié
+
+        // LandPieces du domain2 ajoutées au domain1
+        ArrayList<LandPiece> landPiecesDomain1 = domain1.getLandpieces();
+        ArrayList<LandPiece> landPiecesDomain2 = domain2.getLandpieces();
+        for (LandPiece landPieceToMove : landPiecesDomain2) {
+            landPiecesDomain1.add(landPieceToMove);             // On l'ajoute à la liste des LandPieces du doimain1
+            landPieceToMove.setParentDomain(domain1);           // On met à jour son domaine parent
+        }
+
+        // CrownNumber mis à jour
+        domain1.addCrowns(domain2.getCrownNumber());
+
+        // Suppression du domain2
+        this.domains.remove(domain2);
+
+        // Le domain1 est maintenant la fusion des 2
     }
 
 }
