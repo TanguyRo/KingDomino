@@ -12,7 +12,7 @@ public class Cell {
         this.currentLandPiece = currentLandPiece;
     }
 
-    public void setState(boolean isEmpty) {
+    public void setEmpty(boolean isEmpty) {
         this.isEmpty = isEmpty;
     }
 

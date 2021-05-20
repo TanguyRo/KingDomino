@@ -182,7 +182,7 @@ public class Game {
             }
 
             // Case du chateau
-            cells[2][2].setState(false);
+            cells[2][2].setEmpty(false);
             cells[2][2].setCurrentLandPiece(new LandPiece("Chateau",0));
 
             kingdoms[i].setCells(cells);
