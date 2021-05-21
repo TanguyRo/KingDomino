@@ -51,11 +51,15 @@ public class Kingdom {
 
     public void move(String direction){
 
-        // TODO Vérifier lignes vides avant de move
-
         Cell[][] newCells = new Cell[5][5];
         switch (direction) {
             case "up":
+                // Pour monter, la première ligne (row 0) doit être vide.
+                for (int x=0; x<5; x++){
+                    if(!cells[0][x].isEmpty()){
+                        throw new IllegalStateException("Le royaume ne peut pas être déplacé vers le haut.");
+                    }
+                }
                 for (int x=0; x<5; x++) {
                     for (int y = 0; y < 4; y++) {
                         newCells[y][x] = cells[y+1][x];
@@ -63,6 +67,12 @@ public class Kingdom {
                 }
                 break;
             case "down":
+                // Pour descendre, la dernière ligne (row 4) doit être vide.
+                for (int x=0; x<5; x++){
+                    if(!cells[4][x].isEmpty()){
+                        throw new IllegalStateException("Le royaume ne peut pas être déplacé vers le bas.");
+                    }
+                }
                 for (int x=0; x<5; x++) {
                     for (int y = 1; y < 5; y++) {
                         newCells[y][x] = cells[y-1][x];
@@ -70,6 +80,12 @@ public class Kingdom {
                 }
                 break;
             case "left":
+                // Pour déplacer à gauche, la première colonne (column 0) doit être vide
+                for (int y=0; y<5; y++){
+                    if(!cells[y][0].isEmpty()){
+                        throw new IllegalStateException("Le royaume ne peut pas être déplacé vers la gauche.");
+                    }
+                }
                 for (int x=0; x<4; x++) {
                     for (int y = 0; y < 5; y++) {
                         newCells[y][x] = cells[y][x+1];
@@ -77,6 +93,12 @@ public class Kingdom {
                 }
                 break;
             case "right":
+                // Pour déplacer à droite, la dernière colonne (column 4) doit être vide
+                for (int y=0; y<5; y++){
+                    if(!cells[y][4].isEmpty()){
+                        throw new IllegalStateException("Le royaume ne peut pas être déplacé vers la gauche.");
+                    }
+                }
                 for (int x=1; x<5; x++) {
                     for (int y = 0; y < 5; y++) {
                         newCells[y][x] = cells[y][x - 1];
