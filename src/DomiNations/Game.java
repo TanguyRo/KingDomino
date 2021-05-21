@@ -308,7 +308,7 @@ public class Game {
         for(int i=1; i<=kings.length; i++){
             Scanner scanner = new Scanner(System.in);
 
-            int affichageKing = GetKings.get(0).getPlayer().getColor();
+            int affichageKing = GetKings.get(0).getColor();
             System.out.println("Le joueur " + affichageKing + " a été selectionné au hasard.");
             System.out.println("Le joueur " + affichageKing + " doit choisir un domino parmis " +
                     ListValueDomino + " (Entrer la valeur du domino) :");
