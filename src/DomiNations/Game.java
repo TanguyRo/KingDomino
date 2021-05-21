@@ -133,6 +133,7 @@ public class Game {
                     String listeCouleurs = String.join(", ", colorsMap.keySet()).replaceAll(", (?=[A-Za-z]*$)"," ou ");
                     System.out.println("Saisir la couleur du joueur " + i + " parmi " + listeCouleurs + " : ");
                     String color_input = scanner.nextLine();
+                    color_input = color_input.substring(0, 1).toUpperCase() + color_input.substring(1).toLowerCase();   // On met la première lettre en majuscules et le reste en minsucules
 
                     if (colorsMap.containsKey(color_input)) {
                         color = colorsMap.get(color_input);
