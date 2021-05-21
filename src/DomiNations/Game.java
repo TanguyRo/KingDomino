@@ -12,7 +12,7 @@ public class Game {
     private LinkedList<Domino> drawPile;
     private int nbPlayers;
 
-        public void play() {
+    public void play() {
 
         // Création des joueurs
         createPlayers();
@@ -26,6 +26,36 @@ public class Game {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+
+        
+        // Affichage des royaumes :
+        /*
+        for (Kingdom kingdom: kingdoms){
+            kingdom.print();
+        }
+        */
+
+        // Tests de l'affichage et du déplacement d'un kingdom :
+        /*
+        Kingdom testKingdom = kingdoms[0];
+        Cell[][] testKingdomCells = testKingdom.getCells();
+        for (int x=0; x<5; x++){
+            for (int y=0; y<5; y++){
+                testKingdomCells[y][x] = new Cell(new int[] {x,y},true,null);
+            }
+        }
+        testKingdomCells[2][2].setCurrentLandPiece(new LandPiece("Chateau",0));
+        testKingdomCells[1][1].setCurrentLandPiece(new LandPiece("Montagne",2));
+        testKingdomCells[1][2].setCurrentLandPiece(new LandPiece("Mer",0));
+        testKingdomCells[1][3].setCurrentLandPiece(new LandPiece("Mer",1));
+        testKingdomCells[2][3].setCurrentLandPiece(new LandPiece("Foret",1));
+        testKingdom.print();
+        testKingdom.move("up");
+        testKingdom.print();
+        testKingdom.move("left");
+        testKingdom.print();
+        */
+
 
         Domino DominoInPlay;
         List<Domino> ListDominoInPlay = new ArrayList();
@@ -65,7 +95,6 @@ public class Game {
         System.out.println("Tout les dominos ont été selectionné par les joueurs. Celui avec la plus petite valeur commence en premier.");
 
         /*do {
-
             //Debut de Tour
             Domino DominoInPlay;
             List<Domino> ListDominoInPlay = new ArrayList();
