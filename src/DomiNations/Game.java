@@ -66,6 +66,8 @@ public class Game {
                 //Joue
                 // TODO Récupérer le domino sur lequel son roi se trouvait
                 // TODO Placer ce domino dans le royaume en respectant les règles de connexion.
+                // -> L'user choisit les coordonnées de la position en haut à gauche (entre 0 et 4 pour chaque coordonnée) et l'orientation entre 1 et 4 (3 inputs ou interface graphique)
+                // Bouton Move pour déplacer le board sur l'interface graphique (ou input 0 pour pas de déplacement ou direction et nombre)
                 // TODO Sélectionner un domino de la ligne suivante en y plaçant son roi.
             }
         }

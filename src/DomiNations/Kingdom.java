@@ -94,7 +94,7 @@ public class Kingdom {
         // cells : attribut du kingdom, tableau 5x5 du joueur
 
         // Calcul des positions pour poser
-        int[][] landPiecesPositions = new int[2][];
+        int[][] landPiecesPositions = new int[2][2];
         switch (orientation){
             case 1:
                 landPiecesPositions[0] = upLeftPosition;                                        // LandPiece1
@@ -117,8 +117,16 @@ public class Kingdom {
         }
 
         // Vérifications :
-            // TODO Les index ne doivent pas sortir du board
-
+            // Les dominos ne doivent pas sortir du board
+            // (impossible de rentrer dans la fonction avec un domino complètement dehors mais si upLeftPosition est
+            // contre un bord, une des LandPieces peut se retrouver dehors en fonction de l'orientation)
+        for (int[] position : landPiecesPositions) {            // Pour les positions des 2 LandPieces
+            for (int coordinate : position){                        // Pour chaque coordonnée x et y
+                if (coordinate<0 || coordinate>4){
+                    throw new IllegalArgumentException("Le domino ne peut pas sortir du terrain, veuillez changer de position ou déplacer votre royaume");
+                }
+            }
+        }
             // Le domino ne peut pas être placé sur un autre : les deux cases doivent être vides
         int[] positionLP1 = landPiecesPositions[0];
         int[] positionLP2 = landPiecesPositions[1];
@@ -162,9 +170,9 @@ public class Kingdom {
                     if (!sideCell.isEmpty()) {                                                              // S'il y a une LandPiece sur cette Cell
                         LandPiece sideLandPiece = sideCell.getCurrentLandPiece();                               // On la récupère
                         if (sideLandPiece.getType().equals(typeLandPiece)) {                                    // On incrémente le nombre de LandPieces du même type ou de château en fonction
-                            countSameTypeLandPieces = countSameTypeLandPieces++;
+                            countSameTypeLandPieces++;
                         } else if (sideLandPiece.getType().equals("Chateau")) {
-                            countCastle = countCastle++;
+                            countCastle++;
                         }
                     }
                 }
