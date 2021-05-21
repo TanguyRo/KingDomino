@@ -27,7 +27,45 @@ public class Game {
             e.printStackTrace();
         }
 
-        do {
+        Domino DominoInPlay;
+        List<Domino> ListDominoInPlay = new ArrayList();
+        List<Integer> ListValueDomino = new ArrayList();
+
+        //Piocher autant de dominos qu'il y a de rois en jeu
+        for(int y=0; y<kings.length; y++){
+            DominoInPlay = drawPile.getFirst();
+            drawPile.remove();
+
+            ListDominoInPlay.add(y, DominoInPlay);
+            ListValueDomino.add(y, DominoInPlay.getNumber());
+        }
+
+        //Debut de Premier Tour
+        for(int i=1; i<=kings.length; i++){
+            Scanner scanner = new Scanner(System.in);
+            LinkedList<King> GetKings = new LinkedList(Arrays.asList(kings));
+
+            Collections.shuffle(GetKings);
+            int affichageKing = GetKings.get(0).getPlayer().getColor();
+            System.out.println("Le joueur " + affichageKing + " a été selectionné au hasard.");
+            System.out.println("Le joueur " + affichageKing + " doit choisir un domino parmis " +
+                    ListValueDomino + " (Entrer la valeur du domino) :");
+            int domino = scanner.nextInt();
+
+            for(int j=0; j<kings.length; j++){
+                if(domino == ListDominoInPlay.get(j).getNumber()){
+                    ListDominoInPlay.get(j).setKing(GetKings.get(0));
+                    System.out.println("Le domino selectionné par le joueur " + affichageKing
+                            +  " (" + ListDominoInPlay.get(j) + ") vaut "+ ListDominoInPlay.get(j).getNumber());
+                }
+            }
+
+            GetKings.remove(0);
+        }
+        System.out.println("Tout les dominos ont été selectionné par les joueurs. Celui avec la plus petite valeur commence en premier.");
+
+        /*do {
+
             //Debut de Tour
             Domino DominoInPlay;
             List<Domino> ListDominoInPlay = new ArrayList();
@@ -46,6 +84,8 @@ public class Game {
             }
             // TODO INTERFACE Disposer ces dominos face numérotée visible et rangés par ordre croissant
             Collections.sort(ListValueDomino);
+
+
             // TODO INTERFACE retourner ces dominos face paysage
             //System.out.println(ListValueDomino);
 
@@ -71,7 +111,7 @@ public class Game {
                 // TODO Sélectionner un domino de la ligne suivante en y plaçant son roi.
             }
         }
-        while(!drawPile.isEmpty());
+        while(!drawPile.isEmpty());*/
         //Tous les dominos ont été piochés et posés
 
         // TODO Calcul des points par joueur
