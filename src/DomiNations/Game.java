@@ -21,24 +21,25 @@ public class Game {
 
         // Création des joueurs
         createPlayers();
+        System.out.println("Les joueurs ont bien été créés.");
 
         // Création des royaumes 5x5 pour chaque joueur
         initialiseKingdoms();
+        System.out.println("Les " + nbPlayers + " royaumes ont bien été créés.");
+
+        // Affichage des royaumes :
+        for (Kingdom kingdom: kingdoms){
+            kingdom.print();
+        }
 
         // Création de la pioche, remplie du bon nombre de dominos et mélangée
         try {
             initialiseDrawPile(nbPlayers);
+            System.out.println("La pioche a été mélangée et contient " + drawPile.size() + " dominos.");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
 
-
-        // Affichage des royaumes :
-        /*
-        for (Kingdom kingdom: kingdoms){
-            kingdom.print();
-        }
-        */
 
         // Tests de l'affichage et du déplacement d'un kingdom :
         /*
@@ -72,7 +73,7 @@ public class Game {
             //Debut de Tour
             //Piocher autant de dominos qu'il y a de rois en jeu
             piocheDomino();
-            System.out.println("Dominos restant : " + drawPile.size());
+            System.out.println("Dominos restants : " + drawPile.size());
 
             // TODO INTERFACE Disposer ces dominos face numérotée visible et rangés par ordre croissant
 
@@ -96,38 +97,8 @@ public class Game {
         } while(!drawPile.isEmpty());
         //Tous les dominos ont été piochés et posés
 
-        // Calcul et affichage du score final par joueur
-        int[] scoreByPlayer = new int[nbPlayers];
-        int longestName = 0;
-        for (int i=0; i<nbPlayers; i++){
-            // Partie recherche du nom le plus long pour l'affichage
-            int lengthPlayerName = players[i].getName().length();
-            if (lengthPlayerName > longestName){
-                longestName = lengthPlayerName;
-            }
-            // Partie calcul du score
-            Kingdom playerKingdom = kingdoms[i];
-            int playerScore = 0;
-            for (Domain domain: playerKingdom.getDomains()){
-                playerScore += domain.getLandpieces().size() * domain.getCrownNumber();     // Chaque domaine rapporte n = nbCases x nbCouronnes
-            }
-            scoreByPlayer[i] = playerScore;
-        }
-        System.out.println("Les scores finaux sont :");
-        String format = "%" + Integer.toString(longestName+3) + "s%s%n";
-        for (int i=0; i<nbPlayers; i++){
-            System.out.printf(format, players[i].getName() + " : ", scoreByPlayer[i]);       // On aligne les noms à droite
-        }
-
-
-        // n = nbCases * nbCouronnes pour chaque domaine
-        //nbCases nombre de cases du domaine = domain.landPieces.size()
-        //nbCouronnes nombre de couronnes sur le domaine = domain.landPieces.getCrownNumber()
-
-        // TODO comparaison point entre joueur
-        //si égalité -> plus grand domaine gagne
-        //si égalité de domaine -> plus de couronnes gagne
-        //sinon tous gagnant
+        // Calcul des scores et détermination des gagnants
+        findWinners();
     }
 
     public void createPlayers() {
@@ -197,7 +168,6 @@ public class Game {
         }
 
         currentPlayer = players[0];
-        System.out.println("Les joueurs ont bien été créés.");
     }
 
     // Fonction qui renvoie le nombre de rois nécéessaires en fonction du nombre de joueurs
@@ -219,6 +189,7 @@ public class Game {
 
         for(int i = 0; i<nbPlayers; i++) {
             kingdoms[i] = new Kingdom(1,players[i]);	// taille 1 car uniquement le château au départ
+            players[i].setKingdom(kingdoms[i]);
 
             Cell[][] cells = new Cell[5][5];
 
@@ -235,8 +206,6 @@ public class Game {
             kingdoms[i].setCells(cells);
 
         }
-
-        System.out.println("Les " + nbPlayers + " royaumes ont bien été créés.");
     }
 
     public void initialiseDrawPile(int nbPlayers) throws FileNotFoundException {
@@ -281,8 +250,6 @@ public class Game {
                 for(int i=1; i<=12; i++) { drawPile.remove(); }
                 break;
         }
-
-        System.out.println("La pioche a été mélangée et contient " + drawPile.size() + " dominos.");
     }
 
     public void piocheDomino(){
@@ -308,21 +275,136 @@ public class Game {
         for(int i=1; i<=kings.length; i++){
             Scanner scanner = new Scanner(System.in);
 
-            int affichageKing = GetKings.get(0).getColor();
-            System.out.println("Le joueur " + affichageKing + " a été selectionné au hasard.");
-            System.out.println("Le joueur " + affichageKing + " doit choisir un domino parmis " +
+            String affichageKing = GetKings.get(0).getPlayer().getName();
+            System.out.println(affichageKing + " a été selectionné au hasard.");
+            System.out.println(affichageKing + " doit choisir un domino parmi " +
                     ListValueDomino + " (Entrer la valeur du domino) :");
             int domino = scanner.nextInt();
 
             for(int j=0; j<kings.length; j++){
                 if(domino == ListDominoInPlay.get(j).getNumber()){
                     ListDominoInPlay.get(j).setKing(GetKings.get(0));
-                    System.out.println("Le domino selectionné par le joueur " + affichageKing
+                    System.out.println("Le domino selectionné par " + affichageKing
                             +  " (" + ListDominoInPlay.get(j) + ") vaut "+ ListDominoInPlay.get(j).getNumber());
                 }
             }
 
             GetKings.remove(0);
+        }
+    }
+
+    public void findWinners(){
+        // Calcul du score final par joueur
+        ArrayList<Integer> scoreByPlayer = new ArrayList<>();
+        int longestName = 0;
+        int highscore = 0;
+        for (int i=0; i<nbPlayers; i++){
+            // Partie recherche du nom le plus long pour l'affichage
+            int lengthPlayerName = players[i].getName().length();
+            if (lengthPlayerName > longestName){
+                longestName = lengthPlayerName;
+            }
+            // Partie calcul du score
+            Kingdom playerKingdom = kingdoms[i];
+            int playerScore = 0;
+            for (Domain domain: playerKingdom.getDomains()){
+                playerScore += domain.getLandpieces().size() * domain.getCrownNumber();     // Chaque domaine rapporte n = nbCases x nbCouronnes
+            }
+            scoreByPlayer.add(playerScore);
+            // Partie recherche du meilleur score
+            if (playerScore > highscore){
+                highscore = playerScore;
+            }
+        }
+        // Affichage des scores
+        System.out.println();
+        System.out.println("Les scores finaux sont :");
+        String format = "%" + Integer.toString(longestName+3) + "s%s%n";
+        for (int i=0; i<nbPlayers; i++){
+            System.out.printf(format, players[i].getName() + " : ", scoreByPlayer.get(i));       // On aligne les noms à droite
+        }
+        System.out.println();
+        // Détermination du ou des gagnants potentiels à ce stade
+        ArrayList<Player> potentialWinners = new ArrayList<>();
+        for (int i=0; i<nbPlayers; i++){
+            if (scoreByPlayer.get(i)==highscore){
+                potentialWinners.add(players[i]);
+            }
+        }
+        // S'il y a un seul gagnant, on l'affiche tout de suite, sinon on essaye de les départager
+        if (potentialWinners.size()==1){
+            System.out.println(potentialWinners.get(0).getName() + " a gagné !");
+        }
+        else{
+            System.out.println("Il y a égalité entre " + potentialWinners.size() + " joueurs !");
+            System.out.println("On regarde quel joueur a construit le domaine le plus étendu.");
+            // On calcule la taille du plus grand domaine de chaque joueur
+            ArrayList<Integer> maxDomainSizeByPlayer = new ArrayList<>();
+            int biggestDomain = 0;
+            for (Player player : potentialWinners){
+                ArrayList<Domain> playersDomains = player.getKingdom().getDomains();
+                int maxDomainSize = 0;
+                for (Domain domain : playersDomains){
+                    int domainSize = domain.getLandpieces().size();
+                    if (domainSize > maxDomainSize){
+                        maxDomainSize = domainSize;
+                    }
+                }
+                maxDomainSizeByPlayer.add(maxDomainSize);
+                if (maxDomainSize > biggestDomain){
+                    biggestDomain = maxDomainSize;
+                }
+            }
+            // Détermination du ou des gagnants potentiels à ce nouveau stade
+            ArrayList<Player> potentialWinners2 = new ArrayList<>();
+            for (int i=0; i<potentialWinners.size(); i++){
+                if (maxDomainSizeByPlayer.get(i)==biggestDomain){
+                    potentialWinners2.add(potentialWinners.get(i));
+                }
+            }
+            // S'il y a un seul gagnant, on l'affiche tout de suite, sinon on essaye de les départager
+            if (potentialWinners2.size()==1){
+                System.out.println(potentialWinners2.get(0).getName() + " a gagné !");
+            }
+            else {
+                System.out.println("Il y a égalité entre " + potentialWinners2.size() + " joueurs pour la construction du domaine le plus étendu !");
+                System.out.println("On regarde le nombre de couronnes par joueur.");
+                // On calcule le nombre de couronnes de chaque joueur
+                ArrayList<Integer> crownNumberByPlayer = new ArrayList<>();
+                int biggestCrownNumber = 0;
+                for (Player player : potentialWinners2){
+                    ArrayList<Domain> playersDomains = player.getKingdom().getDomains();
+                    int crownNumber = 0;
+                    for (Domain domain : playersDomains){
+                        crownNumber += domain.getCrownNumber();
+                    }
+                    crownNumberByPlayer.add(crownNumber);
+                    if (crownNumber > biggestCrownNumber){
+                        biggestCrownNumber = crownNumber;
+                    }
+                }
+                // Détermination du ou des gagnants potentiels à ce dernier stade
+                ArrayList<Player> potentialWinners3 = new ArrayList<>();
+                for (int i=0; i<potentialWinners2.size(); i++){
+                    if (crownNumberByPlayer.get(i)==biggestCrownNumber){
+                        potentialWinners3.add(potentialWinners2.get(i));
+                    }
+                }
+                // S'il y a un seul gagnant, on l'affiche, sinon on affiche l'égalité
+                if (potentialWinners3.size()==1){
+                    System.out.println(potentialWinners3.get(0).getName() + " a gagné !");
+                }
+                else {
+                    StringBuilder winnerList = new StringBuilder();
+                    for (Player winner:potentialWinners3){
+                        winnerList.append(winner.getName()).append(", ");
+                    }
+                    String winnerListStr = winnerList.toString().replaceAll(", (?=[A-Za-z]*$)","");
+                    winnerListStr = winnerListStr.replaceAll(", (?=[A-Za-z]*$)"," et ");
+                    System.out.println("Impossible de déterminer un gagnant ! Il y a égalité entre " + winnerListStr + ".");
+                }
+            }
+
         }
     }
 }
