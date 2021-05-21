@@ -64,6 +64,7 @@ public class Kingdom {
                     for (int y = 0; y < 4; y++) {
                         newCells[y][x] = cells[y+1][x];
                     }
+                    newCells[4][x] = new Cell(new int[]{x,4},true,null);
                 }
                 break;
             case "down":
@@ -77,6 +78,7 @@ public class Kingdom {
                     for (int y = 1; y < 5; y++) {
                         newCells[y][x] = cells[y-1][x];
                     }
+                    newCells[0][x] = new Cell(new int[]{x,0},true,null);
                 }
                 break;
             case "left":
@@ -86,10 +88,11 @@ public class Kingdom {
                         throw new IllegalStateException("Le royaume ne peut pas être déplacé vers la gauche.");
                     }
                 }
-                for (int x=0; x<4; x++) {
-                    for (int y = 0; y < 5; y++) {
+                for (int y = 0; y < 5; y++) {
+                    for (int x=0; x<4; x++) {
                         newCells[y][x] = cells[y][x+1];
                     }
+                    newCells[y][4] = new Cell(new int[]{4,y},true,null);
                 }
                 break;
             case "right":
@@ -99,10 +102,11 @@ public class Kingdom {
                         throw new IllegalStateException("Le royaume ne peut pas être déplacé vers la gauche.");
                     }
                 }
-                for (int x=1; x<5; x++) {
-                    for (int y = 0; y < 5; y++) {
+                for (int y = 0; y < 5; y++) {
+                    for (int x=1; x<5; x++) {
                         newCells[y][x] = cells[y][x - 1];
                     }
+                    newCells[y][0] = new Cell(new int[]{0,y},true,null);
                 }
                 break;
         }
