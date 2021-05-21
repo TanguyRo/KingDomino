@@ -17,6 +17,20 @@ public class Game {
     private List<Integer> ListValueDomino;
     private LinkedList<King> GetKings;
 
+    // Rules :
+    private boolean EmpireDuMilieu;
+    private boolean Harmonie;
+
+    // Constructors :
+    public Game(){
+        this.EmpireDuMilieu = false;
+        this.Harmonie = false;
+    };
+    public Game(boolean EmpireDuMilieu, boolean Harmonie){
+        this.EmpireDuMilieu = EmpireDuMilieu;
+        this.Harmonie = Harmonie;
+    }
+
     public void play() {
 
         // Création des joueurs
@@ -301,7 +315,8 @@ public class Game {
         int highscore = 0;
         for (int i=0; i<nbPlayers; i++){
             // Partie recherche du nom le plus long pour l'affichage
-            int lengthPlayerName = players[i].getName().length();
+            String PlayerName = players[i].getName();
+            int lengthPlayerName = PlayerName.length();
             if (lengthPlayerName > longestName){
                 longestName = lengthPlayerName;
             }
@@ -310,6 +325,28 @@ public class Game {
             int playerScore = 0;
             for (Domain domain: playerKingdom.getDomains()){
                 playerScore += domain.getLandpieces().size() * domain.getCrownNumber();     // Chaque domaine rapporte n = nbCases x nbCouronnes
+            }
+            // Bonus si activés
+            if (EmpireDuMilieu){
+                if(playerKingdom.getCells()[2][2].getCurrentLandPiece().getType().equals("Chateau")){
+                    System.out.println(PlayerName + " : bonus Empire du milieu !");
+                    playerScore += 10;
+                }
+            }
+            if (Harmonie){
+                int countEmpty = 0;
+                Cell[][] cells = playerKingdom.getCells();
+                for (int x=0; x<5; x++) {
+                    for (int y = 0; y < 5; y++) {
+                        if (cells[y][x].isEmpty()){
+                            countEmpty++;
+                        }
+                    }
+                }
+                if (countEmpty==0){
+                    System.out.println(PlayerName + " : bonus Harmonie !");
+                    playerScore+=5;
+                }
             }
             scoreByPlayer.add(playerScore);
             // Partie recherche du meilleur score
