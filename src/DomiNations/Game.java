@@ -27,7 +27,7 @@ public class Game {
             e.printStackTrace();
         }
 
-        
+
         // Affichage des royaumes :
         /*
         for (Kingdom kingdom: kingdoms){
@@ -143,7 +143,30 @@ public class Game {
         while(!drawPile.isEmpty());*/
         //Tous les dominos ont été piochés et posés
 
-        // TODO Calcul des points par joueur
+        // Calcul et affichage du score final par joueur
+        int[] scoreByPlayer = new int[nbPlayers];
+        int longestName = 0;
+        for (int i=0; i<nbPlayers; i++){
+            // Partie recherche du nom le plus long pour l'affichage
+            int lengthPlayerName = players[i].getName().length();
+            if (lengthPlayerName > longestName){
+                longestName = lengthPlayerName;
+            }
+            // Partie calcul du score
+            Kingdom playerKingdom = kingdoms[i];
+            int playerScore = 0;
+            for (Domain domain: playerKingdom.getDomains()){
+                playerScore += domain.getLandpieces().size() * domain.getCrownNumber();     // Chaque domaine rapporte n = nbCases x nbCouronnes
+            }
+            scoreByPlayer[i] = playerScore;
+        }
+        System.out.println("Les scores finaux sont :");
+        String format = "%" + Integer.toString(longestName+3) + "s%s%n";
+        for (int i=0; i<nbPlayers; i++){
+            System.out.printf(format, players[i].getName() + " : ", scoreByPlayer[i]);       // On aligne les noms à droite
+        }
+
+
         // n = nbCases * nbCouronnes pour chaque domaine
         //nbCases nombre de cases du domaine = domain.landPieces.size()
         //nbCouronnes nombre de couronnes sur le domaine = domain.landPieces.getCrownNumber()
