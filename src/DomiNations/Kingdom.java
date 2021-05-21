@@ -282,4 +282,43 @@ public class Kingdom {
         // Le domain1 correspond désormais à la fusion des 2
     }
 
+    public void print(){
+        String[] colors={"Rose", "Jaune", "Vert", "Bleu"};
+        // Dictionnaire pour les couleurs
+        HashMap<Integer,String> colorsMap = new HashMap<>();
+        colorsMap.put(1,"\uD83D\uDFE3");
+        colorsMap.put(2,"\uD83D\uDFE1");
+        colorsMap.put(3,"\uD83D\uDFE2");
+        colorsMap.put(4,"\uD83D\uDD35");
+        // Dictionnaire pour les emojis correspondant à chaque type de domaine
+        HashMap<String,String> typesMap = new HashMap<String,String>();
+        typesMap.put("Champs","\uD83C\uDF3E");
+        typesMap.put("Chateau","\uD83C\uDFF0");
+        typesMap.put("Foret","\uD83C\uDF32");
+        typesMap.put("Mer","\uD83C\uDF0A");
+        typesMap.put("Mine","\u26CF\uFE0F️");
+        typesMap.put("Montagne","\u26F0\uFE0F");
+        typesMap.put("Prairie","\uD83C\uDF3F");
+        System.out.println("Royaume de " + player.getName() + " " + colorsMap.get(player.getColor()) + " :");
+        System.out.println("┌───────────────────┐");
+        for (int y=0; y<5; y++){
+            StringBuilder ligne = new StringBuilder();
+            ligne.append("│ ");
+            for (int x=0; x<5; x++){
+                LandPiece landPiece = cells[y][x].getCurrentLandPiece();
+                if (landPiece == null){
+                    ligne.append("⬜️0 ");
+                }
+                else {
+                    String type = landPiece.getType();
+                    int crownNumber = landPiece.getCrownNumber();
+                    ligne.append(typesMap.get(type)+crownNumber+" ");
+                }
+            }
+            ligne.append("│");
+            System.out.println(ligne);
+        }
+        System.out.println("└───────────────────┘");
+    }
+
 }
