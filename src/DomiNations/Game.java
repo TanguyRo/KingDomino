@@ -12,6 +12,11 @@ public class Game {
     private LinkedList<Domino> drawPile;
     private int nbPlayers;
 
+    private Domino DominoInPlay;
+    private List<Domino> ListDominoInPlay;
+    private List<Integer> ListValueDomino;
+    private LinkedList<King> GetKings;
+
     public void play() {
 
         // Création des joueurs
@@ -56,91 +61,39 @@ public class Game {
         testKingdom.print();
         */
 
-
-        Domino DominoInPlay;
-        List<Domino> ListDominoInPlay = new ArrayList();
-        List<Integer> ListValueDomino = new ArrayList();
-
         //Piocher autant de dominos qu'il y a de rois en jeu
-        for(int y=0; y<kings.length; y++){
-            DominoInPlay = drawPile.getFirst();
-            drawPile.remove();
+        piocheDomino();
 
-            ListDominoInPlay.add(y, DominoInPlay);
-            ListValueDomino.add(y, DominoInPlay.getNumber());
-        }
-
-        //Debut de Premier Tour
-        for(int i=1; i<=kings.length; i++){
-            Scanner scanner = new Scanner(System.in);
-            LinkedList<King> GetKings = new LinkedList(Arrays.asList(kings));
-
-            Collections.shuffle(GetKings);
-            int affichageKing = GetKings.get(0).getPlayer().getColor();
-            System.out.println("Le joueur " + affichageKing + " a été selectionné au hasard.");
-            System.out.println("Le joueur " + affichageKing + " doit choisir un domino parmis " +
-                    ListValueDomino + " (Entrer la valeur du domino) :");
-            int domino = scanner.nextInt();
-
-            for(int j=0; j<kings.length; j++){
-                if(domino == ListDominoInPlay.get(j).getNumber()){
-                    ListDominoInPlay.get(j).setKing(GetKings.get(0));
-                    System.out.println("Le domino selectionné par le joueur " + affichageKing
-                            +  " (" + ListDominoInPlay.get(j) + ") vaut "+ ListDominoInPlay.get(j).getNumber());
-                }
-            }
-
-            GetKings.remove(0);
-        }
+        //Debut du Jeu, configuration du premier tour
+        premierTour();
         System.out.println("Tout les dominos ont été selectionné par les joueurs. Celui avec la plus petite valeur commence en premier.");
 
-        /*do {
+        do {
             //Debut de Tour
-            Domino DominoInPlay;
-            List<Domino> ListDominoInPlay = new ArrayList();
-            List<Integer> ListValueDomino = new ArrayList();
-
             //Piocher autant de dominos qu'il y a de rois en jeu
-            for(int i=0; i<kings.length; i++){
-                DominoInPlay = drawPile.getFirst();
-                DominoInPlay.setKing(kings[i]);
-                System.out.println("Le domino pioché par le joueur " + kings[i].getPlayer().getColor()
-                        +  " (" + DominoInPlay + ") vaut "+ DominoInPlay.getNumber());
-                drawPile.remove();
+            piocheDomino();
+            System.out.println("Dominos restant : " + drawPile.size());
 
-                ListDominoInPlay.add(i, DominoInPlay);
-                ListValueDomino.add(i, DominoInPlay.getNumber());
-            }
             // TODO INTERFACE Disposer ces dominos face numérotée visible et rangés par ordre croissant
-            Collections.sort(ListValueDomino);
 
-
-            // TODO INTERFACE retourner ces dominos face paysage
-            //System.out.println(ListValueDomino);
-
-            List<Domino> TriDomino = new ArrayList();
+            /*List<Domino> TriDomino = new ArrayList();
             for(int x=0; x< kings.length; x++){
                 for(int y=0; y< kings.length; y++){
                     if(ListValueDomino.get(x)==ListDominoInPlay.get(y).getNumber()){
                         TriDomino.add(ListDominoInPlay.get(y));
                     }
                 }
-            }
-            System.out.println("Dominos restant : " + drawPile.size());
-            //System.out.println("Dominos en jeu : " + TriDomino);
+            }*/
 
-            for(int i=0; i<kings.length; i++) {
-                TriDomino.get(i).getKing().getPlayer();
-                System.out.println("Tour du joueur " + TriDomino.get(i).getKing().getPlayer().getColor());
+            /*for(int i=0; i<kings.length; i++) {
                 //Joue
                 // TODO Récupérer le domino sur lequel son roi se trouvait
                 // TODO Placer ce domino dans le royaume en respectant les règles de connexion.
                 // -> L'user choisit les coordonnées de la position en haut à gauche (entre 0 et 4 pour chaque coordonnée) et l'orientation entre 1 et 4 (3 inputs ou interface graphique)
                 // Bouton Move pour déplacer le board sur l'interface graphique (ou input 0 pour pas de déplacement ou direction et nombre)
                 // TODO Sélectionner un domino de la ligne suivante en y plaçant son roi.
-            }
-        }
-        while(!drawPile.isEmpty());*/
+            }*/
+        } while(!drawPile.isEmpty());
         //Tous les dominos ont été piochés et posés
 
         // Calcul et affichage du score final par joueur
@@ -332,4 +285,44 @@ public class Game {
         System.out.println("La pioche a été mélangée et contient " + drawPile.size() + " dominos.");
     }
 
+    public void piocheDomino(){
+        this.ListDominoInPlay = new ArrayList();
+        this.ListValueDomino = new ArrayList();
+
+        //Piocher autant de dominos qu'il y a de rois en jeu
+        for(int y=0; y<kings.length; y++){
+            DominoInPlay = drawPile.getFirst();
+            drawPile.remove();
+
+            ListDominoInPlay.add(y, DominoInPlay);
+            ListValueDomino.add(y, DominoInPlay.getNumber());
+        }
+        Collections.sort(ListValueDomino);
+    }
+
+    public void premierTour(){
+        // TODO Impossible de choisir deux fois le même domino + HashMap
+        this.GetKings = new LinkedList(Arrays.asList(kings));
+        Collections.shuffle(GetKings);
+
+        for(int i=1; i<=kings.length; i++){
+            Scanner scanner = new Scanner(System.in);
+
+            int affichageKing = GetKings.get(0).getPlayer().getColor();
+            System.out.println("Le joueur " + affichageKing + " a été selectionné au hasard.");
+            System.out.println("Le joueur " + affichageKing + " doit choisir un domino parmis " +
+                    ListValueDomino + " (Entrer la valeur du domino) :");
+            int domino = scanner.nextInt();
+
+            for(int j=0; j<kings.length; j++){
+                if(domino == ListDominoInPlay.get(j).getNumber()){
+                    ListDominoInPlay.get(j).setKing(GetKings.get(0));
+                    System.out.println("Le domino selectionné par le joueur " + affichageKing
+                            +  " (" + ListDominoInPlay.get(j) + ") vaut "+ ListDominoInPlay.get(j).getNumber());
+                }
+            }
+
+            GetKings.remove(0);
+        }
+    }
 }
