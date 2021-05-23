@@ -310,9 +310,7 @@ public class Kingdom {
                     ligne.append("⬜️0 ");
                 }
                 else {
-                    String type = landPiece.getType();
-                    int crownNumber = landPiece.getCrownNumber();
-                    ligne.append(typesMap.get(type)+crownNumber+" ");
+                    ligne.append(landPiece.toString()+" ");
                 }
             }
             ligne.append("│");

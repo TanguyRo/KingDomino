@@ -78,12 +78,14 @@ public class Game {
         // Début du jeu : création du banc et configuration du premier tour
         bench = new Bench(nbKings);
         bench.drawFirstLane(drawPile);        // On rempli la lane de gauche pour la première fois en piochant au hasard des dominos
+        bench.print();
         premierTour();
         System.out.println("Tout les dominos ont été selectionné par les joueurs. Celui avec la plus petite valeur commence en premier.");
 
         do {
             //Debut de Tour
             bench.drawDominos(drawPile); // On actualise le banc en piochant des nouveaux dominos
+            bench.print();
             System.out.println("Dominos restants : " + drawPile.size());
 
             // TODO INTERFACE Disposer ces dominos face numérotée visible et rangés par ordre croissant

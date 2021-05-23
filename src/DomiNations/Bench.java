@@ -67,4 +67,29 @@ public class Bench {
 
         return dominosValues;
     }
+
+    public void print(){
+        System.out.println("Voilà le banc :");
+        for (int i=0; i<size; i++){
+            Domino[] dominos = {firstLane[i],secondLane[i]};
+            StringBuilder[] parts = new StringBuilder[2];
+            for (int j=0; j<2; j++){
+                if (dominos[j]==null){
+                    parts[j] = new StringBuilder("          ");
+                }
+                else {
+                    StringBuilder sb = new StringBuilder();
+                    sb.append(dominos[j].getNumber());
+                    if (sb.length() == 1) sb.append(" "); // Toujours 2 caractères pour le chiffre
+                    sb.append(" : ");
+                    sb.append(dominos[j].getLandPiece(1));
+                    sb.append(" ");
+                    sb.append(dominos[j].getLandPiece(2));
+                    parts[j] = sb;
+                }
+            }
+            System.out.println(parts[0] + " ｜ " + parts[1]);
+        }
+        System.out.println();
+    }
 }
