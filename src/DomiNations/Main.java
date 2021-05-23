@@ -4,7 +4,7 @@ public class Main {
 
     public static void main(String[] args) {
         Interface2test.start();
-        Game game = new Game();
+        Game game = new Game(true,true);
         game.play();
     }
 }

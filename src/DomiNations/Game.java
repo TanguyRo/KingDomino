@@ -6,26 +6,24 @@ import java.util.*;
 
 public class Game {
     private Player[] players;
-    private Player currentPlayer;
     private Kingdom[] kingdoms;
     private King[] kings;
     private LinkedList<Domino> drawPile;
+    private Bench bench;
     private int nbPlayers;
+    private int nbKings;
 
-    private Domino DominoInPlay;
-    private List<Domino> ListDominoInPlay;
-    private List<Integer> ListValueDomino;
     private LinkedList<King> GetKings;
 
     // Rules :
-    private boolean EmpireDuMilieu;
-    private boolean Harmonie;
+    private final boolean EmpireDuMilieu;
+    private final boolean Harmonie;
 
     // Constructors :
     public Game(){
         this.EmpireDuMilieu = false;
         this.Harmonie = false;
-    };
+    }
     public Game(boolean EmpireDuMilieu, boolean Harmonie){
         this.EmpireDuMilieu = EmpireDuMilieu;
         this.Harmonie = Harmonie;
@@ -76,17 +74,16 @@ public class Game {
         testKingdom.print();
         */
 
-        //Piocher autant de dominos qu'il y a de rois en jeu
-        piocheDomino();
 
-        //Debut du Jeu, configuration du premier tour
+        // Début du jeu : création du banc et configuration du premier tour
+        bench = new Bench(nbKings);
+        bench.drawFirstLane(drawPile);        // On rempli la lane de gauche pour la première fois en piochant au hasard des dominos
         premierTour();
         System.out.println("Tout les dominos ont été selectionné par les joueurs. Celui avec la plus petite valeur commence en premier.");
 
         do {
             //Debut de Tour
-            //Piocher autant de dominos qu'il y a de rois en jeu
-            piocheDomino();
+            bench.drawDominos(drawPile); // On actualise le banc en piochant des nouveaux dominos
             System.out.println("Dominos restants : " + drawPile.size());
 
             // TODO INTERFACE Disposer ces dominos face numérotée visible et rangés par ordre croissant
@@ -132,7 +129,8 @@ public class Game {
         }while(nbPlayers<2 || nbPlayers>4);
 
         this.players = new Player[nbPlayers];
-        this.kings = new King[countKings(nbPlayers)];   // Taille 3 si 3 joueurs, taille 4 si 2 ou 4 joueurs
+        this.nbKings = (nbPlayers==3 ? 3 : 4);   // Taille 3 si 3 joueurs, taille 4 si 2 ou 4 joueurs
+        this.kings = new King[nbKings];
 
         // Noms et couleurs des joueurs :
         for(int i = 1; i<=nbPlayers; i++) {
@@ -181,22 +179,6 @@ public class Game {
                 }
             }
         }
-
-        currentPlayer = players[0];
-    }
-
-    // Fonction qui renvoie le nombre de rois nécéessaires en fonction du nombre de joueurs
-    public int countKings(int nbPlayers){
-        int kingsNumber;
-        switch (nbPlayers){
-            case 3 :
-                kingsNumber = 3;
-                break;
-            default :
-                kingsNumber = 4;
-                break;
-        }
-        return kingsNumber;
     }
 
     public void initialiseKingdoms() {
@@ -245,11 +227,11 @@ public class Game {
         this.drawPile = new LinkedList<>();
 
         // Création de tous les dominos et placement dans l'ordre dans la pile drawPile
-        for (int i=0; i < dominos.length; i++) {
-            String[] infosDomino = dominos[i].split(",");
-            LandPiece landPiece1 = new LandPiece(infosDomino[1],Integer.valueOf(infosDomino[0]));
-            LandPiece landPiece2 = new LandPiece(infosDomino[3],Integer.valueOf(infosDomino[2]));
-            Domino domino = new Domino(landPiece1, landPiece2, Integer.valueOf(infosDomino[4]));
+        for (String line : dominos) {
+            String[] infosDomino = line.split(",");
+            LandPiece landPiece1 = new LandPiece(infosDomino[1], Integer.parseInt(infosDomino[0]));
+            LandPiece landPiece2 = new LandPiece(infosDomino[3], Integer.parseInt(infosDomino[2]));
+            Domino domino = new Domino(landPiece1, landPiece2, Integer.parseInt(infosDomino[4]));
             drawPile.add(domino);
         }
 
@@ -267,42 +249,26 @@ public class Game {
         }
     }
 
-    public void piocheDomino(){
-        this.ListDominoInPlay = new ArrayList();
-        this.ListValueDomino = new ArrayList();
-
-        //Piocher autant de dominos qu'il y a de rois en jeu
-        for(int y=0; y<kings.length; y++){
-            DominoInPlay = drawPile.getFirst();
-            drawPile.remove();
-
-            ListDominoInPlay.add(y, DominoInPlay);
-            ListValueDomino.add(y, DominoInPlay.getNumber());
-        }
-        Collections.sort(ListValueDomino);
-    }
-
     public void premierTour(){
         // TODO Impossible de choisir deux fois le même domino + HashMap
         this.GetKings = new LinkedList(Arrays.asList(kings));
         Collections.shuffle(GetKings);
 
-        for(int i=1; i<=kings.length; i++){
-            Scanner scanner = new Scanner(System.in);
-
+        Scanner scanner = new Scanner(System.in);
+        for(int i=1; i<=nbKings; i++){
             String affichageKing = GetKings.get(0).getPlayer().getName();
             System.out.println(affichageKing + " a été selectionné au hasard.");
             System.out.println(affichageKing + " doit choisir un domino parmi " +
-                    ListValueDomino + " (Entrer la valeur du domino) :");
+                    Arrays.toString(bench.getDominosValues(1)) + " (Entrer la valeur du domino) :");
             int domino = scanner.nextInt();
 
-            for(int j=0; j<kings.length; j++){
+            /*for(int j=0; j<kings.length; j++){
                 if(domino == ListDominoInPlay.get(j).getNumber()){
                     ListDominoInPlay.get(j).setKing(GetKings.get(0));
                     System.out.println("Le domino selectionné par " + affichageKing
                             +  " (" + ListDominoInPlay.get(j) + ") vaut "+ ListDominoInPlay.get(j).getNumber());
                 }
-            }
+            }*/
 
             GetKings.remove(0);
         }
@@ -357,7 +323,7 @@ public class Game {
         // Affichage des scores
         System.out.println();
         System.out.println("Les scores finaux sont :");
-        String format = "%" + Integer.toString(longestName+3) + "s%s%n";
+        String format = "%" + (longestName+3) + "s%s%n";
         for (int i=0; i<nbPlayers; i++){
             System.out.printf(format, players[i].getName() + " : ", scoreByPlayer.get(i));       // On aligne les noms à droite
         }
