@@ -75,7 +75,7 @@ public class Bench {
             StringBuilder[] parts = new StringBuilder[2];
             for (int j=0; j<2; j++){
                 if (dominos[j]==null){
-                    parts[j] = new StringBuilder("          ");
+                    parts[j] = new StringBuilder("              ");
                 }
                 else {
                     Domino domino = dominos[j];
