@@ -78,13 +78,22 @@ public class Bench {
                     parts[j] = new StringBuilder("          ");
                 }
                 else {
+                    Domino domino = dominos[j];
                     StringBuilder sb = new StringBuilder();
-                    sb.append(dominos[j].getNumber());
+                    sb.append(domino.getNumber());
                     if (sb.length() == 1) sb.append(" "); // Toujours 2 caractères pour le chiffre
                     sb.append(" : ");
-                    sb.append(dominos[j].getLandPiece(1));
+                    sb.append(domino.getLandPiece(1));
                     sb.append(" ");
-                    sb.append(dominos[j].getLandPiece(2));
+                    sb.append(domino.getLandPiece(2));
+                    sb.append(" ");
+                    King king = domino.getKing();
+                    if (king!=null){
+                        sb.append(king.getColorEmoji());
+                    }
+                    else {
+                        sb.append("\u26AA");
+                    }
                     parts[j] = sb;
                 }
             }

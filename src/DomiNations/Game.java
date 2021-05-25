@@ -136,7 +136,7 @@ public class Game {
 
         // Noms et couleurs des joueurs :
         for(int i = 1; i<=nbPlayers; i++) {
-            int color = 0;
+            int colorNumber = 0;
 
             System.out.println("Saisir le nom du joueur " + i + " : ");
             String name = scanner.nextLine();
@@ -150,21 +150,21 @@ public class Game {
                     color_input = color_input.substring(0, 1).toUpperCase() + color_input.substring(1).toLowerCase();   // On met la première lettre en majuscules et le reste en minsucules
 
                     if (colorsMap.containsKey(color_input)) {
-                        color = colorsMap.get(color_input);
+                        colorNumber = colorsMap.get(color_input);
                         colorsMap.remove(color_input);
                     }
 
-                } while (color == 0);
+                } while (colorNumber == 0);
             }
             // S'il n'en reste qu'une
             else {
                 String colorName = (String) colorsMap.keySet().toArray()[0];
-                color = colorsMap.get(colorName);
+                colorNumber = colorsMap.get(colorName);
                 colorsMap.remove(colorName);
                 System.out.println("Le joueur " + i + " aura la couleur " + colorName + ".");
             }
 
-            players[i-1] = new Player(name, color);
+            players[i-1] = new Player(name, colorNumber);
 
             // Création des rois en fonction du nombre de joueurs
             if (nbPlayers==3 || nbPlayers==4){

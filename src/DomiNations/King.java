@@ -2,7 +2,7 @@ package DomiNations;
 
 public class King {
     private Player player;
-    private int color;
+    private Color color;
 
 
     public King(Player player){
@@ -19,7 +19,19 @@ public class King {
         return player;
     }
 
-    public int getColor() {
+    public Color getColor() {
         return color;
+    }
+
+    public int getColorNumber() {
+        return color.getNumber();
+    }
+
+    public String getColorName() {
+        return color.getName();
+    }
+
+    public String getColorEmoji() {
+        return color.getEmoji();
     }
 }
