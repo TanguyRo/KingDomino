@@ -76,19 +76,26 @@ public class Game {
         // Début du jeu : création du banc et configuration du premier tour
         bench = new Bench(nbKings);
         bench.drawFirstLane(drawPile);        // On rempli la lane de gauche pour la première fois en piochant au hasard des dominos
-        bench.print();
         ChooseDominosFirstRound();
+        bench.print();
         System.out.println("Tous les dominos ont été selectionnés par les joueurs. Celui avec la plus petite valeur commence en premier.");
+        boolean firstDrawRight = true;
 
         do {
             //Debut de Tour
-            bench.drawDominos(drawPile); // On actualise le banc en piochant des nouveaux dominos
-            bench.print();
+            System.out.println("On pioche " + nbKings + " nouveaux dominos.");
+            if (firstDrawRight){
+                bench.drawSecondLane(drawPile);
+                firstDrawRight = false;
+            }
+            else {
+                bench.drawDominos(drawPile); // On actualise le banc en piochant des nouveaux dominos
+            }
             ChooseDominos();
             System.out.println("Dominos restants : " + drawPile.size());
 
             // TODO INTERFACE Disposer ces dominos face numérotée visible et rangés par ordre croissant
-            for(int i=0; i<kings.length; i++) {
+            for (int i=0; i<kings.length; i++) {
                 //Joue
                 // TODO Récupérer le domino sur lequel son roi se trouvait
                 // TODO Placer ce domino dans le royaume en respectant les règles de connexion.
@@ -255,10 +262,12 @@ public class Game {
         // Pour chaque roi le joueur correspondant choisit un domino.
         for (int i=1; i<=nbKings; i++){
 
+            bench.print();
+
             // Premier roi de la liste précédement mélangée puis le suivant à la prochaine boucle.
             King king = kingsToPlay.get(0);
             Player currentPlayer = king.getPlayer();
-            System.out.println(currentPlayer.getName() + " a été selectionné au hasard.");
+            System.out.println(currentPlayer.getName() + " " + currentPlayer.getColorEmoji() + " a été sélectionné au hasard.");
 
             // Si on a le choix entre les dominos, on demande l'user input
             if (dominosToSelect.size()>1) {
@@ -272,7 +281,7 @@ public class Game {
             else {
                 int dominoNumber = (int) dominosToSelect.keySet().toArray()[0];   // On prend le domino restant
                 dominosToSelect.get(dominoNumber).setKing(king);   // On pose le King sur le domino
-                System.out.println("Le domino " + dominoNumber + " est attribué automatiquement à " + currentPlayer.getName() +  ".");
+                System.out.println("Le domino " + dominoNumber + " est attribué automatiquement à " + currentPlayer.getName() + " " + currentPlayer.getColorEmoji() + ".");
                 dominosToSelect.remove(dominoNumber);
             }
 
@@ -291,6 +300,9 @@ public class Game {
 
         // Pour chaque roi le joueur correspondant choisit un domino.
         for (int i=1; i<=nbKings; i++){
+
+            bench.print();
+
             // TODO ordre joueur en fonction des rois sur les dominos
             King king = kingsToPlay.get(0);
             Player currentPlayer = king.getPlayer();
@@ -307,7 +319,7 @@ public class Game {
             else {
                 int dominoNumber = (int) dominosToSelect.keySet().toArray()[0];   // On prend le domino restant
                 dominosToSelect.get(dominoNumber).setKing(king);   // On pose le King sur le domino
-                System.out.println("Le domino " + dominoNumber + " est attribué automatiquement à " + currentPlayer.getName() +  ".");
+                System.out.println("Le domino " + dominoNumber + " est attribué automatiquement à " + currentPlayer.getName() + " " + currentPlayer.getColorEmoji() + ".");
                 dominosToSelect.remove(dominoNumber);
             }
 

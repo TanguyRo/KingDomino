@@ -51,6 +51,11 @@ public class Bench {
         firstLane = drawDominosAsArray(drawPile);
     }
 
+    // Fonction appelant drawDominosAsArray pour la lane de droite, uniquement utilisée juste après le premier tour
+    public void drawSecondLane(LinkedList<Domino> drawPile) {
+        secondLane = drawDominosAsArray(drawPile);
+    }
+
     // Fonction appelant drawDominosAsArray pour la lane de droite et décalant les dominos
     public void drawDominos(LinkedList<Domino> drawPile) {
         firstLane = secondLane;                         // Les dominos de la lane de gauche ont tous été posés, on peut décaler la lane de droite

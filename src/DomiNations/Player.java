@@ -50,7 +50,7 @@ public class Player {
         int domino = 0;
         // Premier essai
         try {
-            System.out.println(name + " doit choisir un domino parmi " +
+            System.out.println(name + " " + color.getEmoji() + " doit choisir un domino parmi " +
                     dominosToSelect.keySet() + " (Entrer la valeur du domino) :");
             domino = scanner.nextInt();
             scanner.nextLine();
