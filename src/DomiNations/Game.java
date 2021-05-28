@@ -280,7 +280,6 @@ public class Game {
     public void ChooseDominos(){
         HashMap<Integer, Domino> dominosToSelect = new HashMap<>();
         LinkedList<King> kingsToPlay = new LinkedList(Arrays.asList(kings));   //On récupère les rois.
-        String namePlayer;
         int domino;
 
         // HashMap des dominos disponibles sur la lane
