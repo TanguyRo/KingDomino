@@ -13,8 +13,6 @@ public class Game {
     private int nbPlayers;
     private int nbKings;
 
-    private LinkedList<King> GetKings;
-
     // Rules :
     private final boolean EmpireDuMilieu;
     private final boolean Harmonie;
@@ -79,14 +77,14 @@ public class Game {
         bench = new Bench(nbKings);
         bench.drawFirstLane(drawPile);        // On rempli la lane de gauche pour la première fois en piochant au hasard des dominos
         bench.print();
-        ChooseDomino(true);
-        System.out.println("Tout les dominos ont été selectionné par les joueurs. Celui avec la plus petite valeur commence en premier.");
+        ChooseDominosFirstRound();
+        System.out.println("Tous les dominos ont été selectionnés par les joueurs. Celui avec la plus petite valeur commence en premier.");
 
         do {
             //Debut de Tour
             bench.drawDominos(drawPile); // On actualise le banc en piochant des nouveaux dominos
             bench.print();
-            ChooseDomino(false);
+            ChooseDominos();
             System.out.println("Dominos restants : " + drawPile.size());
 
             // TODO INTERFACE Disposer ces dominos face numérotée visible et rangés par ordre croissant
@@ -242,63 +240,74 @@ public class Game {
         }
     }
 
-    public void ChooseDomino(boolean isFirstRound){
-        HashMap<Integer, Domino> DominoInLane = new HashMap<>();
-        this.GetKings = new LinkedList(Arrays.asList(kings));   //On récupère les rois.
-        Scanner scanner = new Scanner(System.in);
+    public void ChooseDominosFirstRound(){
+        HashMap<Integer, Domino> dominosToSelect = new HashMap<>();
+        LinkedList<King> kingsToPlay = new LinkedList(Arrays.asList(kings));   //On récupère les rois.
+
+        // Au premier Tour l'ordre est au hasard -> mélange des rois.
+        Collections.shuffle(kingsToPlay);
+
+        // HashMap des dominos disponibles sur la lane
+        for (int j=1; j<=kings.length; j++){
+            dominosToSelect.put(bench.getDominosValues(1)[j-1], bench.getLane(1)[j-1]);
+        }
+
+        // Pour chaque roi le joueur correspondant choisit un domino.
+        for(int i=1; i<=nbKings; i++){
+
+            // Premier roi de la liste précédement mélangée puis le suivant à la prochaine boucle.
+            Player currentPlayer = kingsToPlay.get(0).getPlayer();
+            System.out.println(currentPlayer.getName() + " a été selectionné au hasard.");
+
+            // Si on a le choix entre les dominos, on demande l'user input
+            if (dominosToSelect.size()>1) {
+                int domino = currentPlayer.chooseDomino(dominosToSelect);   // On choisit le numéro du domino (input de l'user)
+                dominosToSelect.get(domino).setKing(kingsToPlay.get(0));    // On pose le King sur le domino
+                dominosToSelect.remove(domino);                             // On l'enlève des dominos à sélectionner
+            }
+            // S'il ne reste qu'un domino on lui attribue automatiquement
+            else {
+                int domino = (int) dominosToSelect.keySet().toArray()[0];   // On prend le domino restant
+                dominosToSelect.get(domino).setKing(kingsToPlay.get(0));   // On pose le King sur le domino
+                System.out.println("Le domino " + domino + " est attribué automatiquement à " + currentPlayer.getName() +  ".");
+                dominosToSelect.remove(domino);
+            }
+
+            kingsToPlay.remove(0);
+        }
+    }
+
+    public void ChooseDominos(){
+        HashMap<Integer, Domino> dominosToSelect = new HashMap<>();
+        LinkedList<King> kingsToPlay = new LinkedList(Arrays.asList(kings));   //On récupère les rois.
         String namePlayer;
         int domino;
-        int lane;
 
-        if(isFirstRound) {
-            //Premier Tour, l'ordre est au hasard -> mélange des rois.
-            Collections.shuffle(GetKings);
-            lane = 1;
-        }else{
-            lane=2;
-        }
-
-        //HashMap des dominos disponible sur la lane
+        // HashMap des dominos disponibles sur la lane
         for (int j=1; j<=kings.length; j++){
-            DominoInLane.put(bench.getDominosValues(lane)[j-1], bench.getLane(lane)[j-1]);
+            dominosToSelect.put(bench.getDominosValues(2)[j-1], bench.getLane(2)[j-1]);
         }
 
-        //Pour chaque roi les joueurs correspondant choisissent un domino.
+        // Pour chaque roi le joueur correspondant choisit un domino.
         for(int i=1; i<=nbKings; i++){
-            if(isFirstRound) {
-                //Premier roi de la liste précédement mélangé puis le suivant à la prochaine boucle.
-                namePlayer = GetKings.get(0).getPlayer().getName();
-                System.out.println(namePlayer + " a été selectionné au hasard.");
-            }
-            else{
-                //TODO ordre joueur en fonction des rois sur les dominos
-                namePlayer = GetKings.get(0).getPlayer().getName();
-            }
+            // TODO ordre joueur en fonction des rois sur les dominos
+            Player currentPlayer = kingsToPlay.get(0).getPlayer();
 
-            if (DominoInLane.size()>1) {
-                do{
-                    System.out.println(namePlayer + " doit choisir un domino parmi " +
-                            DominoInLane.keySet() + " (Entrer la valeur du domino) :");
-
-                    domino = scanner.nextInt();
-
-                    if (DominoInLane.containsKey(domino)) {
-                        DominoInLane.get(domino).setKing(GetKings.get(0));
-                        System.out.println("Le domino selectionné par " + namePlayer
-                                +  " vaut "+ domino + ".");
-                    }
-                }while(!DominoInLane.containsKey(domino));
-                DominoInLane.remove(domino);
+            // Si on a le choix entre les dominos, on demande l'user input
+            if (dominosToSelect.size()>1) {
+                domino = currentPlayer.chooseDomino(dominosToSelect);   // On choisit le numéro du domino (input de l'user)
+                dominosToSelect.get(domino).setKing(kingsToPlay.get(0));   // On pose le King sur le domino
+                dominosToSelect.remove(domino);                         // On l'enlève des dominos à sélectionner
             }
-            // S'il ne reste qu'un domino
+            // S'il ne reste qu'un domino on lui attribue automatiquement
             else {
-                DominoInLane.get(DominoInLane.keySet().toArray()[0]).setKing(GetKings.get(0));
-                System.out.println("Le domino " + DominoInLane.keySet().toArray()[0] + " est attribué automatiquement à " + namePlayer
-                        +  ".");
-                DominoInLane.remove(DominoInLane.keySet().toArray()[0]);
+                domino = (int) dominosToSelect.keySet().toArray()[0];   // On prend le domino restant
+                dominosToSelect.get(domino).setKing(kingsToPlay.get(0));   // On pose le King sur le domino
+                System.out.println("Le domino " + domino + " est attribué automatiquement à " + currentPlayer.getName() +  ".");
+                dominosToSelect.remove(domino);
             }
 
-            GetKings.remove(0);
+            kingsToPlay.remove(0);
         }
     }
 

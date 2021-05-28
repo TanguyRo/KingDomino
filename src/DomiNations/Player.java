@@ -1,5 +1,7 @@
 package DomiNations;
 
+import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.Scanner;
 
 public class Player {
@@ -42,9 +44,40 @@ public class Player {
         this.kingdom = kingdom;
     }
 
-    public int chooseDomino(int[] values) {
-        // TODO Placer ici le scanner + la vérification que c'est bien un int et qu'il est pas pris
-        return 0;
+    public int chooseDomino(HashMap<Integer, Domino> dominosToSelect) {
+        Scanner scanner = new Scanner(System.in);
+
+        int domino = 0;
+        // Premier essai
+        try {
+            System.out.println(name + " doit choisir un domino parmi " +
+                    dominosToSelect.keySet() + " (Entrer la valeur du domino) :");
+            domino = scanner.nextInt();
+            scanner.nextLine();
+            if (!(dominosToSelect.containsKey(domino))) {
+                domino = 0;
+            }
+        }
+        catch (Exception ex) {
+            scanner.nextLine();
+            domino = 0;
+        }
+        // Si ça n'a pas suffi on recommence jusqu'à avoir un domino correct
+        while (domino == 0){
+            try {
+                System.out.println("Le domino ne peut être que " + dominosToSelect.keySet() + " : ");
+                domino = scanner.nextInt();
+                scanner.nextLine();
+                if (!(dominosToSelect.containsKey(domino))) {
+                    domino = 0;
+                }
+            }
+            catch (Exception ex) {
+                scanner.nextLine();
+                domino = 0;
+            }
+        }
+        return domino;
     }
 
     public int[] choosePosition() {
