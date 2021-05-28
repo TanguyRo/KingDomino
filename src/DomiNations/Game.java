@@ -130,6 +130,8 @@ public class Game {
         this.nbKings = (nbPlayers==3 ? 3 : 4);   // Taille 3 si 3 joueurs, taille 4 si 2 ou 4 joueurs
         this.kings = new King[nbKings];
 
+        // TODO créer fonctions Player.chooseName et Player.chooseColor
+
         // Noms et couleurs des joueurs :
         for(int i = 1; i<=nbPlayers; i++) {
             int colorNumber = 0;
@@ -248,7 +250,7 @@ public class Game {
     }
 
     public void ChooseDominosFirstRound(){
-        HashMap<Integer, Domino> dominosToSelect = new HashMap<>();
+        LinkedHashMap<Integer, Domino> dominosToSelect = new LinkedHashMap<>();
         LinkedList<King> kingsToPlay = new LinkedList(Arrays.asList(kings));   //On récupère les rois.
 
         // Au premier Tour l'ordre est au hasard -> mélange des rois.
@@ -290,7 +292,7 @@ public class Game {
     }
 
     public void ChooseDominos(){
-        HashMap<Integer, Domino> dominosToSelect = new HashMap<>();
+        LinkedHashMap<Integer, Domino> dominosToSelect = new LinkedHashMap<>();
         LinkedList<King> kingsToPlay = new LinkedList(Arrays.asList(kings));   //On récupère les rois.
 
         // HashMap des dominos disponibles sur la lane
