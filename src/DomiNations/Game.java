@@ -113,9 +113,9 @@ public class Game {
     public void createPlayers() {
         //Utilisation d'un dictionnaire pour proposer les couleurs
         String[] colors={"Rose", "Jaune", "Vert", "Bleu"};
-        HashMap<String, Integer> colorsMap = new HashMap<>();
+        HashMap<String, Integer> colorsToSelect = new HashMap<>();
         for (int i=1; i<=4; i++){
-            colorsMap.put(colors[i-1],i);
+            colorsToSelect.put(colors[i-1],i);
         }
 
         Scanner scanner = new Scanner(System.in);
@@ -130,39 +130,29 @@ public class Game {
         this.nbKings = (nbPlayers==3 ? 3 : 4);   // Taille 3 si 3 joueurs, taille 4 si 2 ou 4 joueurs
         this.kings = new King[nbKings];
 
-        // TODO créer fonctions Player.chooseName et Player.chooseColor
-
         // Noms et couleurs des joueurs :
         for(int i = 1; i<=nbPlayers; i++) {
-            int colorNumber = 0;
+            // On crée le joueur
+            Player playerInCreation = new Player();
 
-            System.out.println("Saisir le nom du joueur " + i + " : ");
-            String name = scanner.nextLine();
+            // On définit son nom (input ou aléatoire si IA)
+            playerInCreation.chooseName(i);
 
-            // S'il y a un choix à faire parmi plusieurs couleurs
-            if (colorsMap.size()>1) {
-                do {
-                    String listeCouleurs = String.join(", ", colorsMap.keySet()).replaceAll(", (?=[A-Za-z]*$)"," ou ");
-                    System.out.println("Saisir la couleur du joueur " + i + " parmi " + listeCouleurs + " : ");
-                    String color_input = scanner.nextLine();
-                    color_input = color_input.substring(0, 1).toUpperCase() + color_input.substring(1).toLowerCase();   // On met la première lettre en majuscules et le reste en minsucules
-
-                    if (colorsMap.containsKey(color_input)) {
-                        colorNumber = colorsMap.get(color_input);
-                        colorsMap.remove(color_input);
-                    }
-
-                } while (colorNumber == 0);
+            // Pour la couleur
+                // Si on a le choix entre plusieurs couleurs, on demande l'user input
+            if (colorsToSelect.size()>1) {
+                playerInCreation.chooseColor(i, colorsToSelect);     // On choisit la couleur (input de l'user)
             }
-            // S'il n'en reste qu'une
+                // S'il ne reste qu'une couleur on lui attribue automatiquement
             else {
-                String colorName = (String) colorsMap.keySet().toArray()[0];
-                colorNumber = colorsMap.get(colorName);
-                colorsMap.remove(colorName);
+                String colorName = (String) colorsToSelect.keySet().toArray()[0];   // On récupère la dernière couleur
+                int colorNumber = colorsToSelect.get(colorName);                    // On cherche le numéro correspondant
+                playerInCreation.setColor(colorNumber);                             // On attribue la couleur au joueur
+                colorsToSelect.remove(colorName);                                   // On enlève la couleur de la liste
                 System.out.println("Le joueur " + i + " aura la couleur " + colorName + ".");
             }
 
-            players[i-1] = new Player(name, colorNumber);
+            players[i-1] = playerInCreation;
 
             // Création des rois en fonction du nombre de joueurs
             if (nbPlayers==3 || nbPlayers==4){
@@ -170,12 +160,12 @@ public class Game {
             }
             else if (nbPlayers == 2){
                 if (i==1){
-                    kings[0] = new King(players[i-1]);
-                    kings[1] = new King(players[i-1]);
+                    kings[0] = new King(playerInCreation);
+                    kings[1] = new King(playerInCreation);
                 }
                 else {
-                    kings[2] = new King(players[i-1]);
-                    kings[3] = new King(players[i-1]);
+                    kings[2] = new King(playerInCreation);
+                    kings[3] = new King(playerInCreation);
                 }
             }
         }
@@ -251,7 +241,7 @@ public class Game {
 
     public void ChooseDominosFirstRound(){
         LinkedHashMap<Integer, Domino> dominosToSelect = new LinkedHashMap<>();
-        LinkedList<King> kingsToPlay = new LinkedList(Arrays.asList(kings));   //On récupère les rois.
+        LinkedList<King> kingsToPlay = new LinkedList<King>(Arrays.asList(kings));   // On récupère les rois
 
         // Au premier Tour l'ordre est au hasard -> mélange des rois.
         Collections.shuffle(kingsToPlay);
@@ -293,7 +283,7 @@ public class Game {
 
     public void ChooseDominos(){
         LinkedHashMap<Integer, Domino> dominosToSelect = new LinkedHashMap<>();
-        LinkedList<King> kingsToPlay = new LinkedList(Arrays.asList(kings));   //On récupère les rois.
+        LinkedList<King> kingsToPlay = new LinkedList<King>(Arrays.asList(kings));   // On récupère les rois
 
         // HashMap des dominos disponibles sur la lane
         for (int j=1; j<=kings.length; j++){

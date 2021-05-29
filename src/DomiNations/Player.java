@@ -1,23 +1,20 @@
 package DomiNations;
 
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.Scanner;
 
 public class Player {
-    private final String name;
-    private final Color color;
+    private String name;
+    private Color color;
     private Kingdom kingdom;
-
-
-    public Player(String name, int colorNumber) {
-        this.name = name;
-        this.color = new Color(colorNumber);
-        this.kingdom = null;
-    }
+    private static Scanner scanner = new Scanner(System.in);
 
     public String getName() {
         return name;
+    }
+
+    public void setColor(int colorNumber) {
+        this.color = new Color(colorNumber);
     }
 
     public Color getColor() {
@@ -44,9 +41,33 @@ public class Player {
         this.kingdom = kingdom;
     }
 
-    public int chooseDomino(HashMap<Integer, Domino> dominosToSelect) {
-        Scanner scanner = new Scanner(System.in);
+    // chooseName et chooseColor agissent comme des setters, chooseDomino et choosePosition en revanche renvoient la valeur sélectionnée
 
+    public void chooseName(int i){
+        System.out.println("Saisir le nom du joueur " + i + " : ");
+        String nameInput = scanner.nextLine();
+        nameInput = nameInput.substring(0, 1).toUpperCase() + nameInput.substring(1).toLowerCase();   // On met la première lettre en majuscules et le reste en minsucules
+        name = nameInput;
+    }
+
+    public void chooseColor(int i, HashMap<String, Integer> colorsToSelect) {
+        int colorNumber = 0;
+        do {
+            String colorsList = String.join(", ", colorsToSelect.keySet()).replaceAll(", (?=[A-Za-z]*$)"," ou ");
+            System.out.println("Saisir la couleur du joueur " + i + " parmi " + colorsList + " : ");
+            String colorInput = scanner.nextLine();
+            colorInput = colorInput.substring(0, 1).toUpperCase() + colorInput.substring(1).toLowerCase();   // On met la première lettre en majuscules et le reste en minsucules
+
+            if (colorsToSelect.containsKey(colorInput)) {
+                colorNumber = colorsToSelect.get(colorInput);
+                colorsToSelect.remove(colorInput);
+            }
+        } while (colorNumber == 0);
+
+        color = new Color(colorNumber);
+    }
+
+    public int chooseDomino(HashMap<Integer, Domino> dominosToSelect) {
         int domino = 0;
         // Premier essai
         try {
@@ -81,8 +102,6 @@ public class Player {
     }
 
     public int[] choosePosition() {
-        Scanner scanner = new Scanner(System.in);
-
         // Choix de l'orientation
         int orientation = 0;
             // Premier essai
@@ -185,7 +204,6 @@ public class Player {
     }
 
     public int[] choosePositionTests() {
-        Scanner scanner = new Scanner(System.in);
         System.out.println("Orientation, UpLeftPositionX, UpLeftPositionY : ");
         boolean correctInput = false;
         int[] values = new int[3];
