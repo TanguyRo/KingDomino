@@ -226,7 +226,9 @@ public class Game {
         }
 
         // Mélange des dominos
-        Collections.shuffle(drawPile);
+        for (int i = 0; i < 10; i++) {
+            Collections.shuffle(drawPile);
+        }
 
         // Enlever les dominos en trop si 2 ou 3 joueurs
         switch(nbPlayers) {
