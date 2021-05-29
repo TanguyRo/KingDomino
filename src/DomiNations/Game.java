@@ -259,7 +259,12 @@ public class Game {
             // Premier roi de la liste précédement mélangée puis le suivant à la prochaine boucle.
             King king = kingsToPlay.get(0);
             Player currentPlayer = king.getPlayer();
-            System.out.println(currentPlayer.getName() + " " + currentPlayer.getColorEmoji() + " a été sélectionné au hasard.");
+            if (kingsToPlay.size()>1){
+                System.out.println(currentPlayer.getName() + " " + currentPlayer.getColorEmoji() + " a été sélectionné au hasard.");
+            }
+            else {
+                System.out.println("Il ne reste plus que " + currentPlayer.getName() + " " + currentPlayer.getColorEmoji() + ".");
+            }
 
             // Si on a le choix entre les dominos, on demande l'user input
             if (dominosToSelect.size()>1) {
