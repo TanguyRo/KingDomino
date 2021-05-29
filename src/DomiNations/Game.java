@@ -126,6 +126,8 @@ public class Game {
 
         }while(nbPlayers<2 || nbPlayers>4);
 
+        // Demander nombre de "faux" joueurs
+
         this.players = new Player[nbPlayers];
         this.nbKings = (nbPlayers==3 ? 3 : 4);   // Taille 3 si 3 joueurs, taille 4 si 2 ou 4 joueurs
         this.kings = new King[nbKings];

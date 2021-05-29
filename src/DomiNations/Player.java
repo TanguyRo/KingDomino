@@ -4,10 +4,10 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 public class Player {
-    private String name;
-    private Color color;
-    private Kingdom kingdom;
-    private static Scanner scanner = new Scanner(System.in);
+    protected String name;
+    protected Color color;
+    protected Kingdom kingdom;
+    protected static final Scanner scanner = new Scanner(System.in);
 
     public String getName() {
         return name;
@@ -41,8 +41,7 @@ public class Player {
         this.kingdom = kingdom;
     }
 
-    // chooseName et chooseColor agissent comme des setters, chooseDomino et choosePosition en revanche renvoient la valeur sélectionnée
-
+    // Le nom est directement atttribué au Player
     public void chooseName(int i){
         System.out.println("Saisir le nom du joueur " + i + " : ");
         String nameInput = scanner.nextLine();
@@ -50,6 +49,7 @@ public class Player {
         name = nameInput;
     }
 
+    // La couleur est directement attribuée au Player et retirée du HashMap
     public void chooseColor(int i, HashMap<String, Integer> colorsToSelect) {
         int colorNumber = 0;
         do {
@@ -67,6 +67,7 @@ public class Player {
         color = new Color(colorNumber);
     }
 
+    // Le numéro du domino est renvoyé, mais le domino n'est pas supprimé du HashMap
     public int chooseDomino(HashMap<Integer, Domino> dominosToSelect) {
         int domino = 0;
         // Premier essai
