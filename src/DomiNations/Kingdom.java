@@ -207,6 +207,17 @@ public class Kingdom {
         }
 
         // Pose des 2 LandPiece
+        placeLandPiecesFromDomino(domino, landPiecesPositions, collateralCells);
+
+        // Augmentation de la taille du royaume de 2 landpieces
+        this.upSize(2);
+
+        // On a bien posé les 2 LandPieces
+    }
+
+    // Fonction de base pour placer les 2 LandPieces d'un domino
+    // Utilisée pour la fonction Kingdom.placeDomino et pour le NPC
+    public void placeLandPiecesFromDomino(Domino domino, int[][] landPiecesPositions, Cell[][] collateralCells){
         for (int i=0; i<=1; i++){
 
             LandPiece landPiece = domino.getLandPiece(i+1);
@@ -247,16 +258,10 @@ public class Kingdom {
                 this.domains.add(newDomain);            // On ajoute le nouveau domaine au royaume que l'on modifie
                 landPiece.setParentDomain(newDomain);   // On indique dans LandPiece son nouveau domaine parent
             }
-
         }
-
-        // Augmentation de la taille du royaume de 2 landpieces
-        this.upSize(2);
-
-        // On a bien posé les 2 LandPieces
     }
 
-    public void fusion(Domain domain1, Domain domain2){
+    private void fusion(Domain domain1, Domain domain2){
         // Kingdom et Type non-modifié
 
         // LandPieces du domain2 ajoutées au domain1
