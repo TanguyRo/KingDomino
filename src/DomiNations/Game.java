@@ -140,32 +140,46 @@ public class Game {
                         }
                     }
                 }
-                else{
+                else {
                     // Si c'est un NPC, on choisit et on place directement
-                        // On choisit des positions
+                    // On choisit des positions
                     int[][] positionsToPlace = ((NPC) currentPlayer).choosePosition(domino);
-                        // On remplit le tableau des collateralCells pour chaque LandPiece
-                    Cell[][] cells = currentPlayer.getKingdom().getCells();
-                    Cell[][] collateralCells = new Cell[2][4];
-                        // Pour chaque LandPiece
-                    for (int j=0; j<2; j++){
-                        ArrayList<HashMap<Character, Integer>> collateralCellsPosition = Kingdom.getCollateralCellsPositions(positionsToPlace[j]);
-                        // Pour chaque case
-                        for (int k=0; k<4; k++){
-                            HashMap<Character, Integer> sideCellPosition = collateralCellsPosition.get(k);
-                            int x = sideCellPosition.get('x');
-                            int y = sideCellPosition.get('y');
-                            if (x >= 0 && x <= 4 && y >= 0 && y <= 4) {
-                                collateralCells[j][k] = cells[y][x];
+                    boolean possiblePlacement = true;
+                    for (int a = 0; a < 2; a++) {
+                        for (int b = 0; b < 2; b++) {
+                            if (positionsToPlace[a][b] == -1) {
+                                possiblePlacement = false;
+                                break;
                             }
-                            else {
-                                collateralCells[j][k] = null;
-                            }
-
                         }
                     }
+                    // Si le domino est placable on le place, sinon on le défausse
+                    if (possiblePlacement) {
+                        // On remplit le tableau des collateralCells pour chaque LandPiece
+                        Cell[][] cells = currentPlayer.getKingdom().getCells();
+                        Cell[][] collateralCells = new Cell[2][4];
+                        // Pour chaque LandPiece
+                        for (int j = 0; j < 2; j++) {
+                            ArrayList<HashMap<Character, Integer>> collateralCellsPosition = Kingdom.getCollateralCellsPositions(positionsToPlace[j]);
+                            // Pour chaque case
+                            for (int k = 0; k < 4; k++) {
+                                HashMap<Character, Integer> sideCellPosition = collateralCellsPosition.get(k);
+                                int x = sideCellPosition.get('x');
+                                int y = sideCellPosition.get('y');
+                                if (x >= 0 && x <= 4 && y >= 0 && y <= 4) {
+                                    collateralCells[j][k] = cells[y][x];
+                                } else {
+                                    collateralCells[j][k] = null;
+                                }
+
+                            }
+                        }
                         // On pose
-                    currentPlayer.getKingdom().placeLandPiecesFromDomino(domino, positionsToPlace, collateralCells);
+                        currentPlayer.getKingdom().placeLandPiecesFromDomino(domino, positionsToPlace, collateralCells);
+                    }
+                    else {
+                        System.out.println("Le domino n'est plus plaçable, il sera défaussé.");
+                    }
                 }
                 kingdom.print();
 
@@ -208,7 +222,8 @@ public class Game {
             System.out.println("Combien de joueurs seront des ordinateurs ? (au maximum " + Integer.toString(nbPlayers-1) + ") :");
             nbNPC = scanner.nextInt();
             scanner.nextLine();
-        }while(nbNPC<0 || nbNPC>nbPlayers-1);
+        }while(nbNPC<0 || nbNPC>nbPlayers);
+        // TODO remettre nbNPC>nbPlayers-1
 
         // Noms et couleurs des joueurs "rééls":
         for(int i = 1; i<=nbPlayers-nbNPC; i++) {

@@ -56,7 +56,9 @@ public class NPC extends Player {
         for (int i=0; i<landPiecesTypes.length; i++){
             String type = landPiecesTypes[i];
             // On parcourt les domaines de ce type
+
             for (Domain domain : this.kingdom.getDomains()){
+
                 if (domain.getType().equals(type)){
                     // On parcourt les landPieces du domaine en question pour en trouver une ou l'on peut se coller
                     for (LandPiece landPiece : domain.getLandpieces()){
@@ -72,6 +74,7 @@ public class NPC extends Player {
                                 HashMap<Character, Integer> sideCellPosition = collateralCellsPosition.get(j);                  // On note les coordonnées de la position à vérifier
                                 int x = sideCellPosition.get('x');
                                 int y = sideCellPosition.get('y');
+
                                 Cell sideCell = this.kingdom.getCells()[y][x];  // On note la Cell du côté
                                 if (sideCell.isEmpty()) {
                                     // Si la Cell est vide, on peut y placer notre première case
@@ -87,6 +90,7 @@ public class NPC extends Player {
                                             HashMap<Character, Integer> newSideCellPosition = newCollateralCellsPosition.get(k);
                                             int x2 = newSideCellPosition.get('x');
                                             int y2 = newSideCellPosition.get('y');
+
                                             Cell newSideCell;
                                             if (x2 >= 0 && x2 <= 4 && y2 >= 0 && y2 <= 4) {
                                                 newSideCell = this.kingdom.getCells()[y2][x2];
@@ -97,6 +101,7 @@ public class NPC extends Player {
                                             if (newSideCell!= null && newSideCell.isEmpty()) {
                                                 // Si la Cell est également vide, on a notre deuxième case et on peut alors placer le domino
                                                 int[] secondEmptyCellPosition = new int[]{x2,y2};
+                                                System.out.println("On a une position pour poser");
 
                                                 // Calcul du nombre de points en plus (on ne fait la vérification que d'un côté, ce sera suffisant pour une première estimation)(si les deux sont du même type alors prendre en compte les deux est facile)
                                                 int actualDomainScore = domain.getLandpieces().size() * domain.getCrownNumber();        // domain étant le domaine auquel on se colle
@@ -112,6 +117,7 @@ public class NPC extends Player {
                                                 int deltaDomainScore = newDomainScore - actualDomainScore;
 
                                                 if (deltaDomainScore > bestScore){
+                                                    System.out.println("Nouveau meilleur score");
                                                     // Ce placement est mieux que tous les précédents
                                                     bestScore = deltaDomainScore;
                                                     if (i==0){
@@ -176,11 +182,18 @@ public class NPC extends Player {
                     }
                 }
             }
+            if (possiblePositions.size()>0){
+                positionsToPlace = possiblePositions.get(random.nextInt(possiblePositions.size()));
+            }
+            else {
+                positionsToPlace = new int[2][];
+                positionsToPlace[0] = new int[]{-1,-1};
+                positionsToPlace[1] = new int[]{-1,-1};
+            }
 
-            positionsToPlace = possiblePositions.get(random.nextInt(possiblePositions.size()));
         }
 
-        // On arrive ici avec soit une position parmi les "meilleures" en terme de points gagnés, ou alors une position aléatoire autour du chateau s'il n'a aucun domaine existant à agrandir grâce au domino
+        // On arrive ici avec soit une position parmi les "meilleures" en terme de points gagnés, ou alors une position aléatoire autour du chateau s'il n'a aucun domaine existant à agrandir grâce au domino, ou alors que des -1 si le domino est implaçable
         return positionsToPlace;
     }
 }

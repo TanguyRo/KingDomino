@@ -239,13 +239,10 @@ public class Player {
 
     public void askMove() {
         String direction = "";
-        while (direction == ""){
+        while (direction.equals("")){
             System.out.println("Souhaitez vous déplacer le royaume ? (\"non\" ou direction : haut, bas, gauche ou droite)");
             direction = scanner.nextLine();
             direction = direction.toLowerCase().strip();
-            if (direction.equals("non")) {
-                break;
-            }
             if (directionsMap.containsKey(direction)) {
                 try{
                     this.kingdom.move(directionsMap.get(direction));
@@ -253,6 +250,8 @@ public class Player {
                 } catch (Exception ex){
                     System.out.println(ex.getMessage());
                 }
+            }
+            if (!direction.equals("non")) {
                 direction = "";
             }
         }
