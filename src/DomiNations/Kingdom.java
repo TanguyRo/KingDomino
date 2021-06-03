@@ -169,23 +169,7 @@ public class Kingdom {
 
             // On prépare les tests et les positions des cells autour
             boolean[] edgeCheck = {position[1] != 0, position[0] != 4, position[1] != 4, position[0] != 0};    // On parcourt dans le sens haut-droite-bas-gauche et on regarde si ça ne touche pas le bord
-            ArrayList<HashMap<Character, Integer>> collateralCellsPosition = new ArrayList<>();
-            HashMap<Character, Integer> line1 = new HashMap<>();
-            line1.put('x', position[0]);
-            line1.put('y', position[1] - 1);
-            collateralCellsPosition.add(line1);
-            HashMap<Character, Integer> line2 = new HashMap<>();
-            line2.put('x', position[0] + 1);
-            line2.put('y', position[1]);
-            collateralCellsPosition.add(line2);
-            HashMap<Character, Integer> line3 = new HashMap<>();
-            line3.put('x', position[0]);
-            line3.put('y', position[1] + 1);
-            collateralCellsPosition.add(line3);
-            HashMap<Character, Integer> line4 = new HashMap<>();
-            line4.put('x', position[0] - 1);
-            line4.put('y', position[1]);
-            collateralCellsPosition.add(line4);
+            ArrayList<HashMap<Character, Integer>> collateralCellsPosition = getCollateralCellsPositions(position);
 
             // On regarde pour les 4 cases autour s'il y a une landPiece du même type ou le château
             for (int j = 0; j <= 3; j++) {                                                          // Pour chaque direction (haut-droite-bas-gauche)
@@ -301,6 +285,27 @@ public class Kingdom {
             System.out.println(ligne);
         }
         System.out.println("└───────────────────┘");
+    }
+
+    public static ArrayList<HashMap<Character, Integer>> getCollateralCellsPositions(int[] position) {
+        ArrayList<HashMap<Character, Integer>> collateralCellsPosition = new ArrayList<>();
+        HashMap<Character, Integer> line1 = new HashMap<>();
+        line1.put('x', position[0]);
+        line1.put('y', position[1] - 1);
+        collateralCellsPosition.add(line1);
+        HashMap<Character, Integer> line2 = new HashMap<>();
+        line2.put('x', position[0] + 1);
+        line2.put('y', position[1]);
+        collateralCellsPosition.add(line2);
+        HashMap<Character, Integer> line3 = new HashMap<>();
+        line3.put('x', position[0]);
+        line3.put('y', position[1] + 1);
+        collateralCellsPosition.add(line3);
+        HashMap<Character, Integer> line4 = new HashMap<>();
+        line4.put('x', position[0] - 1);
+        line4.put('y', position[1]);
+        collateralCellsPosition.add(line4);
+        return collateralCellsPosition;
     }
 
 }
