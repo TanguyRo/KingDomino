@@ -28,7 +28,7 @@ public class NPC extends Player {
 
     // Le numéro du domino est renvoyé, mais le domino n'est pas supprimé du HashMap
     @Override
-    public int chooseDomino(HashMap<Integer, Domino> dominosToSelect) {
+    public int chooseDominoNumber(HashMap<Integer, Domino> dominosToSelect) {
         ArrayList<Integer> possibleDominos = new ArrayList<>(dominosToSelect.keySet());    // On choisit une couleur au hasard dans la liste des restantes
         Integer chosenDominoNumber = possibleDominos.get(random.nextInt(possibleDominos.size()));
         System.out.println(this.getName() + " " + this.getColorEmoji() + " a choisi le domino " + chosenDominoNumber + ".");

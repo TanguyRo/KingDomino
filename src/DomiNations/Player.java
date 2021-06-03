@@ -68,7 +68,7 @@ public class Player {
     }
 
     // Le numéro du domino est renvoyé, mais le domino n'est pas supprimé du HashMap
-    public int chooseDomino(HashMap<Integer, Domino> dominosToSelect) {
+    public int chooseDominoNumber(HashMap<Integer, Domino> dominosToSelect) {
         int domino = 0;
         // Premier essai
         try {

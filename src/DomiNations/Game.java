@@ -76,13 +76,13 @@ public class Game {
         // Début du jeu : création du banc et configuration du premier tour
         bench = new Bench(nbKings);
         bench.drawFirstLane(drawPile);        // On rempli la lane de gauche pour la première fois en piochant au hasard des dominos
-        ChooseDominosFirstRound();
+        chooseDominosFirstRound();
         bench.print();
         System.out.println("Tous les dominos ont été selectionnés par les joueurs. Celui avec la plus petite valeur commence en premier.");
         boolean firstDrawRight = true;
 
         do {
-            //Debut de Tour
+            // Début de tour : on décale la lane de droite à gauche et on pioche des nouveaux dominos
             System.out.println("On pioche " + nbKings + " nouveaux dominos.");
             if (firstDrawRight){
                 bench.drawSecondLane(drawPile);
@@ -91,20 +91,49 @@ public class Game {
             else {
                 bench.drawDominos(drawPile); // On actualise le banc en piochant des nouveaux dominos
             }
-            ChooseDominos();
-            System.out.println("Dominos restants : " + drawPile.size());
+            System.out.println("Il reste " + drawPile.size() + " dominos.");
+            // TODO Interface : décalage du banc + actualisation des nouveaux dominos (numéro puis face)
 
-            // TODO INTERFACE Disposer ces dominos face numérotée visible et rangés par ordre croissant
-            for (int i=0; i<kings.length; i++) {
-                //Joue
+            // On prépare la liste des dominos disponibles sur la lane de droite
+            LinkedHashMap<Integer, Domino> dominosToSelect = new LinkedHashMap<>();
+            Domino[] secondLane = bench.getLane(2);
+            for (int j=1; j<=kings.length; j++){
+                Domino domino = secondLane[j-1];
+                dominosToSelect.put(domino.getNumber(), domino);
+            }
+
+            // On prépare la liste des rois triée dans l'ordre de jeu
+            LinkedList<King> kingsToPlay = new LinkedList<King>(Arrays.asList(kings));   // On récupère les rois
+            // TODO Trier les rois en fonction des dominos sur la lane de gauche pour connaitre l'ordre des joueurs
+
+            // Joueur par joueur, on choisi un domino et on place l'ancien
+            for (int i=1; i<=nbKings; i++){
+
+                // On récupère le roi et le joueur
+                King king = kingsToPlay.getFirst();
+                Player currentPlayer = king.getPlayer();
+
+                // On affiche le banc
+                bench.print();
+
+                // On choisit un domino (ou on l'attibue si c'est le dernier restant)
+                chooseDomino(dominosToSelect, currentPlayer, king);
+                // TODO Interface : déplacement du king du domino de gauche à celui choisi à droite
+
+                // On place l'ancien domino
                 // TODO Récupérer le domino sur lequel son roi se trouvait
                 // TODO Placer ce domino dans le royaume en respectant les règles de connexion.
                 // -> L'user choisit les coordonnées de la position en haut à gauche (entre 0 et 4 pour chaque coordonnée) et l'orientation entre 1 et 4 (3 inputs ou interface graphique)
                 // Bouton Move pour déplacer le board sur l'interface graphique (ou input 0 pour pas de déplacement ou direction et nombre)
-                // TODO Sélectionner un domino de la ligne suivante en y plaçant son roi.
+
+                // Le roi a joué donc on l'enlève
+                kingsToPlay.removeFirst();
             }
-        } while(!drawPile.isEmpty());
-        //Tous les dominos ont été piochés et posés
+
+            // Tout le monde a joué, c'est la fin du tour
+        }
+        while(!drawPile.isEmpty());
+        // Tous les dominos ont été piochés et posés
 
         // Calcul des scores et détermination des gagnants
         findWinners();
@@ -271,7 +300,7 @@ public class Game {
         }
     }
 
-    public void ChooseDominosFirstRound(){
+    public void chooseDominosFirstRound(){
         LinkedHashMap<Integer, Domino> dominosToSelect = new LinkedHashMap<>();
         LinkedList<King> kingsToPlay = new LinkedList<King>(Arrays.asList(kings));   // On récupère les rois
 
@@ -300,7 +329,7 @@ public class Game {
 
             // Si on a le choix entre les dominos, on demande l'user input
             if (dominosToSelect.size()>1) {
-                int dominoNumber = currentPlayer.chooseDomino(dominosToSelect);     // On choisit le numéro du domino (input de l'user)
+                int dominoNumber = currentPlayer.chooseDominoNumber(dominosToSelect);     // On choisit le numéro du domino (input de l'user si vrai ou choix aléatoire si NPC)
                 Domino domino = dominosToSelect.get(dominoNumber);
                 domino.setKing(king);                                               // On pose le King sur le domino
                 king.setCurrentDomino(domino);                                      // On update le domino sur le King
@@ -318,41 +347,21 @@ public class Game {
         }
     }
 
-    public void ChooseDominos(){
-        LinkedHashMap<Integer, Domino> dominosToSelect = new LinkedHashMap<>();
-        LinkedList<King> kingsToPlay = new LinkedList<King>(Arrays.asList(kings));   // On récupère les rois
-
-        // HashMap des dominos disponibles sur la lane
-        for (int j=1; j<=kings.length; j++){
-            dominosToSelect.put(bench.getDominosValues(2)[j-1], bench.getLane(2)[j-1]);
+    public void chooseDomino(LinkedHashMap<Integer, Domino> dominosToSelect, Player currentPlayer, King king){
+        // Si on a le choix entre les dominos, on demande l'user input
+        if (dominosToSelect.size()>1) {
+            int dominoNumber = currentPlayer.chooseDominoNumber(dominosToSelect);     // On choisit le numéro du domino (input de l'user si vrai ou choix aléatoire si NPC)
+            Domino domino = dominosToSelect.get(dominoNumber);
+            domino.setKing(king);                                               // On pose le King sur le domino
+            king.setCurrentDomino(domino);                                      // On update le domino sur le King
+            dominosToSelect.remove(dominoNumber);                               // On l'enlève des dominos à sélectionner
         }
-
-        // Pour chaque roi le joueur correspondant choisit un domino.
-        for (int i=1; i<=nbKings; i++){
-
-            bench.print();
-
-            // TODO ordre joueur en fonction des rois sur les dominos
-            King king = kingsToPlay.get(0);
-            Player currentPlayer = king.getPlayer();
-
-            // Si on a le choix entre les dominos, on demande l'user input
-            if (dominosToSelect.size()>1) {
-                int dominoNumber = currentPlayer.chooseDomino(dominosToSelect);     // On choisit le numéro du domino (input de l'user)
-                Domino domino = dominosToSelect.get(dominoNumber);
-                domino.setKing(king);                                               // On pose le King sur le domino
-                king.setCurrentDomino(domino);                                      // On update le domino sur le King
-                dominosToSelect.remove(dominoNumber);                               // On l'enlève des dominos à sélectionner
-            }
-            // S'il ne reste qu'un domino on lui attribue automatiquement
-            else {
-                int dominoNumber = (int) dominosToSelect.keySet().toArray()[0];   // On prend le domino restant
-                dominosToSelect.get(dominoNumber).setKing(king);   // On pose le King sur le domino
-                System.out.println("Le domino " + dominoNumber + " est attribué automatiquement à " + currentPlayer.getName() + " " + currentPlayer.getColorEmoji() + ".");
-                dominosToSelect.remove(dominoNumber);
-            }
-
-            kingsToPlay.remove(0);
+        // S'il ne reste qu'un domino on lui attribue automatiquement
+        else {
+            int dominoNumber = (int) dominosToSelect.keySet().toArray()[0];   // On prend le domino restant
+            dominosToSelect.get(dominoNumber).setKing(king);   // On pose le King sur le domino
+            System.out.println("Le domino " + dominoNumber + " est attribué automatiquement à " + currentPlayer.getName() + " " + currentPlayer.getColorEmoji() + ".");
+            dominosToSelect.remove(dominoNumber);
         }
     }
 
