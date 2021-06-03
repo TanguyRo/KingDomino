@@ -126,18 +126,24 @@ public class Game {
 
         }while(nbPlayers<2 || nbPlayers>4);
 
-        // TODO Demander nombre de NPC et les créer en fonction
-
         this.players = new Player[nbPlayers];
         this.nbKings = (nbPlayers==3 ? 3 : 4);   // Taille 3 si 3 joueurs, taille 4 si 2 ou 4 joueurs
         this.kings = new King[nbKings];
 
-        // Noms et couleurs des joueurs :
-        for(int i = 1; i<=nbPlayers; i++) {
+        // On demande le nombre de NPC parmi les nbPlayers joueurs
+        int nbNPC;
+        do {
+            System.out.println("Combien de joueurs seront des ordinateurs ? (au maximum " + Integer.toString(nbPlayers-1) + " ) :");
+            nbNPC = scanner.nextInt();
+            scanner.nextLine();
+        }while(nbNPC<0 || nbNPC>nbPlayers-1);
+
+        // Noms et couleurs des joueurs "rééls":
+        for(int i = 1; i<=nbPlayers-nbNPC; i++) {
             // On crée le joueur
             Player playerInCreation = new Player();
 
-            // On définit son nom (input ou aléatoire si IA)
+            // On définit son nom (input)
             playerInCreation.chooseName(i);
 
             // Pour la couleur
@@ -157,18 +163,38 @@ public class Game {
             players[i-1] = playerInCreation;
 
             // Création des rois en fonction du nombre de joueurs
-            if (nbPlayers==3 || nbPlayers==4){
-                kings[i-1] = new King(players[i-1]);
+            createKing(playerInCreation, i);
+        }
+        // Noms et couleurs des NPC
+        for(int i = nbPlayers-nbNPC+1; i<=nbPlayers; i++) {
+            // On crée le joueur
+            NPC playerInCreation = new NPC();
+
+            // On définit son nom (aléatoire dans la liste) et sa couleur (aléatoire dans la liste des couleurs restantes)
+            playerInCreation.chooseName();
+            playerInCreation.chooseColor(colorsToSelect);
+            System.out.println(playerInCreation.getName() + " sera le joueur " + i + ". Il jouera en " + playerInCreation.getColorName().toLowerCase() + ".");
+
+            players[i-1] = playerInCreation;
+
+            // Création des rois en fonction du nombre de joueurs
+            createKing(playerInCreation, i);
+        }
+    }
+
+    // Fonction de base utilisée pour créer les kings dans createPlayers
+    private void createKing(Player playerInCreation, int i){
+        if (nbPlayers==3 || nbPlayers==4){
+            kings[i-1] = new King(players[i-1]);
+        }
+        else if (nbPlayers == 2){
+            if (i==1){
+                kings[0] = new King(playerInCreation);
+                kings[1] = new King(playerInCreation);
             }
-            else if (nbPlayers == 2){
-                if (i==1){
-                    kings[0] = new King(playerInCreation);
-                    kings[1] = new King(playerInCreation);
-                }
-                else {
-                    kings[2] = new King(playerInCreation);
-                    kings[3] = new King(playerInCreation);
-                }
+            else {
+                kings[2] = new King(playerInCreation);
+                kings[3] = new King(playerInCreation);
             }
         }
     }
