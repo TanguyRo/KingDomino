@@ -87,8 +87,14 @@ public class NPC extends Player {
                                             HashMap<Character, Integer> newSideCellPosition = newCollateralCellsPosition.get(k);
                                             int x2 = newSideCellPosition.get('x');
                                             int y2 = newSideCellPosition.get('y');
-                                            Cell newSideCell = this.kingdom.getCells()[y2][x2];
-                                            if (newSideCell.isEmpty()) {
+                                            Cell newSideCell;
+                                            if (x2 >= 0 && x2 <= 4 && y2 >= 0 && y2 <= 4) {
+                                                newSideCell = this.kingdom.getCells()[y2][x2];
+                                            }
+                                            else {
+                                                newSideCell = null;
+                                            }
+                                            if (newSideCell!= null && newSideCell.isEmpty()) {
                                                 // Si la Cell est également vide, on a notre deuxième case et on peut alors placer le domino
                                                 int[] secondEmptyCellPosition = new int[]{x2,y2};
 
