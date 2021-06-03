@@ -131,7 +131,7 @@ public class Game {
                     int[] positionToPlace = null;
                     while (positionToPlace == null){
                         try {
-                            // TODO Inpput move pour déplacer le board sur l'interface graphique (ou input 0 pour pas de déplacement ou direction et nombre)
+                            currentPlayer.askMove();
                             positionToPlace = currentPlayer.choosePosition();                                                                       // On demande des coordonnées valides
                             currentPlayer.getKingdom().placeDomino(domino, positionToPlace[0], new int[]{positionToPlace[1],positionToPlace[2]});   // On essaye de poser à ces coordonnées
                         }catch (Exception ex) {

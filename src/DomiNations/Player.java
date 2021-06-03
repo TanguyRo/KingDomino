@@ -8,6 +8,15 @@ public class Player {
     protected Color color;
     protected Kingdom kingdom;
     protected static final Scanner scanner = new Scanner(System.in);
+    private static final HashMap<String,String> directionsMap = new HashMap<String,String>();
+
+    // Remplissage du dictionnaire pour les directions
+    static {
+        directionsMap.put("haut","up");
+        directionsMap.put("bas","down");
+        directionsMap.put("gauche","left");
+        directionsMap.put("droite","right");
+    }
 
     public String getName() {
         return name;
@@ -228,4 +237,24 @@ public class Player {
         return values;
     }
 
+    public void askMove() {
+        String direction = "";
+        while (direction == ""){
+            System.out.println("Souhaitez vous déplacer le royaume ? (\"non\" ou direction : haut, bas, gauche ou droite)");
+            direction = scanner.nextLine();
+            direction = direction.toLowerCase().strip();
+            if (direction.equals("non")) {
+                break;
+            }
+            if (directionsMap.containsKey(direction)) {
+                try{
+                    this.kingdom.move(directionsMap.get(direction));
+                    this.kingdom.print();
+                } catch (Exception ex){
+                    System.out.println(ex.getMessage());
+                }
+                direction = "";
+            }
+        }
+    }
 }
