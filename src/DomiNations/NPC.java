@@ -36,7 +36,7 @@ public class NPC extends Player {
     }
 
     // @Override (paramètres différents donc pas d'Override)
-    public void choosePosition(Domino domino){
+    public int[][] choosePosition(Domino domino){
 
         // Fonctionnement :
         // On fonctionne par rapport aux types des 2 landpieces du Domino. On va chercher dans le Kingdom des landPieces du même type
@@ -175,7 +175,6 @@ public class NPC extends Player {
         }
 
         // On arrive ici avec soit une position parmi les "meilleures" en terme de points gagnés, ou alors une position aléatoire autour du chateau s'il n'a aucun domaine existant à agrandir grâce au domino
-
-        // TODO Pose du domino
+        return positionsToPlace;
     }
 }
