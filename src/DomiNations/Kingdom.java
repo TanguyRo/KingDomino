@@ -8,6 +8,7 @@ public class Kingdom {
     private final Player player;
     private Cell[][] cells;
     private ArrayList<Domain> domains;
+    private LandPiece castle;
 
 
     public Kingdom(int size, Player player) {
@@ -15,6 +16,7 @@ public class Kingdom {
         this.player = player;
         this.cells = new Cell[5][5];
         this.domains = new ArrayList<>();
+        this.castle = null;
     }
 
     public void setSize(int size) {
@@ -47,6 +49,14 @@ public class Kingdom {
 
     public ArrayList<Domain> getDomains() {
         return domains;
+    }
+
+    public void setCastle(LandPiece castle) {
+        this.castle = castle;
+    }
+
+    public LandPiece getCastle() {
+        return castle;
     }
 
     public void move(String direction){
