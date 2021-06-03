@@ -78,12 +78,12 @@ public class Game {
         bench.drawFirstLane(drawPile);        // On rempli la lane de gauche pour la première fois en piochant au hasard des dominos
         chooseDominosFirstRound();
         bench.print();
-        System.out.println("Tous les dominos ont été selectionnés par les joueurs. Celui avec la plus petite valeur commence en premier.");
+        System.out.println("Tous les dominos ont été sélectionnés par les joueurs. Celui avec la plus petite valeur commence en premier.");
         boolean firstDrawRight = true;
 
         do {
             // Début de tour : on décale la lane de droite à gauche et on pioche des nouveaux dominos
-            System.out.println("On pioche " + nbKings + " nouveaux dominos.");
+            System.out.println("On pioche " + nbKings + " nouveaux dominos. Il en reste " + drawPile.size() + ".");
             if (firstDrawRight){
                 bench.drawSecondLane(drawPile);
                 firstDrawRight = false;
@@ -91,7 +91,6 @@ public class Game {
             else {
                 bench.drawDominos(drawPile); // On actualise le banc en piochant des nouveaux dominos
             }
-            System.out.println("Il reste " + drawPile.size() + " dominos.");
             // TODO Interface : décalage du banc + actualisation des nouveaux dominos (numéro puis face)
 
             // On prépare la liste des dominos disponibles sur la lane de droite
@@ -112,19 +111,63 @@ public class Game {
                 // On récupère le roi et le joueur
                 King king = kingsToPlay.getFirst();
                 Player currentPlayer = king.getPlayer();
+                Kingdom kingdom = currentPlayer.getKingdom();
 
-                // On affiche le banc
+                // On note le domino choisi au tour précédent
+                Domino domino = king.getCurrentDomino();
+
+                // On en choisit un nouveau dans la lane de droite (ou on l'attribue si c'est le dernier restant)
                 bench.print();
-
-                // On choisit un domino (ou on l'attibue si c'est le dernier restant)
                 chooseDomino(dominosToSelect, currentPlayer, king);
                 // TODO Interface : déplacement du king du domino de gauche à celui choisi à droite
 
-                // On place l'ancien domino
-                // TODO Récupérer le domino sur lequel son roi se trouvait
-                // TODO Placer ce domino dans le royaume en respectant les règles de connexion.
-                // -> L'user choisit les coordonnées de la position en haut à gauche (entre 0 et 4 pour chaque coordonnée) et l'orientation entre 1 et 4 (3 inputs ou interface graphique)
-                // Bouton Move pour déplacer le board sur l'interface graphique (ou input 0 pour pas de déplacement ou direction et nombre)
+                // On place le domino choisi au tour précédent dans le royaume en respectant les règles de connexion.
+                kingdom.print();
+                System.out.println("Vous devez placer le domino " + domino.toString() + " .");
+                if(!(currentPlayer instanceof NPC)){
+                    // Si c'est un "vrai" joueur, on lui demande les coordonnées pour placer le domino
+                    // Le joueur choisit les coordonnées de la position en haut à gauche (entre 0 et 4 pour chaque coordonnée) et l'orientation entre 1 et 4 (3 inputs ou interface graphique)
+
+                    int[] positionToPlace = null;
+                    while (positionToPlace == null){
+                        try {
+                            // TODO Inpput move pour déplacer le board sur l'interface graphique (ou input 0 pour pas de déplacement ou direction et nombre)
+                            positionToPlace = currentPlayer.choosePosition();                                                                       // On demande des coordonnées valides
+                            currentPlayer.getKingdom().placeDomino(domino, positionToPlace[0], new int[]{positionToPlace[1],positionToPlace[2]});   // On essaye de poser à ces coordonnées
+                        }catch (Exception ex) {
+                            System.out.println(ex.getMessage());
+                            positionToPlace = null;
+                        }
+                    }
+                }
+                else{
+                    // Si c'est un NPC, on choisit et on place directement
+                        // On choisit des positions
+                    int[][] positionsToPlace = ((NPC) currentPlayer).choosePosition(domino);
+                        // On remplit le tableau des collateralCells pour chaque LandPiece
+                    Cell[][] cells = currentPlayer.getKingdom().getCells();
+                    Cell[][] collateralCells = new Cell[2][4];
+                        // Pour chaque LandPiece
+                    for (int j=0; j<2; j++){
+                        ArrayList<HashMap<Character, Integer>> collateralCellsPosition = Kingdom.getCollateralCellsPositions(positionsToPlace[j]);
+                        // Pour chaque case
+                        for (int k=0; k<4; k++){
+                            HashMap<Character, Integer> sideCellPosition = collateralCellsPosition.get(k);
+                            int x = sideCellPosition.get('x');
+                            int y = sideCellPosition.get('y');
+                            if (x >= 0 && x <= 4 && y >= 0 && y <= 4) {
+                                collateralCells[j][k] = cells[y][x];
+                            }
+                            else {
+                                collateralCells[j][k] = null;
+                            }
+
+                        }
+                    }
+                        // On pose
+                    currentPlayer.getKingdom().placeLandPiecesFromDomino(domino, positionsToPlace, collateralCells);
+                }
+                kingdom.print();
 
                 // Le roi a joué donc on l'enlève
                 kingsToPlay.removeFirst();
@@ -162,7 +205,7 @@ public class Game {
         // On demande le nombre de NPC parmi les nbPlayers joueurs
         int nbNPC;
         do {
-            System.out.println("Combien de joueurs seront des ordinateurs ? (au maximum " + Integer.toString(nbPlayers-1) + " ) :");
+            System.out.println("Combien de joueurs seront des ordinateurs ? (au maximum " + Integer.toString(nbPlayers-1) + ") :");
             nbNPC = scanner.nextInt();
             scanner.nextLine();
         }while(nbNPC<0 || nbNPC>nbPlayers-1);
@@ -202,7 +245,7 @@ public class Game {
             // On définit son nom (aléatoire dans la liste) et sa couleur (aléatoire dans la liste des couleurs restantes)
             playerInCreation.chooseName();
             playerInCreation.chooseColor(colorsToSelect);
-            System.out.println(playerInCreation.getName() + " sera le joueur " + i + ". Il jouera en " + playerInCreation.getColorName().toLowerCase() + ".");
+            System.out.println(playerInCreation.getName() + " sera le joueur " + i + ". Il/elle jouera en " + playerInCreation.getColorName().toLowerCase() + ".");
 
             players[i-1] = playerInCreation;
 
@@ -244,13 +287,12 @@ public class Game {
             }
 
             // Case du chateau
-            cells[2][2].setEmpty(false);
             LandPiece castle = new LandPiece("Chateau",0);
-            cells[2][2].setCurrentLandPiece(castle);
+            castle.setCurrentCell(cells[2][2]);
+            cells[2][2] = new Cell(new int[] {2,2},false, castle);
 
             kingdoms[i].setCells(cells);
             kingdoms[i].setCastle(castle);
-
         }
     }
 
@@ -318,7 +360,7 @@ public class Game {
             bench.print();
 
             // Premier roi de la liste précédement mélangée puis le suivant à la prochaine boucle.
-            King king = kingsToPlay.get(0);
+            King king = kingsToPlay.getFirst();
             Player currentPlayer = king.getPlayer();
             if (kingsToPlay.size()>1){
                 System.out.println(currentPlayer.getName() + " " + currentPlayer.getColorEmoji() + " a été sélectionné au hasard.");
@@ -337,13 +379,15 @@ public class Game {
             }
             // S'il ne reste qu'un domino on lui attribue automatiquement
             else {
-                int dominoNumber = (int) dominosToSelect.keySet().toArray()[0];   // On prend le domino restant
-                dominosToSelect.get(dominoNumber).setKing(king);   // On pose le King sur le domino
+                int dominoNumber = (int) dominosToSelect.keySet().toArray()[0];     // On prend le domino restant
+                Domino domino = dominosToSelect.get(dominoNumber);
+                domino.setKing(king);                                               // On pose le King sur le domino
+                king.setCurrentDomino(domino);                                      // On update le domino sur le King
                 System.out.println("Le domino " + dominoNumber + " est attribué automatiquement à " + currentPlayer.getName() + " " + currentPlayer.getColorEmoji() + ".");
                 dominosToSelect.remove(dominoNumber);
             }
 
-            kingsToPlay.remove(0);
+            kingsToPlay.removeFirst();
         }
     }
 
@@ -359,7 +403,9 @@ public class Game {
         // S'il ne reste qu'un domino on lui attribue automatiquement
         else {
             int dominoNumber = (int) dominosToSelect.keySet().toArray()[0];   // On prend le domino restant
-            dominosToSelect.get(dominoNumber).setKing(king);   // On pose le King sur le domino
+            Domino domino = dominosToSelect.get(dominoNumber);
+            domino.setKing(king);                                               // On pose le King sur le domino
+            king.setCurrentDomino(domino);                                      // On update le domino sur le King
             System.out.println("Le domino " + dominoNumber + " est attribué automatiquement à " + currentPlayer.getName() + " " + currentPlayer.getColorEmoji() + ".");
             dominosToSelect.remove(dominoNumber);
         }

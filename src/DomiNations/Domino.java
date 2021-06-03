@@ -37,4 +37,9 @@ public class Domino {
     public King getKing() {
         return king;
     }
+
+    @Override
+    public String toString(){
+        return (landPiece1.toString() + " " + landPiece2.toString());
+    }
 }

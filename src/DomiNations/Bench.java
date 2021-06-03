@@ -88,9 +88,7 @@ public class Bench {
                     sb.append(domino.getNumber());
                     if (sb.length() == 1) sb.append(" "); // Toujours 2 caractères pour le chiffre
                     sb.append(" : ");
-                    sb.append(domino.getLandPiece(1));
-                    sb.append(" ");
-                    sb.append(domino.getLandPiece(2));
+                    sb.append(domino.toString());
                     sb.append(" ");
                     King king = domino.getKing();
                     if (king!=null){
