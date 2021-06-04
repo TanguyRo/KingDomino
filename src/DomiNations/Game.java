@@ -107,17 +107,10 @@ public class Game {
             }
 
             // On prépare la liste des rois triée dans l'ordre de jeu
-            LinkedList<King> kingsToPlay = new LinkedList<King>(Arrays.asList(kings));   // On récupère les rois
-                // On crée un dictionnaire faisant correspondre les rois à la valeur de leur domino
-            HashMap<Integer, King> kingsHashMap = new HashMap<Integer, King>();
-            for (int i=0; i<nbKings; i++){
-                King king = kings[i];
-                kingsHashMap.put(king.getCurrentDomino().getNumber(), king);
-            }
-                // On reprend l'ordre des dominos déjà triés sur le banc
-            int[] dominoValues = bench.getDominosValues(1);
-            for (int i=0; i<nbKings; i++){
-                kingsToPlay.add(kingsHashMap.get(dominoValues[i]));     // On ajoute à chaque fois le roi correpondant à la valeur du domino
+            LinkedList<King> kingsToPlay = new LinkedList<King>();
+                // Les dominos du banc sont déjà triés, on reprend les rois correspondants à chaque domino
+            for (Domino domino: bench.getLane(1)) {
+                kingsToPlay.add(domino.getKing());
             }
 
             // Joueur par joueur, on choisi un domino et on place l'ancien
