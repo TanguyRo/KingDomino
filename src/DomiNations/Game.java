@@ -103,7 +103,21 @@ public class Game {
 
             // On prépare la liste des rois triée dans l'ordre de jeu
             LinkedList<King> kingsToPlay = new LinkedList<King>(Arrays.asList(kings));   // On récupère les rois
-            // TODO Trier les rois en fonction des dominos sur la lane de gauche pour connaitre l'ordre des joueurs
+
+            HashMap<Integer, King> kingsHashMap = new HashMap();
+            for(int y=0; y<kings.length; y++){
+                //Fait correspondre les rois à la valeur de leur domino
+                kingsHashMap.put(kingsToPlay.get(y).getCurrentDomino().getNumber(), kingsToPlay.get(y));
+            }
+            //Tri des rois en fonction de la clé soit la valeur de leur domino
+            TreeMap<Integer, King> kingsSorted = new TreeMap<Integer, King>(kingsHashMap);
+
+            //On vide la liste des rois
+            kingsToPlay = new LinkedList<King>();
+            for(int j=0; j<kings.length; j++){
+                //Ajout des rois triés selon la valeur de leur domino
+                kingsToPlay.add(kingsSorted.get(bench.getDominosValues(1)[j]));
+            }
 
             // Joueur par joueur, on choisi un domino et on place l'ancien
             for (int i=1; i<=nbKings; i++){
