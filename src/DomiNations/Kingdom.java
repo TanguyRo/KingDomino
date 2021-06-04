@@ -19,20 +19,8 @@ public class Kingdom {
         this.castle = null;
     }
 
-    public void setSize(int size) {
-        this.size = size;
-    }
-
     public void upSize(int up) {
         this.size += up;
-    }
-
-    public int getSize() {
-        return size;
-    }
-
-    public Player getPlayer() {
-        return player;
     }
 
     public Cell[][] getCells() {
@@ -41,10 +29,6 @@ public class Kingdom {
 
     public void setCells(Cell[][] cells) {
         this.cells = cells;
-    }
-
-    public void setDomains(ArrayList<Domain> domains) {
-        this.domains = domains;
     }
 
     public ArrayList<Domain> getDomains() {
@@ -243,7 +227,7 @@ public class Kingdom {
                         }
                         else{                                                               // Si c'est le premier domaine collatéral qu'on vérifie, on ajoute landPiece1 à celui-ci
                             collateralDomains.add(sideDomain);                                  // On l'ajoute à la liste des domains de même type autour
-                            sideDomain.getLandpieces().add(landPiece);                          // On ajoute la LandPiece au domaine existant
+                            sideDomain.getLandPieces().add(landPiece);                          // On ajoute la LandPiece au domaine existant
                             landPiece.setParentDomain(sideDomain);                              // On indique dans LandPiece son nouveau domaine parent
                             sideDomain.addCrowns(landPiece.getCrownNumber());                   // On met à jour le nombre total de Crowns du domaine
                         }
@@ -254,7 +238,7 @@ public class Kingdom {
 
             // Si la nouvelle LandPiece ne s'ajoute à aucun domaine existant, on crée un domaine
             if(collateralDomains.size()==0){
-                Domain newDomain = new Domain(this, typeLandPiece, landPiece.getCrownNumber(), landPiece);   // On crée un nouveau domaine, composé d'une seul LandPiece
+                Domain newDomain = new Domain(typeLandPiece, landPiece.getCrownNumber(), landPiece);   // On crée un nouveau domaine, composé d'une seul LandPiece
                 this.domains.add(newDomain);            // On ajoute le nouveau domaine au royaume que l'on modifie
                 landPiece.setParentDomain(newDomain);   // On indique dans LandPiece son nouveau domaine parent
             }
@@ -266,8 +250,8 @@ public class Kingdom {
             // Kingdom et Type non-modifié
 
             // LandPieces du domain2 ajoutées au domain1
-            ArrayList<LandPiece> landPiecesDomain1 = domain1.getLandpieces();
-            ArrayList<LandPiece> landPiecesDomain2 = domain2.getLandpieces();
+            ArrayList<LandPiece> landPiecesDomain1 = domain1.getLandPieces();
+            ArrayList<LandPiece> landPiecesDomain2 = domain2.getLandPieces();
             for (LandPiece landPieceToMove : landPiecesDomain2) {
                 landPiecesDomain1.add(landPieceToMove);             // On l'ajoute à la liste des LandPieces du doimain1
                 landPieceToMove.setParentDomain(domain1);           // On met à jour son domaine parent

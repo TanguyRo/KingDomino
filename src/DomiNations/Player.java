@@ -33,10 +33,6 @@ public class Player {
         return color;
     }
 
-    public int getColorNumber() {
-        return color.getNumber();
-    }
-
     public String getColorName() {
         return color.getName();
     }
@@ -214,30 +210,6 @@ public class Player {
         UpLeftPositionY--;      // On passe en coordonnées Java (0-4 au lieu de 1-5)
 
         return new int[]{orientation, UpLeftPositionX, UpLeftPositionY};
-    }
-
-    public int[] choosePositionTests() {
-        System.out.println("Orientation, UpLeftPositionX, UpLeftPositionY : ");
-        boolean correctInput = false;
-        int[] values = new int[3];
-        while (!correctInput) {
-            try {
-                String input = scanner.nextLine();
-                input = input.replaceAll("\n", "");  // On enlève le retour à la ligne final
-                String[] inputs = input.split(", ");   // On sépare les 3 valeurs
-                for (int i = 0; i < 3; i++) {                // Conversion en int
-                    values[i] = Integer.parseInt(inputs[i]);
-                }
-                if (values[0] >= 1 && values[0] <= 4 && values[1] >= 1 && values[1] <= 5 && values[2] >= 1 && values[2] <= 5) {
-                    correctInput = true;
-                }
-            } catch (Exception ex) {
-                System.out.println("Réessayer : ");
-            }
-        }
-        values[1]--;
-        values[2]--;
-        return values;
     }
 
     public boolean askKeepDomino() {

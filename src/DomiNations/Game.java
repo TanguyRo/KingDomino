@@ -469,7 +469,7 @@ public class Game {
             Kingdom playerKingdom = kingdoms[i];
             int playerScore = 0;
             for (Domain domain: playerKingdom.getDomains()){
-                playerScore += domain.getLandpieces().size() * domain.getCrownNumber();     // Chaque domaine rapporte n = nbCases x nbCouronnes
+                playerScore += domain.getLandPieces().size() * domain.getCrownNumber();     // Chaque domaine rapporte n = nbCases x nbCouronnes
             }
             // Bonus si activés
             if (EmpireDuMilieu){
@@ -528,7 +528,7 @@ public class Game {
                 ArrayList<Domain> playersDomains = player.getKingdom().getDomains();
                 int maxDomainSize = 0;
                 for (Domain domain : playersDomains){
-                    int domainSize = domain.getLandpieces().size();
+                    int domainSize = domain.getLandPieces().size();
                     if (domainSize > maxDomainSize){
                         maxDomainSize = domainSize;
                     }

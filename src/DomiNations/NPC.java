@@ -59,7 +59,7 @@ public class NPC extends Player {
             for (Domain domain : this.kingdom.getDomains()){
                 if (domain.getType().equals(type)){
                     // On parcourt les landPieces du domaine en question pour en trouver une ou l'on peut se coller
-                    for (LandPiece landPiece : domain.getLandpieces()){
+                    for (LandPiece landPiece : domain.getLandPieces()){
                         int[] landPiecePosition = landPiece.getCurrentCell().getPosition();
                         // On prépare les tests et les positions des cells autour
                         boolean[] edgeCheck = {landPiecePosition[1] != 0, landPiecePosition[0] != 4, landPiecePosition[1] != 4, landPiecePosition[0] != 0};    // On parcourt dans le sens haut-droite-bas-gauche et on regarde si ça ne touche pas le bord
@@ -98,15 +98,15 @@ public class NPC extends Player {
                                                 int[] secondEmptyCellPosition = new int[]{x2,y2};
 
                                                 // Calcul du nombre de points en plus (on ne fait la vérification que d'un côté, ce sera suffisant pour une première estimation)(si les deux sont du même type alors prendre en compte les deux est facile)
-                                                int actualDomainScore = domain.getLandpieces().size() * domain.getCrownNumber();        // domain étant le domaine auquel on se colle
+                                                int actualDomainScore = domain.getLandPieces().size() * domain.getCrownNumber();        // domain étant le domaine auquel on se colle
                                                 int newDomainScore;
                                                 if (landPiecesTypes.length == 2){
                                                     // Si les deux types sont différents on ne regarde que pour la pièce qui touche
-                                                    newDomainScore = (domain.getLandpieces().size() + 1) * (domain.getCrownNumber() + dominoLandPieces[i].getCrownNumber());    // La taille serait +1 & le nombre de couronnes serait +le nombre de couronnes sur la pièce que l'on pose
+                                                    newDomainScore = (domain.getLandPieces().size() + 1) * (domain.getCrownNumber() + dominoLandPieces[i].getCrownNumber());    // La taille serait +1 & le nombre de couronnes serait +le nombre de couronnes sur la pièce que l'on pose
                                                 }
                                                 else {
                                                     // Si les deux types sont identiques on compte les deux
-                                                    newDomainScore = (domain.getLandpieces().size() + 2) * (domain.getCrownNumber() + dominoLandPieces[0].getCrownNumber() + dominoLandPieces[1].getCrownNumber());
+                                                    newDomainScore = (domain.getLandPieces().size() + 2) * (domain.getCrownNumber() + dominoLandPieces[0].getCrownNumber() + dominoLandPieces[1].getCrownNumber());
                                                 }
                                                 int deltaDomainScore = newDomainScore - actualDomainScore;
 

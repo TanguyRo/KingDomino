@@ -1,8 +1,8 @@
 package DomiNations;
 
 public class King {
-    private Player player;
-    private Color color;
+    private final Player player;
+    private final Color color;
     private Domino currentDomino;
 
 
@@ -12,25 +12,8 @@ public class King {
         this.currentDomino = null;
     }
 
-    public void setPlayer(Player player){
-        this.player = player;
-        this.color = player.getColor();
-    }
-
     public Player getPlayer(){
         return player;
-    }
-
-    public Color getColor() {
-        return color;
-    }
-
-    public int getColorNumber() {
-        return color.getNumber();
-    }
-
-    public String getColorName() {
-        return color.getName();
     }
 
     public String getColorEmoji() {

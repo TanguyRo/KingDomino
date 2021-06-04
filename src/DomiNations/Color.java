@@ -1,7 +1,6 @@
 package DomiNations;
 
 public class Color {
-    private final int number;
     private final String name;
     private final String emoji;
     private static final String[] colorsNames;
@@ -13,14 +12,8 @@ public class Color {
     }
 
     public Color(int number) {
-        this.number = number;
         this.name = colorsNames[number - 1];
         this.emoji = colorsEmojis[number - 1];
-    }
-
-
-    public int getNumber() {
-        return number;
     }
 
     public String getName() {

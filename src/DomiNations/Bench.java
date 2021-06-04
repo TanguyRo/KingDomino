@@ -2,7 +2,6 @@ package DomiNations;
 
 import java.util.Arrays;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.LinkedList;
 
 public class Bench {
@@ -15,14 +14,6 @@ public class Bench {
         this.size = size;
         this.firstLane = new Domino[size];
         this.secondLane = new Domino[size];
-    }
-
-    public void setFirstLane(Domino[] lane){
-        this.firstLane = lane;
-    }
-
-    public void setSecondLane(Domino[] lane){
-        this.secondLane = lane;
     }
 
     public Domino[] getLane(int lane){

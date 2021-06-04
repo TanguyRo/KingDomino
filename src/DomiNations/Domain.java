@@ -3,22 +3,16 @@ package DomiNations;
 import java.util.ArrayList;
 
 public class Domain {
-    private final Kingdom kingdom;
     private final String type;
     private int totalCrownNumber;
-    private ArrayList<LandPiece> landPieces;
+    private final ArrayList<LandPiece> landPieces;
 
 
-    public Domain(Kingdom kingdom, String type, int totalCrownNumber, LandPiece firstLandPiece) {
-        this.kingdom = kingdom;
+    public Domain(String type, int totalCrownNumber, LandPiece firstLandPiece) {
         this.type = type;
         this.totalCrownNumber = totalCrownNumber;
         this.landPieces = new ArrayList<>();
         this.landPieces.add(firstLandPiece);
-    }
-
-    public void setCrownNumber(int totalCrownNumber) {
-        this.totalCrownNumber = totalCrownNumber;
     }
 
     public void addCrowns(int crownsToAdd) {
@@ -29,19 +23,11 @@ public class Domain {
         return totalCrownNumber;
     }
 
-    public Kingdom getKingdom() {
-        return kingdom;
-    }
-
     public String getType() {
         return type;
     }
 
-    public void setLandpieces(ArrayList<LandPiece> landpieces) {
-        this.landPieces = landpieces;
-    }
-
-    public ArrayList<LandPiece> getLandpieces() {
+    public ArrayList<LandPiece> getLandPieces() {
         return landPieces;
     }
 
