@@ -139,16 +139,22 @@ public class Game {
                     // Si c'est un "vrai" joueur, on lui demande les coordonnées pour placer le domino
                     // Le joueur choisit les coordonnées de la position en haut à gauche (entre 0 et 4 pour chaque coordonnée) et l'orientation entre 1 et 4 (3 inputs ou interface graphique)
 
-                    int[] positionToPlace = null;
-                    while (positionToPlace == null){
-                        try {
-                            currentPlayer.askMove();
-                            positionToPlace = currentPlayer.choosePosition();                                                                       // On demande des coordonnées valides
-                            currentPlayer.getKingdom().placeDomino(domino, positionToPlace[0], new int[]{positionToPlace[1],positionToPlace[2]});   // On essaye de poser à ces coordonnées
-                        }catch (Exception ex) {
-                            System.out.println(ex.getMessage());
-                            positionToPlace = null;
+                    boolean placeDomino = currentPlayer.askKeepDomino();
+                    if (placeDomino) {
+                        int[] positionToPlace = null;
+                        while (positionToPlace == null) {
+                            try {
+                                currentPlayer.askMove();
+                                positionToPlace = currentPlayer.choosePosition();                                                                       // On demande des coordonnées valides
+                                currentPlayer.getKingdom().placeDomino(domino, positionToPlace[0], new int[]{positionToPlace[1], positionToPlace[2]});   // On essaye de poser à ces coordonnées
+                            } catch (Exception ex) {
+                                System.out.println(ex.getMessage());
+                                positionToPlace = null;
+                            }
                         }
+                    }
+                    else {
+                        System.out.println("Le domino sera défaussé.");
                     }
                 }
                 else {
@@ -419,7 +425,7 @@ public class Game {
                 Domino domino = dominosToSelect.get(dominoNumber);
                 domino.setKing(king);                                               // On pose le King sur le domino
                 king.setCurrentDomino(domino);                                      // On update le domino sur le King
-                System.out.println("Le domino " + dominoNumber + " est attribué automatiquement à " + currentPlayer.getName() + " " + currentPlayer.getColorEmoji() + ".");
+                System.out.println("Le domino " + dominoNumber + " : " +domino.toString() + " est attribué automatiquement à " + currentPlayer.getName() + " " + currentPlayer.getColorEmoji() + ".");
                 dominosToSelect.remove(dominoNumber);
             }
 
@@ -442,7 +448,7 @@ public class Game {
             Domino domino = dominosToSelect.get(dominoNumber);
             domino.setKing(king);                                               // On pose le King sur le domino
             king.setCurrentDomino(domino);                                      // On update le domino sur le King
-            System.out.println("Le domino " + dominoNumber + " est attribué automatiquement à " + currentPlayer.getName() + " " + currentPlayer.getColorEmoji() + ".");
+            System.out.println("Le domino " + dominoNumber + " : " +domino.toString() + " est attribué automatiquement à " + currentPlayer.getName() + " " + currentPlayer.getColorEmoji() + ".");
             dominosToSelect.remove(dominoNumber);
         }
     }

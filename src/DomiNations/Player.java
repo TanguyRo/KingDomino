@@ -8,10 +8,13 @@ public class Player {
     protected Color color;
     protected Kingdom kingdom;
     protected static final Scanner scanner = new Scanner(System.in);
+    private static final HashMap<String,Boolean> choicesMap = new HashMap<String,Boolean>();
     private static final HashMap<String,String> directionsMap = new HashMap<String,String>();
 
     // Remplissage du dictionnaire pour les directions
     static {
+        choicesMap.put("oui",true);
+        choicesMap.put("non",false);
         directionsMap.put("haut","up");
         directionsMap.put("bas","down");
         directionsMap.put("gauche","left");
@@ -235,6 +238,18 @@ public class Player {
         values[1]--;
         values[2]--;
         return values;
+    }
+
+    public boolean askKeepDomino() {
+        String choice;
+        while (true){
+            System.out.println("Souhaitez vous poser ce domino ? (\"oui\" ou \"non\")");
+            choice = scanner.nextLine();
+            choice = choice.toLowerCase().strip();
+            if (choicesMap.containsKey(choice)) {
+                return choicesMap.get(choice);
+            }
+        }
     }
 
     public void askMove() {
