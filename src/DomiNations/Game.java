@@ -79,44 +79,45 @@ public class Game {
         chooseDominosFirstRound();
         bench.print();
         System.out.println("Tous les dominos ont été sélectionnés par les joueurs. Celui avec la plus petite valeur commence en premier.");
+
         boolean firstDrawRight = true;
+        boolean lastRound = false;
+        boolean play = true;
 
-        do {
-            // Début de tour : on décale la lane de droite à gauche et on pioche des nouveaux dominos
-            System.out.println("On pioche " + nbKings + " nouveaux dominos. Il en reste " + drawPile.size() + ".");
-            if (firstDrawRight){
-                bench.drawSecondLane(drawPile);
-                firstDrawRight = false;
-            }
-            else {
-                bench.drawDominos(drawPile); // On actualise le banc en piochant des nouveaux dominos
-            }
-            // TODO Interface : décalage du banc + actualisation des nouveaux dominos (numéro puis face)
-
-            // On prépare la liste des dominos disponibles sur la lane de droite
+        while (play) {
             LinkedHashMap<Integer, Domino> dominosToSelect = new LinkedHashMap<>();
-            Domino[] secondLane = bench.getLane(2);
-            for (int j=1; j<=kings.length; j++){
-                Domino domino = secondLane[j-1];
-                dominosToSelect.put(domino.getNumber(), domino);
+            if (!lastRound){
+                // Début de tour : on décale la lane de droite à gauche et on pioche des nouveaux dominos
+                System.out.println("On pioche " + nbKings + " nouveaux dominos. Il en reste " + drawPile.size() + ".");
+                if (firstDrawRight){
+                    bench.drawSecondLane(drawPile);
+                    firstDrawRight = false;
+                }
+                else {
+                    bench.drawDominos(drawPile); // On actualise le banc en piochant des nouveaux dominos
+                }
+                // TODO Interface : décalage du banc + actualisation des nouveaux dominos (numéro puis face)
+
+                // On prépare la liste des dominos disponibles sur la lane de droite
+                Domino[] secondLane = bench.getLane(2);
+                for (int j=1; j<=kings.length; j++){
+                    Domino domino = secondLane[j-1];
+                    dominosToSelect.put(domino.getNumber(), domino);
+                }
             }
 
             // On prépare la liste des rois triée dans l'ordre de jeu
             LinkedList<King> kingsToPlay = new LinkedList<King>(Arrays.asList(kings));   // On récupère les rois
-
-            HashMap<Integer, King> kingsHashMap = new HashMap();
-            for(int y=0; y<kings.length; y++){
-                //Fait correspondre les rois à la valeur de leur domino
-                kingsHashMap.put(kingsToPlay.get(y).getCurrentDomino().getNumber(), kingsToPlay.get(y));
+                // On crée un dictionnaire faisant correspondre les rois à la valeur de leur domino
+            HashMap<Integer, King> kingsHashMap = new HashMap<Integer, King>();
+            for (int i=0; i<nbKings; i++){
+                King king = kings[i];
+                kingsHashMap.put(king.getCurrentDomino().getNumber(), king);
             }
-            //Tri des rois en fonction de la clé soit la valeur de leur domino
-            TreeMap<Integer, King> kingsSorted = new TreeMap<Integer, King>(kingsHashMap);
-
-            //On vide la liste des rois
-            kingsToPlay = new LinkedList<King>();
-            for(int j=0; j<kings.length; j++){
-                //Ajout des rois triés selon la valeur de leur domino
-                kingsToPlay.add(kingsSorted.get(bench.getDominosValues(1)[j]));
+                // On reprend l'ordre des dominos déjà triés sur le banc
+            int[] dominoValues = bench.getDominosValues(1);
+            for (int i=0; i<nbKings; i++){
+                kingsToPlay.add(kingsHashMap.get(dominoValues[i]));     // On ajoute à chaque fois le roi correpondant à la valeur du domino
             }
 
             // Joueur par joueur, on choisi un domino et on place l'ancien
@@ -132,11 +133,14 @@ public class Game {
 
                 // On en choisit un nouveau dans la lane de droite (ou on l'attribue si c'est le dernier restant)
                 bench.print();
-                chooseDomino(dominosToSelect, currentPlayer, king);
-                // TODO Interface : déplacement du king du domino de gauche à celui choisi à droite
+                kingdom.print();
+                    // On ne choisit pas de domino au dernier tour
+                if (!lastRound) {
+                    chooseDomino(dominosToSelect, currentPlayer, king);
+                    // TODO Interface : déplacement du king du domino de gauche à celui choisi à droite
+                }
 
                 // On place le domino choisi au tour précédent dans le royaume en respectant les règles de connexion.
-                kingdom.print();
                 System.out.println("Vous devez placer le domino " + domino.toString() + " .");
                 if(!(currentPlayer instanceof NPC)){
                     // Si c'est un "vrai" joueur, on lui demande les coordonnées pour placer le domino
@@ -202,9 +206,17 @@ public class Game {
             }
 
             // Tout le monde a joué, c'est la fin du tour
+
+            // Si c'était le dernier tour on arrête le jeu
+            if (lastRound){
+                play = false;
+            }
+
+            // Si on a pioché ici les derniers dominos, il reste un dernier tour pour les poser
+            if (drawPile.isEmpty()){
+                lastRound = true;
+            }
         }
-        while(!drawPile.isEmpty());
-        // Tous les dominos ont été piochés et posés
 
         // Calcul des scores et détermination des gagnants
         findWinners();
@@ -379,8 +391,10 @@ public class Game {
         Collections.shuffle(kingsToPlay);
 
         // HashMap des dominos disponibles sur la lane
+        int[] dominosValues = bench.getDominosValues(1);
+        Domino[] lane1 = bench.getLane(1);
         for (int j=1; j<=kings.length; j++){
-            dominosToSelect.put(bench.getDominosValues(1)[j-1], bench.getLane(1)[j-1]);
+            dominosToSelect.put(dominosValues[j-1], lane1[j-1]);
         }
 
         // Pour chaque roi le joueur correspondant choisit un domino.
