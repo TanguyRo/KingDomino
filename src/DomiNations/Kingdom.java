@@ -262,23 +262,25 @@ public class Kingdom {
     }
 
     private void fusion(Domain domain1, Domain domain2){
-        // Kingdom et Type non-modifié
+        if (!domain1.equals(domain2)){
+            // Kingdom et Type non-modifié
 
-        // LandPieces du domain2 ajoutées au domain1
-        ArrayList<LandPiece> landPiecesDomain1 = domain1.getLandpieces();
-        ArrayList<LandPiece> landPiecesDomain2 = domain2.getLandpieces();
-        for (LandPiece landPieceToMove : landPiecesDomain2) {
-            landPiecesDomain1.add(landPieceToMove);             // On l'ajoute à la liste des LandPieces du doimain1
-            landPieceToMove.setParentDomain(domain1);           // On met à jour son domaine parent
+            // LandPieces du domain2 ajoutées au domain1
+            ArrayList<LandPiece> landPiecesDomain1 = domain1.getLandpieces();
+            ArrayList<LandPiece> landPiecesDomain2 = domain2.getLandpieces();
+            for (LandPiece landPieceToMove : landPiecesDomain2) {
+                landPiecesDomain1.add(landPieceToMove);             // On l'ajoute à la liste des LandPieces du doimain1
+                landPieceToMove.setParentDomain(domain1);           // On met à jour son domaine parent
+            }
+
+            // CrownNumber mis à jour
+            domain1.addCrowns(domain2.getCrownNumber());
+
+            // Suppression du domain2
+            this.domains.remove(domain2);
+
+            // Le domain1 correspond désormais à la fusion des 2
         }
-
-        // CrownNumber mis à jour
-        domain1.addCrowns(domain2.getCrownNumber());
-
-        // Suppression du domain2
-        this.domains.remove(domain2);
-
-        // Le domain1 correspond désormais à la fusion des 2
     }
 
     public void print(){

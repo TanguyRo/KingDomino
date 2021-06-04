@@ -56,14 +56,11 @@ public class NPC extends Player {
         for (int i=0; i<landPiecesTypes.length; i++){
             String type = landPiecesTypes[i];
             // On parcourt les domaines de ce type
-
             for (Domain domain : this.kingdom.getDomains()){
-
                 if (domain.getType().equals(type)){
                     // On parcourt les landPieces du domaine en question pour en trouver une ou l'on peut se coller
                     for (LandPiece landPiece : domain.getLandpieces()){
                         int[] landPiecePosition = landPiece.getCurrentCell().getPosition();
-
                         // On prépare les tests et les positions des cells autour
                         boolean[] edgeCheck = {landPiecePosition[1] != 0, landPiecePosition[0] != 4, landPiecePosition[1] != 4, landPiecePosition[0] != 0};    // On parcourt dans le sens haut-droite-bas-gauche et on regarde si ça ne touche pas le bord
                         ArrayList<HashMap<Character, Integer>> collateralCellsPosition = Kingdom.getCollateralCellsPositions(landPiecePosition);
@@ -74,7 +71,6 @@ public class NPC extends Player {
                                 HashMap<Character, Integer> sideCellPosition = collateralCellsPosition.get(j);                  // On note les coordonnées de la position à vérifier
                                 int x = sideCellPosition.get('x');
                                 int y = sideCellPosition.get('y');
-
                                 Cell sideCell = this.kingdom.getCells()[y][x];  // On note la Cell du côté
                                 if (sideCell.isEmpty()) {
                                     // Si la Cell est vide, on peut y placer notre première case
@@ -86,11 +82,10 @@ public class NPC extends Player {
                                     // On regarde pour les 3 autres cases autour (4 - celle dont on vient) si l'une d'elles est vide (pour pouvoir poser la deuxième landpiece)
                                     for (int k = 0; k <= 3; k++) {                                                                  // Pour chaque direction (haut-droite-bas-gauche)
                                         // On saute le cas de la case de laquelle on vient : (j+2) modulo 4
-                                        if ((k != (j + 2) % 4) && newEdgeCheck[j]) {
+                                        if ((k != (j + 2) % 4) && newEdgeCheck[k]) {
                                             HashMap<Character, Integer> newSideCellPosition = newCollateralCellsPosition.get(k);
                                             int x2 = newSideCellPosition.get('x');
                                             int y2 = newSideCellPosition.get('y');
-
                                             Cell newSideCell;
                                             if (x2 >= 0 && x2 <= 4 && y2 >= 0 && y2 <= 4) {
                                                 newSideCell = this.kingdom.getCells()[y2][x2];
@@ -101,7 +96,6 @@ public class NPC extends Player {
                                             if (newSideCell!= null && newSideCell.isEmpty()) {
                                                 // Si la Cell est également vide, on a notre deuxième case et on peut alors placer le domino
                                                 int[] secondEmptyCellPosition = new int[]{x2,y2};
-                                                System.out.println("On a une position pour poser");
 
                                                 // Calcul du nombre de points en plus (on ne fait la vérification que d'un côté, ce sera suffisant pour une première estimation)(si les deux sont du même type alors prendre en compte les deux est facile)
                                                 int actualDomainScore = domain.getLandpieces().size() * domain.getCrownNumber();        // domain étant le domaine auquel on se colle
@@ -117,7 +111,6 @@ public class NPC extends Player {
                                                 int deltaDomainScore = newDomainScore - actualDomainScore;
 
                                                 if (deltaDomainScore > bestScore){
-                                                    System.out.println("Nouveau meilleur score");
                                                     // Ce placement est mieux que tous les précédents
                                                     bestScore = deltaDomainScore;
                                                     if (i==0){
