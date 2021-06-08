@@ -27,6 +27,38 @@ public class Game {
         this.Harmonie = Harmonie;
     }
 
+    // Getters
+
+    public Player[] getPlayers() {
+        return players;
+    }
+
+    public Kingdom[] getKingdoms() {
+        return kingdoms;
+    }
+
+    public King[] getKings() {
+        return kings;
+    }
+
+    public LinkedList<Domino> getDrawPile() {
+        return drawPile;
+    }
+
+    public Bench getBench() {
+        return bench;
+    }
+
+    public int getNbPlayers() {
+        return nbPlayers;
+    }
+
+    public int getNbKings() {
+        return nbKings;
+    }
+
+    // Functions
+
     public void play() {
 
         // Création des joueurs
@@ -36,6 +68,8 @@ public class Game {
         // Création des royaumes 5x5 pour chaque joueur
         initialiseKingdoms();
         System.out.println("Les " + nbPlayers + " royaumes ont bien été créés.");
+
+        /*
 
         // Affichage des royaumes :
         for (Kingdom kingdom: kingdoms){
@@ -49,6 +83,8 @@ public class Game {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+
+        */
 
 
         // Tests de l'affichage et du déplacement d'un kingdom :
@@ -72,6 +108,7 @@ public class Game {
         testKingdom.print();
         */
 
+        /*
 
         // Début du jeu : création du banc et configuration du premier tour
         bench = new Bench(nbKings);
@@ -219,6 +256,8 @@ public class Game {
 
         // Calcul des scores et détermination des gagnants
         findWinners();
+
+        */
     }
 
     public void createPlayers() {
