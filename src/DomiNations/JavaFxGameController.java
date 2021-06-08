@@ -2,6 +2,7 @@ package DomiNations;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.layout.VBox;
 import javafx.scene.layout.HBox;
 
 import java.util.LinkedList;
@@ -20,6 +21,22 @@ public class JavaFxGameController {
     private Button startButton;
 
     @FXML
+    private VBox leftPanel;
+    @FXML
+    private VBox centerPanel;
+    @FXML
+    private VBox rightPanel;
+
+    @FXML
+    private VBox firstPlayer;
+    @FXML
+    private VBox secondPlayer;
+    @FXML
+    private VBox thirdPlayer;
+    @FXML
+    private VBox fourthPlayer;
+
+    @FXML
     private HBox colorBar1;
     @FXML
     private HBox colorBar2;
@@ -27,6 +44,18 @@ public class JavaFxGameController {
     private HBox colorBar3;
     @FXML
     private HBox colorBar4;
+
+    @FXML
+    private VBox firstPlayerKings;
+    @FXML
+    private VBox secondPlayerKings;
+    @FXML
+    private VBox thirdPlayerKings;
+    @FXML
+    private VBox fourthPlayerKings;
+
+
+
     
     @FXML
     private void initialize() {
@@ -44,6 +73,7 @@ public class JavaFxGameController {
         kingdoms = game.getKingdoms();
         System.out.println("Les " + nbPlayers + " royaumes ont bien été créés.");
 
+        removePlayerTiles(nbPlayers);
         setPlayersColorsOnInterface(players);
 
 
@@ -53,17 +83,35 @@ public class JavaFxGameController {
         });
     }
 
-    public void setPlayersColorsOnInterface(Player[] players){
-        for (int i = 0; i < 4; i++) {
-            HBox colorBar;
-            switch (i) {
-                case 0 -> colorBar = colorBar1;
-                case 1 -> colorBar = colorBar2;
-                case 2 -> colorBar = colorBar3;
-                case 3 -> colorBar = colorBar4;
-                default -> throw new IllegalStateException("Unexpected value: " + i);
+    public void removePlayerTiles(int nbPlayers){
+        if (nbPlayers <= 3){
+            rightPanel.getChildren().remove(fourthPlayer);      // Si 2 ou 3 joueurs on enlève le 4ème joueur
+            if (nbPlayers <= 2){
+                leftPanel.getChildren().remove(thirdPlayer);    // Si 2 joueurs on enlève aussi le 3ème joueur
             }
-            System.out.println(i + colorBar.toString());
+            else {                                              // Si 3 on enlève le deuxième king
+                firstPlayerKings.getChildren().remove(0);
+                secondPlayerKings.getChildren().remove(0);
+                thirdPlayerKings.getChildren().remove(0);
+            }
+        }
+        else {
+            firstPlayerKings.getChildren().remove(0);
+            secondPlayerKings.getChildren().remove(0);
+            thirdPlayerKings.getChildren().remove(0);
+            fourthPlayerKings.getChildren().remove(0);
+        }
+    }
+
+    public void setPlayersColorsOnInterface(Player[] players){
+        for (int i = 0; i < players.length; i++) {
+            HBox colorBar = switch (i) {
+                case 0 -> colorBar1;
+                case 1 -> colorBar2;
+                case 2 -> colorBar3;
+                case 3 -> colorBar4;
+                default -> throw new IllegalStateException("Unexpected value: " + i);
+            };
             String hexValueOfPlayer = players[i].getColor().getHexValue();
             colorBar.setStyle("-fx-background-color: "+hexValueOfPlayer);
         }

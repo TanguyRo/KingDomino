@@ -23,7 +23,7 @@
          <children>
             <VBox fx:id="leftPanel" alignment="CENTER_LEFT" prefHeight="720.0" prefWidth="410.0">
                <children>
-                  <VBox alignment="TOP_CENTER" prefHeight="360.0" prefWidth="410.0" style="-fx-border-color: black;">
+                  <VBox fx:id="firstPlayer" alignment="TOP_CENTER" prefHeight="360.0" prefWidth="410.0" style="-fx-border-color: black;">
                      <children>
                         <HBox fx:id="colorBar1" alignment="TOP_CENTER" prefHeight="20.0" prefWidth="410.0" style="-fx-background-color: #326d1d;" />
                         <HBox alignment="BOTTOM_CENTER" layoutX="10.0" layoutY="10.0" prefHeight="340.0" prefWidth="410.0">
@@ -51,9 +51,14 @@
                                     <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                                  </padding>
                               </HBox>
-                              <VBox alignment="CENTER_RIGHT" prefHeight="360.0" prefWidth="90.0">
+                              <VBox fx:id="firstPlayerKings" alignment="CENTER_RIGHT" prefHeight="360.0" prefWidth="90.0">
                                  <children>
                                     <ImageView fitHeight="70.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../img/king1.png" />
+                                       </image>
+                                    </ImageView>
+                                    <ImageView fitHeight="70.0" fitWidth="42.0" layoutX="36.0" layoutY="145.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image url="@../img/king1.png" />
                                        </image>
@@ -67,7 +72,7 @@
                         </HBox>
                      </children>
                   </VBox>
-                  <VBox alignment="TOP_CENTER" layoutX="10.0" layoutY="370.0" prefHeight="360.0" prefWidth="410.0" style="-fx-border-color: black;">
+                  <VBox fx:id="thirdPlayer" alignment="TOP_CENTER" layoutX="10.0" layoutY="370.0" prefHeight="360.0" prefWidth="410.0" style="-fx-border-color: black;">
                      <children>
                         <HBox alignment="TOP_CENTER" layoutX="10.0" layoutY="10.0" prefHeight="340.0" prefWidth="410.0">
                            <children>
@@ -94,9 +99,14 @@
                                     <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                                  </padding>
                               </HBox>
-                              <VBox alignment="CENTER_RIGHT" prefHeight="360.0" prefWidth="90.0">
+                              <VBox fx:id="thirdPlayerKings" alignment="CENTER_RIGHT" prefHeight="360.0" prefWidth="90.0">
                                  <children>
                                     <ImageView fitHeight="70.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../img/king2.png" />
+                                       </image>
+                                    </ImageView>
+                                    <ImageView fitHeight="70.0" fitWidth="42.0" layoutX="36.0" layoutY="145.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image url="@../img/king2.png" />
                                        </image>
@@ -113,7 +123,7 @@
                   </VBox>
                </children>
             </VBox>
-            <VBox alignment="CENTER" layoutX="410.0" prefHeight="720.0" prefWidth="460.0">
+            <VBox fx:id="centerPanel" alignment="CENTER" layoutX="410.0" prefHeight="720.0" prefWidth="460.0">
                <children>
                   <HBox alignment="TOP_CENTER" prefHeight="180.0" prefWidth="460.0" style="-fx-border-color: black;">
                      <children>
@@ -216,16 +226,21 @@
                      </padding></VBox>
                </children>
             </VBox>
-            <VBox fx:id="leftPanel1" alignment="CENTER_RIGHT" layoutX="870.0" prefHeight="720.0" prefWidth="410.0">
+            <VBox fx:id="rightPanel" alignment="CENTER_RIGHT" layoutX="870.0" prefHeight="720.0" prefWidth="410.0">
                <children>
-                  <VBox alignment="TOP_CENTER" prefHeight="360.0" prefWidth="410.0" style="-fx-border-color: black;">
+                  <VBox fx:id="secondPlayer" alignment="TOP_CENTER" prefHeight="360.0" prefWidth="410.0" style="-fx-border-color: black;">
                      <children>
                         <HBox fx:id="colorBar2" alignment="TOP_CENTER" prefHeight="20.0" prefWidth="410.0" style="-fx-background-color: #e7b131;" />
                         <HBox alignment="BOTTOM_CENTER" layoutX="10.0" layoutY="10.0" prefHeight="340.0" prefWidth="410.0">
                            <children>
-                              <VBox alignment="CENTER_LEFT" prefHeight="360.0" prefWidth="90.0">
+                              <VBox fx:id="secondPlayerKings" alignment="CENTER_LEFT" prefHeight="360.0" prefWidth="90.0">
                                  <children>
                                     <ImageView fitHeight="70.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../img/king3.png" />
+                                       </image>
+                                    </ImageView>
+                                    <ImageView fitHeight="70.0" fitWidth="42.0" layoutX="35.0" layoutY="145.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image url="@../img/king3.png" />
                                        </image>
@@ -262,13 +277,18 @@
                         </HBox>
                      </children>
                   </VBox>
-                  <VBox alignment="TOP_CENTER" layoutX="10.0" layoutY="10.0" prefHeight="360.0" prefWidth="410.0" style="-fx-border-color: black;">
+                  <VBox fx:id="fourthPlayer" alignment="TOP_CENTER" layoutX="10.0" layoutY="10.0" prefHeight="360.0" prefWidth="410.0" style="-fx-border-color: black;">
                      <children>
                         <HBox alignment="TOP_CENTER" layoutX="10.0" layoutY="10.0" prefHeight="340.0" prefWidth="410.0">
                            <children>
-                              <VBox alignment="CENTER_LEFT" prefHeight="360.0" prefWidth="90.0">
+                              <VBox fx:id="fourthPlayerKings" alignment="CENTER_LEFT" prefHeight="360.0" prefWidth="90.0">
                                  <children>
                                     <ImageView fitHeight="70.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../img/king4.png" />
+                                       </image>
+                                    </ImageView>
+                                    <ImageView fitHeight="70.0" fitWidth="42.0" layoutX="35.0" layoutY="145.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image url="@../img/king4.png" />
                                        </image>
