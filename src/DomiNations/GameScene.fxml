@@ -25,7 +25,7 @@
                <children>
                   <VBox alignment="TOP_CENTER" prefHeight="360.0" prefWidth="410.0" style="-fx-border-color: black;">
                      <children>
-                        <HBox alignment="TOP_CENTER" prefHeight="20.0" prefWidth="410.0" style="-fx-background-color: #326d1d;" />
+                        <HBox fx:id="colorBar1" alignment="TOP_CENTER" prefHeight="20.0" prefWidth="410.0" style="-fx-background-color: #326d1d;" />
                         <HBox alignment="BOTTOM_CENTER" layoutX="10.0" layoutY="10.0" prefHeight="340.0" prefWidth="410.0">
                            <children>
                               <HBox alignment="CENTER_LEFT" prefHeight="360.0" prefWidth="320.0">
@@ -108,7 +108,7 @@
                               </VBox>
                            </children>
                         </HBox>
-                        <HBox alignment="BOTTOM_CENTER" prefHeight="20.0" prefWidth="410.0" style="-fx-background-color: #337cc4;" />
+                        <HBox fx:id="colorBar3" alignment="BOTTOM_CENTER" prefHeight="20.0" prefWidth="410.0" style="-fx-background-color: #337cc4;" />
                      </children>
                   </VBox>
                </children>
@@ -220,7 +220,7 @@
                <children>
                   <VBox alignment="TOP_CENTER" prefHeight="360.0" prefWidth="410.0" style="-fx-border-color: black;">
                      <children>
-                        <HBox alignment="TOP_CENTER" prefHeight="20.0" prefWidth="410.0" style="-fx-background-color: #e7b131;" />
+                        <HBox fx:id="colorBar2" alignment="TOP_CENTER" prefHeight="20.0" prefWidth="410.0" style="-fx-background-color: #e7b131;" />
                         <HBox alignment="BOTTOM_CENTER" layoutX="10.0" layoutY="10.0" prefHeight="340.0" prefWidth="410.0">
                            <children>
                               <VBox alignment="CENTER_LEFT" prefHeight="360.0" prefWidth="90.0">
@@ -303,7 +303,7 @@
                               </HBox>
                            </children>
                         </HBox>
-                        <HBox alignment="BOTTOM_CENTER" prefHeight="20.0" prefWidth="410.0" style="-fx-background-color: #c43349;" />
+                        <HBox fx:id="colorBar4" alignment="BOTTOM_CENTER" prefHeight="20.0" prefWidth="410.0" style="-fx-background-color: #c43349;" />
                      </children>
                   </VBox>
                </children>
