@@ -53,12 +53,12 @@
                               </HBox>
                               <VBox fx:id="firstPlayerKings" alignment="CENTER_RIGHT" prefHeight="360.0" prefWidth="90.0">
                                  <children>
-                                    <ImageView fitHeight="70.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fx:id="king11" fitHeight="70.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image url="@../img/king1.png" />
+                                          <Image fx:id="greenKing" url="@../img/king1.png" />
                                        </image>
                                     </ImageView>
-                                    <ImageView fitHeight="70.0" fitWidth="42.0" layoutX="36.0" layoutY="145.0" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fx:id="king12" fitHeight="70.0" fitWidth="42.0" layoutX="36.0" layoutY="145.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image url="@../img/king1.png" />
                                        </image>
@@ -101,12 +101,12 @@
                               </HBox>
                               <VBox fx:id="thirdPlayerKings" alignment="CENTER_RIGHT" prefHeight="360.0" prefWidth="90.0">
                                  <children>
-                                    <ImageView fitHeight="70.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fx:id="king31" fitHeight="70.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image url="@../img/king2.png" />
+                                          <Image fx:id="blueKing" url="@../img/king2.png" />
                                        </image>
                                     </ImageView>
-                                    <ImageView fitHeight="70.0" fitWidth="42.0" layoutX="36.0" layoutY="145.0" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fx:id="king32" fitHeight="70.0" fitWidth="42.0" layoutX="36.0" layoutY="145.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image url="@../img/king2.png" />
                                        </image>
@@ -235,12 +235,12 @@
                            <children>
                               <VBox fx:id="secondPlayerKings" alignment="CENTER_LEFT" prefHeight="360.0" prefWidth="90.0">
                                  <children>
-                                    <ImageView fitHeight="70.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fx:id="king21" fitHeight="70.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image url="@../img/king3.png" />
+                                          <Image fx:id="yellowKing" url="@../img/king3.png" />
                                        </image>
                                     </ImageView>
-                                    <ImageView fitHeight="70.0" fitWidth="42.0" layoutX="35.0" layoutY="145.0" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fx:id="king22"  fitHeight="70.0" fitWidth="42.0" layoutX="35.0" layoutY="145.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image url="@../img/king3.png" />
                                        </image>
@@ -283,12 +283,12 @@
                            <children>
                               <VBox fx:id="fourthPlayerKings" alignment="CENTER_LEFT" prefHeight="360.0" prefWidth="90.0">
                                  <children>
-                                    <ImageView fitHeight="70.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fx:id="king41" fitHeight="70.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image url="@../img/king4.png" />
+                                          <Image fx:id="pinkKing" url="@../img/king4.png" />
                                        </image>
                                     </ImageView>
-                                    <ImageView fitHeight="70.0" fitWidth="42.0" layoutX="35.0" layoutY="145.0" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fx:id="king42" fitHeight="70.0" fitWidth="42.0" layoutX="35.0" layoutY="145.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image url="@../img/king4.png" />
                                        </image>

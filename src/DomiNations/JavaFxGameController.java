@@ -1,7 +1,10 @@
 package DomiNations;
 
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.HBox;
 
@@ -54,9 +57,33 @@ public class JavaFxGameController {
     @FXML
     private VBox fourthPlayerKings;
 
+    @FXML
+    private ImageView king11;
+    @FXML
+    private ImageView king12;
+    @FXML
+    private ImageView king21;
+    @FXML
+    private ImageView king22;
+    @FXML
+    private ImageView king31;
+    @FXML
+    private ImageView king32;
+    @FXML
+    private ImageView king41;
+    @FXML
+    private ImageView king42;
+
+    @FXML
+    private Image blueKing;
+    @FXML
+    private Image pinkKing;
+    @FXML
+    private Image greenKing;
+    @FXML
+    private Image yellowKing;
 
 
-    
     @FXML
     private void initialize() {
         // Création des joueurs
@@ -73,14 +100,57 @@ public class JavaFxGameController {
         kingdoms = game.getKingdoms();
         System.out.println("Les " + nbPlayers + " royaumes ont bien été créés.");
 
-        removePlayerTiles(nbPlayers);
         setPlayersColorsOnInterface(players);
+        removePlayerTiles(nbPlayers);
 
 
         // Handle Button event.
         startButton.setOnAction((event) -> {
             System.out.println("Clic sur le bouton");
         });
+    }
+
+    public void setPlayersColorsOnInterface(Player[] players){
+        for (int i = 0; i < players.length; i++) {
+            HBox colorBar;
+            ImageView[] kingsImageView;
+            String imageURl;
+            switch (i) {
+                case 0 -> {
+                    colorBar = colorBar1;
+                    kingsImageView = new ImageView[]{king11, king12};
+                }
+                case 1 -> {
+                    colorBar = colorBar2;
+                    kingsImageView = new ImageView[]{king21, king22};
+                }
+                case 2 -> {
+                    colorBar = colorBar3;
+                    kingsImageView = new ImageView[]{king31, king32};
+                }
+                case 3 -> {
+                    colorBar = colorBar4;
+                    kingsImageView = new ImageView[]{king41, king42};
+                }
+                default -> throw new IllegalStateException("Unexpected value: " + i);
+            }
+            Color colorOfPlayer = players[i].getColor();
+
+            // Color Bar change :
+            String hexValueOfPlayer = colorOfPlayer.getHexValue();
+            colorBar.setStyle("-fx-background-color: "+hexValueOfPlayer);
+
+            // Kings color change :
+            String playerColor = colorOfPlayer.getName();
+            for (ImageView imageView: kingsImageView){
+                switch (playerColor) {
+                    case "Vert" -> imageView.setImage(greenKing);
+                    case "Bleu" -> imageView.setImage(blueKing);
+                    case "Jaune" -> imageView.setImage(yellowKing);
+                    case "Rose" -> imageView.setImage(pinkKing);
+                }
+            }
+        }
     }
 
     public void removePlayerTiles(int nbPlayers){
@@ -90,30 +160,16 @@ public class JavaFxGameController {
                 leftPanel.getChildren().remove(thirdPlayer);    // Si 2 joueurs on enlève aussi le 3ème joueur
             }
             else {                                              // Si 3 on enlève le deuxième king
-                firstPlayerKings.getChildren().remove(0);
-                secondPlayerKings.getChildren().remove(0);
-                thirdPlayerKings.getChildren().remove(0);
+                firstPlayerKings.getChildren().remove(king12);
+                secondPlayerKings.getChildren().remove(king22);
+                thirdPlayerKings.getChildren().remove(king32);
             }
         }
         else {
-            firstPlayerKings.getChildren().remove(0);
-            secondPlayerKings.getChildren().remove(0);
-            thirdPlayerKings.getChildren().remove(0);
-            fourthPlayerKings.getChildren().remove(0);
-        }
-    }
-
-    public void setPlayersColorsOnInterface(Player[] players){
-        for (int i = 0; i < players.length; i++) {
-            HBox colorBar = switch (i) {
-                case 0 -> colorBar1;
-                case 1 -> colorBar2;
-                case 2 -> colorBar3;
-                case 3 -> colorBar4;
-                default -> throw new IllegalStateException("Unexpected value: " + i);
-            };
-            String hexValueOfPlayer = players[i].getColor().getHexValue();
-            colorBar.setStyle("-fx-background-color: "+hexValueOfPlayer);
+            firstPlayerKings.getChildren().remove(king12);
+            secondPlayerKings.getChildren().remove(king22);
+            thirdPlayerKings.getChildren().remove(king32);
+            fourthPlayerKings.getChildren().remove(king42);
         }
     }
 }

@@ -8,8 +8,6 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 
-    private static JavaFxGameController controller;
-
     public static void main(String[] args) {
         launch(args);
     }
