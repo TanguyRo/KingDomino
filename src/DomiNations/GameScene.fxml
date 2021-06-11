@@ -10,6 +10,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
 
 <GridPane alignment="center" hgap="10" prefHeight="720.0" prefWidth="1280.0" vgap="10" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="DomiNations.JavaFxGameController">
    <columnConstraints>
@@ -23,7 +24,7 @@
          <children>
             <VBox fx:id="leftPanel" alignment="CENTER_LEFT" prefHeight="720.0" prefWidth="410.0">
                <children>
-                  <VBox fx:id="firstPlayer" alignment="TOP_CENTER" prefHeight="360.0" prefWidth="410.0" style="-fx-border-color: black;">
+                  <VBox fx:id="firstPlayerTile" alignment="TOP_CENTER" prefHeight="360.0" prefWidth="410.0" style="-fx-border-color: black;">
                      <children>
                         <HBox fx:id="colorBar1" alignment="TOP_CENTER" prefHeight="20.0" prefWidth="410.0" style="-fx-background-color: #326d1d;" />
                         <HBox alignment="BOTTOM_CENTER" layoutX="10.0" layoutY="10.0" prefHeight="340.0" prefWidth="410.0">
@@ -51,17 +52,28 @@
                                     <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                                  </padding>
                               </HBox>
-                              <VBox fx:id="firstPlayerKings" alignment="CENTER_RIGHT" prefHeight="360.0" prefWidth="90.0">
+                              <VBox fx:id="firstPlayerKings" alignment="TOP_CENTER" prefHeight="360.0" prefWidth="90.0">
                                  <children>
+                                    <Text fx:id="playerName1" boundsType="VISUAL" nodeOrientation="LEFT_TO_RIGHT" strokeType="OUTSIDE" strokeWidth="0.0" text="Joueur" textAlignment="CENTER" textOrigin="CENTER" wrappingWidth="80.0" VBox.vgrow="NEVER">
+                                       <VBox.margin>
+                                          <Insets bottom="60.0" />
+                                       </VBox.margin>
+                                    </Text>
                                     <ImageView fx:id="king11" fitHeight="70.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image fx:id="greenKing" url="@../img/king1.png" />
                                        </image>
+                                       <VBox.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </VBox.margin>
                                     </ImageView>
                                     <ImageView fx:id="king12" fitHeight="70.0" fitWidth="42.0" layoutX="36.0" layoutY="145.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image url="@../img/king1.png" />
                                        </image>
+                                       <VBox.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </VBox.margin>
                                     </ImageView>
                                  </children>
                                  <padding>
@@ -72,7 +84,7 @@
                         </HBox>
                      </children>
                   </VBox>
-                  <VBox fx:id="thirdPlayer" alignment="TOP_CENTER" layoutX="10.0" layoutY="370.0" prefHeight="360.0" prefWidth="410.0" style="-fx-border-color: black;">
+                  <VBox fx:id="thirdPlayerTile" alignment="TOP_CENTER" layoutX="10.0" layoutY="370.0" prefHeight="360.0" prefWidth="410.0" style="-fx-border-color: black;">
                      <children>
                         <HBox alignment="TOP_CENTER" layoutX="10.0" layoutY="10.0" prefHeight="340.0" prefWidth="410.0">
                            <children>
@@ -99,18 +111,28 @@
                                     <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                                  </padding>
                               </HBox>
-                              <VBox fx:id="thirdPlayerKings" alignment="CENTER_RIGHT" prefHeight="360.0" prefWidth="90.0">
+                              <VBox fx:id="thirdPlayerKings" alignment="BOTTOM_CENTER" prefHeight="360.0" prefWidth="90.0">
                                  <children>
                                     <ImageView fx:id="king31" fitHeight="70.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image fx:id="blueKing" url="@../img/king2.png" />
                                        </image>
+                                       <VBox.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </VBox.margin>
                                     </ImageView>
                                     <ImageView fx:id="king32" fitHeight="70.0" fitWidth="42.0" layoutX="36.0" layoutY="145.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image url="@../img/king2.png" />
                                        </image>
+                                       <VBox.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </VBox.margin>
                                     </ImageView>
+                                    <Text fx:id="playerName3" boundsType="VISUAL" nodeOrientation="LEFT_TO_RIGHT" strokeType="OUTSIDE" strokeWidth="0.0" text="Joueur" textAlignment="CENTER" textOrigin="TOP" wrappingWidth="81.12841796875">
+                                       <VBox.margin>
+                                          <Insets top="60.0" />
+                                       </VBox.margin></Text>
                                  </children>
                                  <padding>
                                     <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
@@ -228,22 +250,32 @@
             </VBox>
             <VBox fx:id="rightPanel" alignment="CENTER_RIGHT" layoutX="870.0" prefHeight="720.0" prefWidth="410.0">
                <children>
-                  <VBox fx:id="secondPlayer" alignment="TOP_CENTER" prefHeight="360.0" prefWidth="410.0" style="-fx-border-color: black;">
+                  <VBox fx:id="secondPlayerTile" alignment="TOP_CENTER" prefHeight="360.0" prefWidth="410.0" style="-fx-border-color: black;">
                      <children>
                         <HBox fx:id="colorBar2" alignment="TOP_CENTER" prefHeight="20.0" prefWidth="410.0" style="-fx-background-color: #e7b131;" />
                         <HBox alignment="BOTTOM_CENTER" layoutX="10.0" layoutY="10.0" prefHeight="340.0" prefWidth="410.0">
                            <children>
-                              <VBox fx:id="secondPlayerKings" alignment="CENTER_LEFT" prefHeight="360.0" prefWidth="90.0">
+                              <VBox fx:id="secondPlayerKings" alignment="TOP_CENTER" prefHeight="360.0" prefWidth="90.0">
                                  <children>
+                                    <Text fx:id="playerName2" boundsType="VISUAL" nodeOrientation="LEFT_TO_RIGHT" strokeType="OUTSIDE" strokeWidth="0.0" text="Joueur" textAlignment="CENTER" textOrigin="TOP" wrappingWidth="81.12841796875">
+                                       <VBox.margin>
+                                          <Insets bottom="60.0" />
+                                       </VBox.margin></Text>
                                     <ImageView fx:id="king21" fitHeight="70.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image fx:id="yellowKing" url="@../img/king3.png" />
                                        </image>
+                                       <VBox.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </VBox.margin>
                                     </ImageView>
-                                    <ImageView fx:id="king22"  fitHeight="70.0" fitWidth="42.0" layoutX="35.0" layoutY="145.0" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fx:id="king22" fitHeight="70.0" fitWidth="42.0" layoutX="35.0" layoutY="145.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image url="@../img/king3.png" />
                                        </image>
+                                       <VBox.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </VBox.margin>
                                     </ImageView>
                                  </children>
                                  <padding>
@@ -277,22 +309,32 @@
                         </HBox>
                      </children>
                   </VBox>
-                  <VBox fx:id="fourthPlayer" alignment="TOP_CENTER" layoutX="10.0" layoutY="10.0" prefHeight="360.0" prefWidth="410.0" style="-fx-border-color: black;">
+                  <VBox fx:id="fourthPlayerTile" alignment="TOP_CENTER" layoutX="10.0" layoutY="10.0" prefHeight="360.0" prefWidth="410.0" style="-fx-border-color: black;">
                      <children>
                         <HBox alignment="TOP_CENTER" layoutX="10.0" layoutY="10.0" prefHeight="340.0" prefWidth="410.0">
                            <children>
-                              <VBox fx:id="fourthPlayerKings" alignment="CENTER_LEFT" prefHeight="360.0" prefWidth="90.0">
+                              <VBox fx:id="fourthPlayerKings" alignment="BOTTOM_CENTER" prefHeight="360.0" prefWidth="90.0">
                                  <children>
                                     <ImageView fx:id="king41" fitHeight="70.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image fx:id="pinkKing" url="@../img/king4.png" />
                                        </image>
+                                       <VBox.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </VBox.margin>
                                     </ImageView>
                                     <ImageView fx:id="king42" fitHeight="70.0" fitWidth="42.0" layoutX="35.0" layoutY="145.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image url="@../img/king4.png" />
                                        </image>
+                                       <VBox.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </VBox.margin>
                                     </ImageView>
+                                    <Text fx:id="playerName4" boundsType="VISUAL" nodeOrientation="LEFT_TO_RIGHT" strokeType="OUTSIDE" strokeWidth="0.0" text="Joueur" textAlignment="CENTER" textOrigin="TOP" wrappingWidth="81.12841796875">
+                                       <VBox.margin>
+                                          <Insets top="60.0" />
+                                       </VBox.margin></Text>
                                  </children>
                                  <padding>
                                     <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />

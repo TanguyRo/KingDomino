@@ -7,6 +7,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.HBox;
+import javafx.scene.text.Text;
 
 import java.util.LinkedList;
 
@@ -23,6 +24,7 @@ public class JavaFxGameController {
     @FXML
     private Button startButton;
 
+    // 3 grandes tuiles
     @FXML
     private VBox leftPanel;
     @FXML
@@ -30,15 +32,17 @@ public class JavaFxGameController {
     @FXML
     private VBox rightPanel;
 
+    // Tuile pour chaque joueur
     @FXML
-    private VBox firstPlayer;
+    private VBox firstPlayerTile;
     @FXML
-    private VBox secondPlayer;
+    private VBox secondPlayerTile;
     @FXML
-    private VBox thirdPlayer;
+    private VBox thirdPlayerTile;
     @FXML
-    private VBox fourthPlayer;
+    private VBox fourthPlayerTile;
 
+    // Barres de couleurs pour chaque joueur
     @FXML
     private HBox colorBar1;
     @FXML
@@ -48,6 +52,17 @@ public class JavaFxGameController {
     @FXML
     private HBox colorBar4;
 
+    // Zones de texte pour les noms des joueurs
+    @FXML
+    private Text playerName1;
+    @FXML
+    private Text playerName2;
+    @FXML
+    private Text playerName3;
+    @FXML
+    private Text playerName4;
+
+    // Conteneur des Kings pour chaque joueur
     @FXML
     private VBox firstPlayerKings;
     @FXML
@@ -57,6 +72,17 @@ public class JavaFxGameController {
     @FXML
     private VBox fourthPlayerKings;
 
+    // Images des 4 Kings
+    @FXML
+    private Image blueKing;
+    @FXML
+    private Image pinkKing;
+    @FXML
+    private Image greenKing;
+    @FXML
+    private Image yellowKing;
+
+    // ImageView des Kings (2 spots par joueur)
     @FXML
     private ImageView king11;
     @FXML
@@ -74,15 +100,6 @@ public class JavaFxGameController {
     @FXML
     private ImageView king42;
 
-    @FXML
-    private Image blueKing;
-    @FXML
-    private Image pinkKing;
-    @FXML
-    private Image greenKing;
-    @FXML
-    private Image yellowKing;
-
 
     @FXML
     private void initialize() {
@@ -93,7 +110,7 @@ public class JavaFxGameController {
         initialiseKingdoms();
 
         // Paramètres d'affichage en fonction des joueurs (nombre de tuiles et couleurs)
-        setPlayersColorsOnInterface(players);
+        setPlayersParametersOnInterface(players);
         removePlayerTiles(nbPlayers);
 
 
@@ -119,40 +136,48 @@ public class JavaFxGameController {
         System.out.println("Les " + nbPlayers + " royaumes ont bien été créés.");
     }
 
-    public void setPlayersColorsOnInterface(Player[] players){
+    public void setPlayersParametersOnInterface(Player[] players){
         for (int i = 0; i < players.length; i++) {
+            Player player = players[i];
+            Color playerColor = player.getColor();
             HBox colorBar;
             ImageView[] kingsImageView;
-            String imageURl;
+            Text playerNameTextZone;
             switch (i) {
                 case 0 -> {
                     colorBar = colorBar1;
                     kingsImageView = new ImageView[]{king11, king12};
+                    playerNameTextZone = playerName1;
                 }
                 case 1 -> {
                     colorBar = colorBar2;
                     kingsImageView = new ImageView[]{king21, king22};
+                    playerNameTextZone = playerName2;
                 }
                 case 2 -> {
                     colorBar = colorBar3;
                     kingsImageView = new ImageView[]{king31, king32};
+                    playerNameTextZone = playerName3;
                 }
                 case 3 -> {
                     colorBar = colorBar4;
                     kingsImageView = new ImageView[]{king41, king42};
+                    playerNameTextZone = playerName4;
                 }
                 default -> throw new IllegalStateException("Unexpected value: " + i);
             }
-            Color colorOfPlayer = players[i].getColor();
+
+            // Name change :
+            playerNameTextZone.setText(player.getName());
 
             // Color Bar change :
-            String hexValueOfPlayer = colorOfPlayer.getHexValue();
+            String hexValueOfPlayer = playerColor.getHexValue();
             colorBar.setStyle("-fx-background-color: "+hexValueOfPlayer);
 
             // Kings color change :
-            String playerColor = colorOfPlayer.getName();
+            String playerColorName = playerColor.getName();
             for (ImageView imageView: kingsImageView){
-                switch (playerColor) {
+                switch (playerColorName) {
                     case "Vert" -> imageView.setImage(greenKing);
                     case "Bleu" -> imageView.setImage(blueKing);
                     case "Jaune" -> imageView.setImage(yellowKing);
@@ -164,9 +189,9 @@ public class JavaFxGameController {
 
     public void removePlayerTiles(int nbPlayers){
         if (nbPlayers <= 3){
-            rightPanel.getChildren().remove(fourthPlayer);      // Si 2 ou 3 joueurs on enlève le 4ème joueur
+            rightPanel.getChildren().remove(fourthPlayerTile);      // Si 2 ou 3 joueurs on enlève le 4ème joueur
             if (nbPlayers <= 2){
-                leftPanel.getChildren().remove(thirdPlayer);    // Si 2 joueurs on enlève aussi le 3ème joueur
+                leftPanel.getChildren().remove(thirdPlayerTile);    // Si 2 joueurs on enlève aussi le 3ème joueur
             }
             else {                                              // Si 3 on enlève le deuxième king
                 firstPlayerKings.getChildren().remove(king12);
