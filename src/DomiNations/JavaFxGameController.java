@@ -87,19 +87,12 @@ public class JavaFxGameController {
     @FXML
     private void initialize() {
         // Création des joueurs
-        game.createPlayers();
-        nbPlayers = game.getNbPlayers();        // On actualise
-        players = game.getPlayers();
-        nbKings = game.getNbKings();
-        kings = game.getKings();
-        System.out.println("Les joueurs ont bien été créés.");
+        createPlayers();
 
         // Création des royaumes 5x5 pour chaque joueur
-        game.initialiseKingdoms();
-        players = game.getPlayers();
-        kingdoms = game.getKingdoms();
-        System.out.println("Les " + nbPlayers + " royaumes ont bien été créés.");
+        initialiseKingdoms();
 
+        // Paramètres d'affichage en fonction des joueurs (nombre de tuiles et couleurs)
         setPlayersColorsOnInterface(players);
         removePlayerTiles(nbPlayers);
 
@@ -108,6 +101,22 @@ public class JavaFxGameController {
         startButton.setOnAction((event) -> {
             System.out.println("Clic sur le bouton");
         });
+    }
+
+    private void createPlayers(){
+        game.createPlayers();
+        nbPlayers = game.getNbPlayers();        // On actualise
+        players = game.getPlayers();
+        nbKings = game.getNbKings();
+        kings = game.getKings();
+        System.out.println("Les joueurs ont bien été créés.");
+    }
+
+    private void initialiseKingdoms(){
+        game.initialiseKingdoms();
+        players = game.getPlayers();
+        kingdoms = game.getKingdoms();
+        System.out.println("Les " + nbPlayers + " royaumes ont bien été créés.");
     }
 
     public void setPlayersColorsOnInterface(Player[] players){
