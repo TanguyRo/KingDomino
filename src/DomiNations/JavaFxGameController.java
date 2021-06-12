@@ -143,7 +143,7 @@ public class JavaFxGameController {
             kingsVbox.get(0).getChildren().remove(kingsImageViews.get(0).get(1));
             kingsVbox.get(1).getChildren().remove(kingsImageViews.get(1).get(1));
             kingsVbox.get(2).getChildren().remove(kingsImageViews.get(2).get(1));
-            kingsVbox.get(2).getChildren().remove(kingsImageViews.get(3).get(1));
+            kingsVbox.get(3).getChildren().remove(kingsImageViews.get(3).get(1));
         }
     }
 
