@@ -62,6 +62,8 @@ public class Game {
 
     // Functions
 
+    /*
+
     public void play() {
 
         // Création des joueurs
@@ -72,7 +74,6 @@ public class Game {
         //initialiseKingdoms();
         System.out.println("Les " + nbPlayers + " royaumes ont bien été créés.");
 
-        /*
 
         // Affichage des royaumes :
         for (Kingdom kingdom: kingdoms){
@@ -86,32 +87,6 @@ public class Game {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-
-        */
-
-
-        // Tests de l'affichage et du déplacement d'un kingdom :
-        /*
-        Kingdom testKingdom = kingdoms[0];
-        Cell[][] testKingdomCells = testKingdom.getCells();
-        for (int x=0; x<5; x++){
-            for (int y=0; y<5; y++){
-                testKingdomCells[y][x] = new Cell(new int[] {x,y},true,null);
-            }
-        }
-        testKingdomCells[2][2].setCurrentLandPiece(new LandPiece("Chateau",0));
-        testKingdomCells[1][1].setCurrentLandPiece(new LandPiece("Montagne",2));
-        testKingdomCells[1][2].setCurrentLandPiece(new LandPiece("Mer",0));
-        testKingdomCells[1][3].setCurrentLandPiece(new LandPiece("Mer",1));
-        testKingdomCells[2][3].setCurrentLandPiece(new LandPiece("Foret",1));
-        testKingdom.print();
-        testKingdom.move("up");
-        testKingdom.print();
-        testKingdom.move("left");
-        testKingdom.print();
-        */
-
-        /*
 
         // Début du jeu : création du banc et configuration du premier tour
         bench = new Bench(nbKings);
@@ -260,8 +235,9 @@ public class Game {
         // Calcul des scores et détermination des gagnants
         findWinners();
 
-        */
+
     }
+    */
 
     public void createPlayers() {
         //Utilisation d'un dictionnaire pour proposer les couleurs
@@ -387,7 +363,7 @@ public class Game {
 
     public void initialiseDrawPile(int nbPlayers, ArrayList<ArrayList<Image>> dominosImages) throws FileNotFoundException {
         // scanner va lire le contenu du fichier .csv
-        Scanner scanner = new Scanner(new File("dominos.csv"));
+        Scanner scanner = new Scanner(new File("src/dominos.csv"));
         scanner.nextLine();		// On saute la ligne d'en-tête
 
         // stringBuilder va stocker le contenu du fichier

@@ -1251,7 +1251,7 @@
       </ArrayList>
    </fx:define>
    <fx:define>
-      <ArrayList fx:id="dominos">
+      <ArrayList fx:id="dominosImages">
          <fx:reference source="domino1" />
          <fx:reference source="domino2" />
          <fx:reference source="domino3" />

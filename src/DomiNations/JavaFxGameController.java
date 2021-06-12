@@ -8,6 +8,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
@@ -62,7 +63,7 @@ public class JavaFxGameController {
 
     // Images des châteaux
     @FXML
-    private ArrayList<ArrayList<Image>> dominos;
+    private ArrayList<ArrayList<Image>> dominosImages;
 
     // ImageView des cells des grids
     @FXML
@@ -76,9 +77,17 @@ public class JavaFxGameController {
         // Création des royaumes 5x5 pour chaque joueur
         initialiseKingdoms();
 
-        // Paramètres d'affichage en fonction des joueurs (nombre de tuiles et couleurs)
+        // Paramètres d'affichage en fonction des joueurs (nombre de tuiles, noms et couleurs)
         setPlayersParametersOnInterface(players);
         removePlayerTiles(nbPlayers);
+
+        // Création de la pioche, remplie du bon nombre de dominos et mélangée
+        try {
+            initialiseDrawPile();
+            System.out.println("La pioche a été mélangée et contient " + drawPile.size() + " dominos.");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
 
         // Handle Button event.
         startButton.setOnAction((event) -> {
@@ -168,5 +177,10 @@ public class JavaFxGameController {
         for (int i = 0; i < nbPlayers; i++) {
             actualiseKingdom(kingdoms[i]);
         }
+    }
+
+    public void initialiseDrawPile() throws FileNotFoundException {
+        game.initialiseDrawPile(nbPlayers, dominosImages);
+        drawPile = game.getDrawPile();
     }
 }
