@@ -1,11 +1,13 @@
 package DomiNations;
 
+import javafx.scene.image.Image;
 import java.util.HashMap;
 
 public class LandPiece {
     private Cell cell;
     private final String type;
     private final int crownNumber;
+    private Image image;
     private Domain parentDomain;
     private static final HashMap<String,String> typesMap = new HashMap<String,String>();    // static car commun à tous les objets LandPiece
 
@@ -41,6 +43,14 @@ public class LandPiece {
 
     public int getCrownNumber() {
         return crownNumber;
+    }
+
+    public void setImage(Image image) {
+        this.image = image;
+    }
+
+    public Image getImage() {
+        return image;
     }
 
     public void setParentDomain(Domain parentDomain) {

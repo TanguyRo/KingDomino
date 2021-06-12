@@ -1,9 +1,12 @@
 package DomiNations;
 
+import javafx.scene.image.ImageView;
+
 public class Cell {
     private final int[] position;
     private boolean isEmpty;
     private LandPiece currentLandPiece;
+    private ImageView imageView;
 
 
     public Cell(int[] position, boolean isEmpty, LandPiece currentLandPiece) {
@@ -30,5 +33,13 @@ public class Cell {
 
     public LandPiece getCurrentLandPiece() {
         return currentLandPiece;
+    }
+
+    public void setImageView(ImageView imageView) {
+        this.imageView = imageView;
+    }
+
+    public ImageView getImageView() {
+        return imageView;
     }
 }

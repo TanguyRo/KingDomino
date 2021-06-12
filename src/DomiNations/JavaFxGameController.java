@@ -1,7 +1,6 @@
 package DomiNations;
 
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -9,6 +8,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class JavaFxGameController {
@@ -32,74 +32,41 @@ public class JavaFxGameController {
     @FXML
     private VBox rightPanel;
 
-    // Tuile pour chaque joueur
+    // Tuiles de chaque joueur
     @FXML
-    private VBox firstPlayerTile;
-    @FXML
-    private VBox secondPlayerTile;
-    @FXML
-    private VBox thirdPlayerTile;
-    @FXML
-    private VBox fourthPlayerTile;
+    private ArrayList<VBox> playersTiles;
 
     // Barres de couleurs pour chaque joueur
     @FXML
-    private HBox colorBar1;
-    @FXML
-    private HBox colorBar2;
-    @FXML
-    private HBox colorBar3;
-    @FXML
-    private HBox colorBar4;
+    private ArrayList<HBox> colorBars;
 
     // Zones de texte pour les noms des joueurs
     @FXML
-    private Text playerName1;
-    @FXML
-    private Text playerName2;
-    @FXML
-    private Text playerName3;
-    @FXML
-    private Text playerName4;
+    private ArrayList<Text> playerNamesTextZones;
 
     // Conteneur des Kings pour chaque joueur
     @FXML
-    private VBox firstPlayerKings;
-    @FXML
-    private VBox secondPlayerKings;
-    @FXML
-    private VBox thirdPlayerKings;
-    @FXML
-    private VBox fourthPlayerKings;
+    private ArrayList<VBox> kingsVbox;
 
     // Images des 4 Kings
     @FXML
-    private Image blueKing;
-    @FXML
-    private Image pinkKing;
-    @FXML
-    private Image greenKing;
-    @FXML
-    private Image yellowKing;
+    private ArrayList<Image> kingsImages;
 
     // ImageView des Kings (2 spots par joueur)
     @FXML
-    private ImageView king11;
-    @FXML
-    private ImageView king12;
-    @FXML
-    private ImageView king21;
-    @FXML
-    private ImageView king22;
-    @FXML
-    private ImageView king31;
-    @FXML
-    private ImageView king32;
-    @FXML
-    private ImageView king41;
-    @FXML
-    private ImageView king42;
+    private ArrayList<ArrayList<ImageView>> kingsImageViews;
 
+    // Images des châteaux
+    @FXML
+    private ArrayList<Image> castleImages;
+
+    // Images des châteaux
+    @FXML
+    private ArrayList<ArrayList<Image>> dominos;
+
+    // ImageView des cells des grids
+    @FXML
+    private ArrayList<ArrayList<ArrayList<ImageView>>> gridCells;
 
     @FXML
     private void initialize() {
@@ -112,7 +79,6 @@ public class JavaFxGameController {
         // Paramètres d'affichage en fonction des joueurs (nombre de tuiles et couleurs)
         setPlayersParametersOnInterface(players);
         removePlayerTiles(nbPlayers);
-
 
         // Handle Button event.
         startButton.setOnAction((event) -> {
@@ -130,80 +96,77 @@ public class JavaFxGameController {
     }
 
     private void initialiseKingdoms(){
-        game.initialiseKingdoms();
+        game.initialiseKingdoms(gridCells, castleImages); // Crée les royaumes, avec les ImageView de chaque cell et les images des châteaux
         players = game.getPlayers();
         kingdoms = game.getKingdoms();
+
+        actualiseKingdoms(kingdoms);    // On met à jour l'affichage
+
         System.out.println("Les " + nbPlayers + " royaumes ont bien été créés.");
     }
 
-    public void setPlayersParametersOnInterface(Player[] players){
+    private void setPlayersParametersOnInterface(Player[] players){
         for (int i = 0; i < players.length; i++) {
             Player player = players[i];
             Color playerColor = player.getColor();
-            HBox colorBar;
-            ImageView[] kingsImageView;
-            Text playerNameTextZone;
-            switch (i) {
-                case 0 -> {
-                    colorBar = colorBar1;
-                    kingsImageView = new ImageView[]{king11, king12};
-                    playerNameTextZone = playerName1;
-                }
-                case 1 -> {
-                    colorBar = colorBar2;
-                    kingsImageView = new ImageView[]{king21, king22};
-                    playerNameTextZone = playerName2;
-                }
-                case 2 -> {
-                    colorBar = colorBar3;
-                    kingsImageView = new ImageView[]{king31, king32};
-                    playerNameTextZone = playerName3;
-                }
-                case 3 -> {
-                    colorBar = colorBar4;
-                    kingsImageView = new ImageView[]{king41, king42};
-                    playerNameTextZone = playerName4;
-                }
-                default -> throw new IllegalStateException("Unexpected value: " + i);
-            }
 
             // Name change :
+            Text playerNameTextZone = playerNamesTextZones.get(i);
             playerNameTextZone.setText(player.getName());
 
             // Color Bar change :
+            HBox colorBar = colorBars.get(i);
             String hexValueOfPlayer = playerColor.getHexValue();
             colorBar.setStyle("-fx-background-color: "+hexValueOfPlayer);
 
             // Kings color change :
-            String playerColorName = playerColor.getName();
-            for (ImageView imageView: kingsImageView){
-                switch (playerColorName) {
-                    case "Vert" -> imageView.setImage(greenKing);
-                    case "Bleu" -> imageView.setImage(blueKing);
-                    case "Jaune" -> imageView.setImage(yellowKing);
-                    case "Rose" -> imageView.setImage(pinkKing);
+            ArrayList<ImageView> playerKingsImageViews = kingsImageViews.get(i);
+            for (ImageView imageView: playerKingsImageViews){
+                imageView.setImage(kingsImages.get(playerColor.getNumber()-1));
+            }
+        }
+    }
+
+    private void removePlayerTiles(int nbPlayers){
+        if (nbPlayers <= 3){
+            rightPanel.getChildren().remove(playersTiles.get(3));      // Si 2 ou 3 joueurs on enlève le 4ème joueur
+            if (nbPlayers <= 2){
+                leftPanel.getChildren().remove(playersTiles.get(2));    // Si 2 joueurs on enlève aussi le 3ème joueur
+            }
+            else {                                              // Si 3 on enlève le deuxième king
+                kingsVbox.get(0).getChildren().remove(kingsImageViews.get(0).get(1));
+                kingsVbox.get(1).getChildren().remove(kingsImageViews.get(1).get(1));
+                kingsVbox.get(2).getChildren().remove(kingsImageViews.get(2).get(1));
+            }
+        }
+        else {
+            kingsVbox.get(0).getChildren().remove(kingsImageViews.get(0).get(1));
+            kingsVbox.get(1).getChildren().remove(kingsImageViews.get(1).get(1));
+            kingsVbox.get(2).getChildren().remove(kingsImageViews.get(2).get(1));
+            kingsVbox.get(2).getChildren().remove(kingsImageViews.get(3).get(1));
+        }
+    }
+
+    private void actualiseKingdom(Kingdom kingdom){
+        for (int x=0; x<5; x++) {
+            for (int y = 0; y < 5; y++) {
+                Cell cell = kingdom.getCells()[y][x];
+                ImageView imageView = cell.getImageView();
+                // Si la cell a une landpiece
+                if (!cell.isEmpty()) {
+                    LandPiece landPiece = cell.getCurrentLandPiece();
+                    imageView.setVisible(true);
+                    imageView.setImage(landPiece.getImage());
+                } else {
+                    imageView.setVisible(false);
                 }
             }
         }
     }
 
-    public void removePlayerTiles(int nbPlayers){
-        if (nbPlayers <= 3){
-            rightPanel.getChildren().remove(fourthPlayerTile);      // Si 2 ou 3 joueurs on enlève le 4ème joueur
-            if (nbPlayers <= 2){
-                leftPanel.getChildren().remove(thirdPlayerTile);    // Si 2 joueurs on enlève aussi le 3ème joueur
-            }
-            else {                                              // Si 3 on enlève le deuxième king
-                firstPlayerKings.getChildren().remove(king12);
-                secondPlayerKings.getChildren().remove(king22);
-                thirdPlayerKings.getChildren().remove(king32);
-            }
-        }
-        else {
-            firstPlayerKings.getChildren().remove(king12);
-            secondPlayerKings.getChildren().remove(king22);
-            thirdPlayerKings.getChildren().remove(king32);
-            fourthPlayerKings.getChildren().remove(king42);
+    private void actualiseKingdoms(Kingdom[] kingdoms){
+        for (int i = 0; i < nbPlayers; i++) {
+            actualiseKingdom(kingdoms[i]);
         }
     }
 }

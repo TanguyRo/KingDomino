@@ -1,5 +1,8 @@
 package DomiNations;
 
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.*;
@@ -66,7 +69,7 @@ public class Game {
         System.out.println("Les joueurs ont bien été créés.");
 
         // Création des royaumes 5x5 pour chaque joueur
-        initialiseKingdoms();
+        //initialiseKingdoms();
         System.out.println("Les " + nbPlayers + " royaumes ont bien été créés.");
 
         /*
@@ -350,32 +353,39 @@ public class Game {
         }
     }
 
-    public void initialiseKingdoms() {
+    public void initialiseKingdoms(ArrayList<ArrayList<ArrayList<ImageView>>> gridCells, ArrayList<Image> castleImages) {
         this.kingdoms = new Kingdom[nbPlayers];
 
         for(int i = 0; i<nbPlayers; i++) {
-            kingdoms[i] = new Kingdom(1,players[i]);	// taille 1 car uniquement le château au départ
-            players[i].setKingdom(kingdoms[i]);
+            Player player = players[i];
+            kingdoms[i] = new Kingdom(1,player);	// taille 1 car uniquement le château au départ
+            player.setKingdom(kingdoms[i]);
+
+            ArrayList<ArrayList<ImageView>> playerGrid = gridCells.get(i);
 
             Cell[][] cells = new Cell[5][5];
 
             for (int x=0; x<5; x++){
                 for (int y=0; y<5; y++){
-                    cells[y][x] = new Cell(new int[] {x,y},true,null);
+                    Cell cell = new Cell(new int[] {x,y},true,null);
+                    cell.setImageView(playerGrid.get(y).get(x));
+                    cells[y][x] = cell;
                 }
             }
 
             // Case du chateau
             LandPiece castle = new LandPiece("Chateau",0);
             castle.setCurrentCell(cells[2][2]);
-            cells[2][2] = new Cell(new int[] {2,2},false, castle);
+            castle.setImage(castleImages.get(player.getColorNumber()-1));
+            cells[2][2].setEmpty(false);
+            cells[2][2].setCurrentLandPiece(castle);
 
             kingdoms[i].setCells(cells);
             kingdoms[i].setCastle(castle);
         }
     }
 
-    public void initialiseDrawPile(int nbPlayers) throws FileNotFoundException {
+    public void initialiseDrawPile(int nbPlayers, ArrayList<ArrayList<Image>> dominosImages) throws FileNotFoundException {
         // scanner va lire le contenu du fichier .csv
         Scanner scanner = new Scanner(new File("dominos.csv"));
         scanner.nextLine();		// On saute la ligne d'en-tête
@@ -396,12 +406,19 @@ public class Game {
         // Création de la pile de dominos
         this.drawPile = new LinkedList<>();
 
+        // Itérateur pour les Image des dominos
+        Iterator<ArrayList<Image>> dominosImagesIterator = dominosImages.iterator();
+
         // Création de tous les dominos et placement dans l'ordre dans la pile drawPile
         for (String line : dominos) {
+            ArrayList<Image> dominoImages = dominosImagesIterator.next();       // On récupère les objets Image des 2 LandPieces du domino
             String[] infosDomino = line.split(",");
+            int dominoNumber = Integer.parseInt(infosDomino[4]);
             LandPiece landPiece1 = new LandPiece(infosDomino[1], Integer.parseInt(infosDomino[0]));
+            landPiece1.setImage(dominoImages.get(0));
             LandPiece landPiece2 = new LandPiece(infosDomino[3], Integer.parseInt(infosDomino[2]));
-            Domino domino = new Domino(landPiece1, landPiece2, Integer.parseInt(infosDomino[4]));
+            landPiece2.setImage(dominoImages.get(1));
+            Domino domino = new Domino(landPiece1, landPiece2, dominoNumber);
             drawPile.add(domino);
         }
 
