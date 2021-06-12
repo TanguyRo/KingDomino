@@ -189,7 +189,7 @@
                                     </Text>
                                     <ImageView fx:id="king11" fitHeight="70.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image fx:id="greenKing" url="@../img/kings/greenKing.png" />
+                                          <Image fx:id="greenKing1" url="@../img/kings/greenKing.png" />
                                        </image>
                                        <VBox.margin>
                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -197,7 +197,7 @@
                                     </ImageView>
                                     <ImageView fx:id="king12" fitHeight="70.0" fitWidth="42.0" layoutX="36.0" layoutY="145.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image url="@../img/kings/greenKing.png" />
+                                          <Image fx:id="greenKing2" url="@../img/kings/greenKing.png" />
                                        </image>
                                        <VBox.margin>
                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -370,7 +370,7 @@
                                  <children>
                                     <ImageView fx:id="king31" fitHeight="70.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image fx:id="blueKing" url="@../img/kings/blueKing.png" />
+                                          <Image fx:id="blueKing1" url="@../img/kings/blueKing.png" />
                                        </image>
                                        <VBox.margin>
                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -378,7 +378,7 @@
                                     </ImageView>
                                     <ImageView fx:id="king32" fitHeight="70.0" fitWidth="42.0" layoutX="36.0" layoutY="145.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image url="@../img/kings/blueKing.png" />
+                                          <Image fx:id="blueKing2" url="@../img/kings/blueKing.png" />
                                        </image>
                                        <VBox.margin>
                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -613,7 +613,7 @@
                                        </VBox.margin></Text>
                                     <ImageView fx:id="king21" fitHeight="70.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image fx:id="yellowKing" url="@../img/kings/yellowKing.png" />
+                                          <Image fx:id="yellowKing1" url="@../img/kings/yellowKing.png" />
                                        </image>
                                        <VBox.margin>
                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -621,7 +621,7 @@
                                     </ImageView>
                                     <ImageView fx:id="king22" fitHeight="70.0" fitWidth="42.0" layoutX="35.0" layoutY="145.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image url="@../img/kings/yellowKing.png" />
+                                          <Image fx:id="yellowKing2" url="@../img/kings/yellowKing.png" />
                                        </image>
                                        <VBox.margin>
                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -794,7 +794,7 @@
                                  <children>
                                     <ImageView fx:id="king41" fitHeight="70.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image fx:id="redKing" url="@../img/kings/redKing.png" />
+                                          <Image fx:id="redKing1" url="@../img/kings/redKing.png" />
                                        </image>
                                        <VBox.margin>
                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -802,7 +802,7 @@
                                     </ImageView>
                                     <ImageView fx:id="king42" fitHeight="70.0" fitWidth="42.0" layoutX="35.0" layoutY="145.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image url="@../img/kings/redKing.png" />
+                                          <Image fx:id="redKing2" url="@../img/kings/redKing.png" />
                                        </image>
                                        <VBox.margin>
                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -1010,11 +1010,35 @@
       </ArrayList>
    </fx:define>
    <fx:define>
+      <ArrayList fx:id="redKings">
+         <fx:reference source="redKing1" />
+         <fx:reference source="redKing2" />
+      </ArrayList>
+   </fx:define>
+   <fx:define>
+      <ArrayList fx:id="yellowKings">
+         <fx:reference source="yellowKing1" />
+         <fx:reference source="yellowKing2" />
+      </ArrayList>
+   </fx:define>
+   <fx:define>
+      <ArrayList fx:id="greenKings">
+         <fx:reference source="greenKing1" />
+         <fx:reference source="greenKing2" />
+      </ArrayList>
+   </fx:define>
+   <fx:define>
+      <ArrayList fx:id="blueKings">
+         <fx:reference source="blueKing1" />
+         <fx:reference source="blueKing2" />
+      </ArrayList>
+   </fx:define>
+   <fx:define>
       <ArrayList fx:id="kingsImages">
-         <fx:reference source="redKing" />
-         <fx:reference source="yellowKing" />
-         <fx:reference source="greenKing" />
-         <fx:reference source="blueKing" />
+         <fx:reference source="redKings" />
+         <fx:reference source="yellowKings" />
+         <fx:reference source="greenKings" />
+         <fx:reference source="blueKings" />
       </ArrayList>
    </fx:define>
    <fx:define>

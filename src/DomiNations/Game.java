@@ -239,7 +239,7 @@ public class Game {
     }
     */
 
-    public void createPlayers() {
+    public void createPlayersAndKings(ArrayList<ArrayList<Image>> kingsImages) {
         //Utilisation d'un dictionnaire pour proposer les couleurs
         String[] colors={"Rose", "Jaune", "Vert", "Bleu"};
         HashMap<String, Integer> colorsToSelect = new HashMap<>();
@@ -293,7 +293,7 @@ public class Game {
             players[i-1] = playerInCreation;
 
             // Création des rois en fonction du nombre de joueurs
-            createKing(playerInCreation, i);
+            createKing(playerInCreation, i, kingsImages.get(i-1));
         }
         // Noms et couleurs des NPC
         for(int i = nbPlayers-nbNPC+1; i<=nbPlayers; i++) {
@@ -308,24 +308,24 @@ public class Game {
             players[i-1] = playerInCreation;
 
             // Création des rois en fonction du nombre de joueurs
-            createKing(playerInCreation, i);
+            createKing(playerInCreation, i, kingsImages.get(i-1));
         }
     }
 
-    // Fonction de base utilisée pour créer les kings dans createPlayers
-    private void createKing(Player playerInCreation, int i){
+    // Fonction de base utilisée pour créer les kings dans createPlayersAndKings
+    private void createKing(Player playerInCreation, int i, ArrayList<Image> kingsImagesOfPlayer){
         if (nbPlayers==3 || nbPlayers==4){
-            kings[i-1] = new King(players[i-1]);
+            King onlyKing = new King(players[i-1]);
+            onlyKing.setImage(kingsImagesOfPlayer.get(0));
+            kings[i-1] = onlyKing;
         }
         else if (nbPlayers == 2){
-            if (i==1){
-                kings[0] = new King(playerInCreation);
-                kings[1] = new King(playerInCreation);
-            }
-            else {
-                kings[2] = new King(playerInCreation);
-                kings[3] = new King(playerInCreation);
-            }
+            King firstKing = new King(playerInCreation);
+            firstKing.setImage(kingsImagesOfPlayer.get(0));
+            kings[2*i-2] = firstKing;                           // 0 pour le joueur 1 et 3 pour le joueur 2
+            King secondKing = new King(playerInCreation);
+            secondKing.setImage(kingsImagesOfPlayer.get(1));
+            kings[2*i-1] = secondKing;                          // 1 pour le joueur 1 et 2 pour le joueur 2
         }
     }
 

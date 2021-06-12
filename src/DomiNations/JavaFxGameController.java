@@ -48,9 +48,9 @@ public class JavaFxGameController {
     @FXML
     private ArrayList<VBox> kingsVbox;
 
-    // Images des 4 Kings
+    // Images des Kings (2 par joueur)
     @FXML
-    private ArrayList<Image> kingsImages;
+    private ArrayList<ArrayList<Image>> kingsImages;
 
     // ImageView des Kings (2 spots par joueur)
     @FXML
@@ -85,7 +85,7 @@ public class JavaFxGameController {
     @FXML
     private void initialize() {
         // Création des joueurs
-        createPlayers();
+        createPlayersAndKings();
 
         // Création des royaumes 5x5 pour chaque joueur
         initialiseKingdoms();
@@ -108,8 +108,8 @@ public class JavaFxGameController {
         });
     }
 
-    private void createPlayers(){
-        game.createPlayers();
+    private void createPlayersAndKings(){
+        game.createPlayersAndKings(kingsImages);
         nbPlayers = game.getNbPlayers();        // On actualise
         players = game.getPlayers();
         nbKings = game.getNbKings();
@@ -143,8 +143,9 @@ public class JavaFxGameController {
 
             // Kings color change :
             ArrayList<ImageView> playerKingsImageViews = kingsImageViews.get(i);
-            for (ImageView imageView: playerKingsImageViews){
-                imageView.setImage(kingsImages.get(playerColor.getNumber()-1));
+            ArrayList<Image> kingsImagesOfPlayer = kingsImages.get(playerColor.getNumber()-1);
+            for (int j=0; j<playerKingsImageViews.size(); j++){
+                playerKingsImageViews.get(j).setImage(kingsImagesOfPlayer.get(j));
             }
         }
     }
@@ -197,4 +198,5 @@ public class JavaFxGameController {
         game.initialiseDrawPile(nbPlayers, dominosImages);
         drawPile = game.getDrawPile();
     }
+
 }
