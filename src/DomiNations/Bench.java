@@ -16,6 +16,10 @@ public class Bench {
         this.secondLane = new Domino[size];
     }
 
+    public int getSize() {
+        return size;
+    }
+
     public Domino[] getLane(int lane){
         return (lane==1 ? firstLane : secondLane);
     }

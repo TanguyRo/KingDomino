@@ -411,7 +411,7 @@
                      </opaqueInsets></HBox>
                   <VBox fx:id="benchVBox" alignment="CENTER" prefHeight="540.0" prefWidth="460.0" style="-fx-border-color: black;">
                      <children>
-                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="460.0">
+                        <HBox alignment="CENTER" prefHeight="90.0" prefWidth="460.0">
                            <children>
                               <ImageView fx:id="l1_d1_king" fitHeight="70.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
                                  <HBox.margin>
@@ -457,7 +457,27 @@
                               </ImageView>
                            </children>
                         </HBox>
-                        <HBox alignment="CENTER" layoutX="11.0" layoutY="215.0" prefHeight="100.0" prefWidth="460.0">
+                        <HBox alignment="CENTER" prefHeight="30.0" prefWidth="200.0">
+                           <children>
+                              <HBox alignment="TOP_CENTER" prefHeight="30.0" prefWidth="160.0">
+                                 <children>
+                                    <Text fx:id="l1_d1_number" strokeType="OUTSIDE" strokeWidth="0.0" text="00" />
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets right="10.0" />
+                                 </HBox.margin>
+                              </HBox>
+                              <HBox alignment="TOP_CENTER" layoutX="159.0" layoutY="10.0" prefHeight="30.0" prefWidth="160.0">
+                                 <children>
+                                    <Text fx:id="l2_d1_number" strokeType="OUTSIDE" strokeWidth="0.0" text="00" />
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets left="10.0" />
+                                 </HBox.margin>
+                              </HBox>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" layoutX="11.0" layoutY="215.0" prefHeight="90.0" prefWidth="460.0">
                            <children>
                               <ImageView fx:id="l1_d2_king" fitHeight="70.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
                                  <HBox.margin>
@@ -503,7 +523,27 @@
                               </ImageView>
                            </children>
                         </HBox>
-                        <HBox alignment="CENTER" layoutX="11.0" layoutY="280.0" prefHeight="100.0" prefWidth="460.0">
+                        <HBox alignment="CENTER" layoutX="11.0" layoutY="175.0" prefHeight="30.0" prefWidth="200.0">
+                           <children>
+                              <HBox alignment="TOP_CENTER" prefHeight="30.0" prefWidth="160.0">
+                                 <children>
+                                    <Text fx:id="l1_d2_number" strokeType="OUTSIDE" strokeWidth="0.0" text="00" />
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets right="10.0" />
+                                 </HBox.margin>
+                              </HBox>
+                              <HBox alignment="TOP_CENTER" layoutX="159.0" layoutY="10.0" prefHeight="30.0" prefWidth="160.0">
+                                 <children>
+                                    <Text fx:id="l2_d2_number" strokeType="OUTSIDE" strokeWidth="0.0" text="00" />
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets left="10.0" />
+                                 </HBox.margin>
+                              </HBox>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" layoutX="11.0" layoutY="280.0" prefHeight="90.0" prefWidth="460.0">
                            <children>
                               <ImageView fx:id="l1_d3_king" fitHeight="70.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
                                  <HBox.margin>
@@ -549,7 +589,27 @@
                               </ImageView>
                            </children>
                         </HBox>
-                        <HBox fx:id="lastBenchRow" alignment="CENTER" layoutX="11.0" layoutY="345.0" prefHeight="100.0" prefWidth="460.0">
+                        <HBox alignment="CENTER" layoutX="11.0" layoutY="475.0" prefHeight="30.0" prefWidth="200.0">
+                           <children>
+                              <HBox alignment="TOP_CENTER" prefHeight="30.0" prefWidth="160.0">
+                                 <children>
+                                    <Text fx:id="l1_d3_number" strokeType="OUTSIDE" strokeWidth="0.0" text="00" />
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets right="10.0" />
+                                 </HBox.margin>
+                              </HBox>
+                              <HBox alignment="TOP_CENTER" layoutX="159.0" layoutY="10.0" prefHeight="30.0" prefWidth="160.0">
+                                 <children>
+                                    <Text fx:id="l2_d3_number" strokeType="OUTSIDE" strokeWidth="0.0" text="00" />
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets left="10.0" />
+                                 </HBox.margin>
+                              </HBox>
+                           </children>
+                        </HBox>
+                        <HBox fx:id="lastBenchRow" alignment="CENTER" layoutX="11.0" layoutY="345.0" prefHeight="90.0" prefWidth="460.0">
                            <children>
                               <ImageView fx:id="l1_d4_king" fitHeight="70.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
                                  <HBox.margin>
@@ -595,6 +655,26 @@
                               </ImageView>
                            </children>
                         </HBox>
+                        <HBox alignment="CENTER" layoutX="11.0" layoutY="280.0" prefHeight="30.0" prefWidth="200.0">
+                           <children>
+                              <HBox alignment="TOP_CENTER" prefHeight="30.0" prefWidth="160.0">
+                                 <children>
+                                    <Text fx:id="l1_d4_number" strokeType="OUTSIDE" strokeWidth="0.0" text="00" />
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets right="10.0" />
+                                 </HBox.margin>
+                              </HBox>
+                              <HBox alignment="TOP_CENTER" layoutX="159.0" layoutY="10.0" prefHeight="30.0" prefWidth="160.0">
+                                 <children>
+                                    <Text fx:id="l2_d4_number" strokeType="OUTSIDE" strokeWidth="0.0" text="00" />
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets left="10.0" />
+                                 </HBox.margin>
+                              </HBox>
+                           </children>
+                        </HBox>
                      </children></VBox>
                </children>
             </VBox>
@@ -610,7 +690,8 @@
                                     <Text fx:id="playerName2" boundsType="VISUAL" nodeOrientation="LEFT_TO_RIGHT" strokeType="OUTSIDE" strokeWidth="0.0" text="Joueur" textAlignment="CENTER" textOrigin="TOP" wrappingWidth="81.12841796875">
                                        <VBox.margin>
                                           <Insets bottom="60.0" />
-                                       </VBox.margin></Text>
+                                       </VBox.margin>
+                                    </Text>
                                     <ImageView fx:id="king21" fitHeight="70.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image fx:id="yellowKing1" url="@../img/kings/yellowKing.png" />
@@ -811,7 +892,8 @@
                                     <Text fx:id="playerName4" boundsType="VISUAL" nodeOrientation="LEFT_TO_RIGHT" strokeType="OUTSIDE" strokeWidth="0.0" text="Joueur" textAlignment="CENTER" textOrigin="TOP" wrappingWidth="81.12841796875">
                                        <VBox.margin>
                                           <Insets top="60.0" />
-                                       </VBox.margin></Text>
+                                       </VBox.margin>
+                                    </Text>
                                  </children>
                                  <padding>
                                     <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
@@ -1735,6 +1817,28 @@
       <ArrayList fx:id="benchKingsImageViews">
          <fx:reference source="firstLaneKings" />
          <fx:reference source="secondLaneKings" />
+      </ArrayList>
+   </fx:define>
+   <fx:define>
+      <ArrayList fx:id="firstLaneNumbers">
+         <fx:reference source="l1_d1_number" />
+         <fx:reference source="l1_d2_number" />
+         <fx:reference source="l1_d3_number" />
+         <fx:reference source="l1_d4_number" />
+      </ArrayList>
+   </fx:define>
+   <fx:define>
+      <ArrayList fx:id="secondLaneNumbers">
+         <fx:reference source="l2_d1_number" />
+         <fx:reference source="l2_d2_number" />
+         <fx:reference source="l2_d3_number" />
+         <fx:reference source="l2_d4_number" />
+      </ArrayList>
+   </fx:define>
+   <fx:define>
+      <ArrayList fx:id="benchDominoNumbersText">
+         <fx:reference source="firstLaneNumbers" />
+         <fx:reference source="secondLaneNumbers" />
       </ArrayList>
    </fx:define>
 </GridPane>

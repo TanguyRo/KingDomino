@@ -8,8 +8,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.LinkedList;
+import java.util.*;
 
 public class JavaFxGameController {
     private final Game game = new Game(true,true);
@@ -82,6 +81,10 @@ public class JavaFxGameController {
     @FXML
     private ArrayList<ArrayList<ImageView>> benchKingsImageViews;
 
+    // Text des numéros des dominos sur le banc
+    @FXML
+    private ArrayList<ArrayList<Text>> benchDominoNumbersText;
+
     @FXML
     private void initialize() {
         // Création des joueurs
@@ -102,10 +105,10 @@ public class JavaFxGameController {
             e.printStackTrace();
         }
 
-        // Handle Button event.
-        startButton.setOnAction((event) -> {
-            System.out.println("Clic sur le bouton");
-        });
+        // Création et remplissage avec les premiers dominos
+        bench = new Bench(nbKings);
+        bench.drawFirstLane(drawPile);        // On rempli la lane de gauche pour la première fois en piochant au hasard des dominos
+        actualiseBench();
     }
 
     private void createPlayersAndKings(){
@@ -197,6 +200,42 @@ public class JavaFxGameController {
     public void initialiseDrawPile() throws FileNotFoundException {
         game.initialiseDrawPile(nbPlayers, dominosImages);
         drawPile = game.getDrawPile();
+    }
+
+    private void actualiseBench(){
+        Domino[][] twoLanes = new Domino[][]{bench.getLane(1), bench.getLane(2)};
+        for (int lane=0; lane<=1; lane++){
+            for (int row = 0; row < bench.getSize(); row++) {
+                Domino domino = twoLanes[lane][row];
+                ArrayList<ImageView> landPiecesImageViews = benchDominosImageViews.get(lane).get(row);
+                ImageView sideKingImageView = benchKingsImageViews.get(lane).get(row);
+                Text dominoNumberText = benchDominoNumbersText.get(lane).get(row);
+                if (domino != null){
+                    // On affiche le numéro du domino
+                    dominoNumberText.setText(String.valueOf(domino.getNumber()));
+                    // On affiche les 2 LandPieces
+                    for (int i=0; i<=1; i++){
+                        ImageView imageView = landPiecesImageViews.get(i);
+                        imageView.setVisible(true);
+                        imageView.setImage(domino.getLandPiece(i+1).getImage());
+                    }
+                    // On affiche le roi s'il y a
+                    King king = domino.getKing();
+                    if (king != null){
+                        sideKingImageView.setVisible(true);
+                        sideKingImageView.setImage(king.getImage());
+                    }
+                    else{
+                        sideKingImageView.setVisible(false);
+                    }
+                }
+                else {
+                    dominoNumberText.setText("");
+                    landPiecesImageViews.get(0).setVisible(false);
+                    landPiecesImageViews.get(1).setVisible(false);
+                }
+            }
+        }
     }
 
 }
