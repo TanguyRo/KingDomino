@@ -7,7 +7,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
-
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -65,9 +64,23 @@ public class JavaFxGameController {
     @FXML
     private ArrayList<ArrayList<Image>> dominosImages;
 
-    // ImageView des cells des grids
+    // ImageViews des cells des grids
     @FXML
     private ArrayList<ArrayList<ArrayList<ImageView>>> gridCells;
+
+    // Dernière rangée du bench à enlever si 3 joueurs
+    @FXML
+    private VBox benchVBox;
+    @FXML
+    private HBox lastBenchRow;
+
+    // ImageViews des cells du bench
+    @FXML
+    private ArrayList<ArrayList<ArrayList<ImageView>>> benchDominosImageViews;
+
+    // ImageViews des kings du bench
+    @FXML
+    private ArrayList<ArrayList<ImageView>> benchKingsImageViews;
 
     @FXML
     private void initialize() {
@@ -78,8 +91,8 @@ public class JavaFxGameController {
         initialiseKingdoms();
 
         // Paramètres d'affichage en fonction des joueurs (nombre de tuiles, noms et couleurs)
-        setPlayersParametersOnInterface(players);
-        removePlayerTiles(nbPlayers);
+        setPlayersParametersOnInterface();
+        removePlayerTilesAndBenchRow();
 
         // Création de la pioche, remplie du bon nombre de dominos et mélangée
         try {
@@ -114,7 +127,7 @@ public class JavaFxGameController {
         System.out.println("Les " + nbPlayers + " royaumes ont bien été créés.");
     }
 
-    private void setPlayersParametersOnInterface(Player[] players){
+    private void setPlayersParametersOnInterface(){
         for (int i = 0; i < players.length; i++) {
             Player player = players[i];
             Color playerColor = player.getColor();
@@ -136,16 +149,17 @@ public class JavaFxGameController {
         }
     }
 
-    private void removePlayerTiles(int nbPlayers){
+    private void removePlayerTilesAndBenchRow(){
         if (nbPlayers <= 3){
             rightPanel.getChildren().remove(playersTiles.get(3));      // Si 2 ou 3 joueurs on enlève le 4ème joueur
             if (nbPlayers <= 2){
                 leftPanel.getChildren().remove(playersTiles.get(2));    // Si 2 joueurs on enlève aussi le 3ème joueur
             }
-            else {                                              // Si 3 on enlève le deuxième king
+            else {                                              // Si 3 on enlève le deuxième king et la dernière rangée du banc
                 kingsVbox.get(0).getChildren().remove(kingsImageViews.get(0).get(1));
                 kingsVbox.get(1).getChildren().remove(kingsImageViews.get(1).get(1));
                 kingsVbox.get(2).getChildren().remove(kingsImageViews.get(2).get(1));
+                benchVBox.getChildren().remove(lastBenchRow);
             }
         }
         else {
