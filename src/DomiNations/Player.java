@@ -33,6 +33,10 @@ public class Player {
         return color;
     }
 
+    public int getColorNumber() {
+        return color.getNumber();
+    }
+
     public String getColorName() {
         return color.getName();
     }
