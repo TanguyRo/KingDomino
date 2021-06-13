@@ -202,7 +202,7 @@ public class JavaFxGameController {
         drawPile = game.getDrawPile();
     }
 
-    private void actualiseBench(){
+    public void actualiseBench(){
         Domino[][] twoLanes = new Domino[][]{bench.getLane(1), bench.getLane(2)};
         for (int lane=0; lane<=1; lane++){
             for (int row = 0; row < bench.getSize(); row++) {
@@ -238,4 +238,54 @@ public class JavaFxGameController {
         }
     }
 
+    public void chooseDominosFirstRound(){
+        LinkedHashMap<Integer, Domino> dominosToSelect = new LinkedHashMap<>();
+        LinkedList<King> kingsToPlay = new LinkedList<King>(Arrays.asList(kings));   // On récupère les rois
+
+        // Au premier Tour l'ordre est au hasard -> mélange des rois.
+        Collections.shuffle(kingsToPlay);
+
+        // HashMap des dominos disponibles sur la lane
+        int[] dominosValues = bench.getDominosValues(1);
+        Domino[] lane1 = bench.getLane(1);
+        for (int j=1; j<=kings.length; j++){
+            dominosToSelect.put(dominosValues[j-1], lane1[j-1]);
+        }
+
+        // Pour chaque roi le joueur correspondant choisit un domino.
+        for (int i=1; i<=nbKings; i++){
+
+            actualiseBench();
+
+            // Premier roi de la liste précédement mélangée puis le suivant à la prochaine boucle.
+            King king = kingsToPlay.getFirst();
+            Player currentPlayer = king.getPlayer();
+            if (kingsToPlay.size()>1){
+                System.out.println(currentPlayer.getName() + " " + currentPlayer.getColorEmoji() + " a été sélectionné au hasard.");
+            }
+            else {
+                System.out.println("Il ne reste plus que " + currentPlayer.getName() + " " + currentPlayer.getColorEmoji() + ".");
+            }
+
+            // Si on a le choix entre les dominos, on demande l'user input
+            if (dominosToSelect.size()>1) {
+                int dominoNumber = currentPlayer.chooseDominoNumber(dominosToSelect);     // On choisit le numéro du domino (input de l'user si vrai ou choix aléatoire si NPC)
+                Domino domino = dominosToSelect.get(dominoNumber);
+                domino.setKing(king);                                               // On pose le King sur le domino
+                king.setCurrentDomino(domino);                                      // On update le domino sur le King
+                dominosToSelect.remove(dominoNumber);                               // On l'enlève des dominos à sélectionner
+            }
+            // S'il ne reste qu'un domino on lui attribue automatiquement
+            else {
+                int dominoNumber = (int) dominosToSelect.keySet().toArray()[0];     // On prend le domino restant
+                Domino domino = dominosToSelect.get(dominoNumber);
+                domino.setKing(king);                                               // On pose le King sur le domino
+                king.setCurrentDomino(domino);                                      // On update le domino sur le King
+                System.out.println("Le domino " + dominoNumber + " : " +domino.toString() + " est attribué automatiquement à " + currentPlayer.getName() + " " + currentPlayer.getColorEmoji() + ".");
+                dominosToSelect.remove(dominoNumber);
+            }
+
+            kingsToPlay.removeFirst();
+        }
+    }
 }
