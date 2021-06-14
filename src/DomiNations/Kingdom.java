@@ -1,5 +1,7 @@
 package DomiNations;
 
+import javafx.scene.image.ImageView;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -44,6 +46,15 @@ public class Kingdom {
     }
 
     public void move(String direction){
+        // On sauvegarde les ImageView des différentes cases
+        ArrayList<ArrayList<ImageView>> playerGrid = new ArrayList<ArrayList<ImageView>>();
+        for (int y=0; y<5; y++){
+            ArrayList<ImageView> playerRow = new ArrayList<ImageView>();
+            for (int x=0; x<5; x++){
+                playerRow.add(cells[y][x].getImageView());
+            }
+            playerGrid.add(playerRow);
+        }
 
         Cell[][] newCells = new Cell[5][5];
         switch (direction) {
@@ -105,6 +116,13 @@ public class Kingdom {
                 break;
         }
         cells = newCells;		// on remplace par le nouveau "board"
+
+        // On remet les ImageView
+        for (int y=0; y<5; y++){
+            for (int x=0; x<5; x++){
+                cells[y][x].setImageView(playerGrid.get(y).get(x));
+            }
+        }
     }
 
     public void placeDomino(Domino domino, int orientation, int[] upLeftPosition){

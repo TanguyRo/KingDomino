@@ -2,6 +2,7 @@ package DomiNations;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -98,6 +99,14 @@ public class JavaFxGameController {
     @FXML
     private ArrayList<ArrayList<Text>> benchDominoNumbersText;
 
+    // Boutons de déplacement
+    @FXML
+    private ArrayList<ArrayList<Button>> moveButtons;
+
+    // Affichage du text
+    @FXML
+    private Label textPrompt;
+
     @FXML
     private void initialize() {
         // Création des joueurs
@@ -122,6 +131,8 @@ public class JavaFxGameController {
         bench = new Bench(nbKings);
         bench.drawFirstLane(drawPile);        // On rempli la lane de gauche pour la première fois en piochant au hasard des dominos
         actualiseBench();
+
+        setButtonsEvents();
     }
 
     private void createPlayersAndKings(){
@@ -264,6 +275,44 @@ public class JavaFxGameController {
                     landPiecesImageViews.get(1).setVisible(false);
                 }
             }
+        }
+    }
+
+    public void setButtonsEvents(){
+        for (int i=0; i<nbPlayers; i++){
+            ArrayList<Button> playerButtons = moveButtons.get(i);
+            Kingdom kingdom = kingdoms[i];
+            for (int j=0; j<4; j++) {
+                Button button = playerButtons.get(j);
+                int finalJ = j;
+                int finalI = i;
+                button.setOnAction((event) -> {
+                    try {
+                        switch (finalJ) {
+                            case 0 -> {
+                                kingdom.move("up");
+                                textPrompt.setText("Le royaume " + Integer.toString(finalI +1) + " a été déplacé vers le haut.");
+                            }
+                            case 1 -> {
+                                kingdom.move("right");
+                                textPrompt.setText("Le royaume " + Integer.toString(finalI +1) + " a été déplacé vers la droite.");
+                            }
+                            case 2 -> {
+                                kingdom.move("down");
+                                textPrompt.setText("Le royaume " + Integer.toString(finalI +1) + " a été déplacé vers le bas.");
+                            }
+                            case 3 -> {
+                                kingdom.move("left");
+                                textPrompt.setText("Le royaume " + Integer.toString(finalI +1) + " a été déplacé vers la gauche.");
+                            }
+                        }
+                        actualiseKingdom(kingdom);
+                    } catch (Exception e){
+                        textPrompt.setText(e.getMessage());
+                    }
+                });
+            }
+
         }
     }
 
