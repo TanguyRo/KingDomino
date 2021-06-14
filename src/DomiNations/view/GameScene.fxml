@@ -15,7 +15,7 @@
 <?import javafx.scene.text.Text?>
 
 <?import java.util.ArrayList?>
-<GridPane alignment="center" hgap="10" prefHeight="720.0" prefWidth="1280.0" vgap="10" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="DomiNations.JavaFxGameController">
+<GridPane alignment="center" hgap="10" prefHeight="720.0" prefWidth="1280.0" vgap="10" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="DomiNations.controller.JavaFxGameController">
    <columnConstraints>
       <ColumnConstraints />
    </columnConstraints>
@@ -27,17 +27,17 @@
          <children>
             <ImageView fx:id="twoPlayersBackground" fitHeight="720.0" fitWidth="1280.0" preserveRatio="true">
                <image>
-                  <Image url="@../img/background/2Players.jpg" />
+                  <Image url="@../../ressources/img/background/2Players.jpg" />
                </image>
             </ImageView>
             <ImageView fx:id="threePlayersBackground" fitHeight="720.0" fitWidth="1280.0" preserveRatio="true">
                <image>
-                  <Image url="@../img/background/3Players.jpg" />
+                  <Image url="@../../ressources/img/background/3Players.jpg" />
                </image>
             </ImageView>
             <ImageView fx:id="fourPlayersBackground" fitHeight="720.0" fitWidth="1280.0" preserveRatio="true">
                <image>
-                  <Image url="@../img/background/4Players.jpg" />
+                  <Image url="@../../ressources/img/background/4Players.jpg" />
                </image>
             </ImageView>
             <VBox fx:id="leftPanel" alignment="CENTER_LEFT" prefHeight="720.0" prefWidth="410.0">
@@ -67,127 +67,127 @@
                                        <children>
                                           <ImageView fx:id="grid1_cell00" fitHeight="53.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="0" GridPane.rowIndex="0">
                                              <image>
-                                                <Image fx:id="tile11" url="@../img/tiles/11.jpg" />
+                                                <Image fx:id="tile11" url="@../../ressources/img/tiles/11.jpg" />
                                              </image>
                                           </ImageView>
                                           <ImageView fx:id="grid1_cell10" fitHeight="53.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="0">
                                              <image>
-                                                <Image fx:id="tile12" url="@../img/tiles/12.jpg" />
+                                                <Image fx:id="tile12" url="@../../ressources/img/tiles/12.jpg" />
                                              </image>
                                           </ImageView>
                                           <ImageView fx:id="grid1_cell20" fitHeight="53.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="0">
                                              <image>
-                                                <Image fx:id="tile21" url="@../img/tiles/21.jpg" />
+                                                <Image fx:id="tile21" url="@../../ressources/img/tiles/21.jpg" />
                                              </image>
                                           </ImageView>
                                           <ImageView fx:id="grid1_cell30" fitHeight="53.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="0">
                                              <image>
-                                                <Image fx:id="tile22" url="@../img/tiles/22.jpg" />
+                                                <Image fx:id="tile22" url="@../../ressources/img/tiles/22.jpg" />
                                              </image>
                                           </ImageView>
                                           <ImageView fx:id="grid1_cell40" fitHeight="53.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="0">
                                              <image>
-                                                <Image fx:id="tile31" url="@../img/tiles/31.jpg" />
+                                                <Image fx:id="tile31" url="@../../ressources/img/tiles/31.jpg" />
                                              </image>
                                           </ImageView>
                                           <ImageView fx:id="grid1_cell01" fitHeight="53.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="0" GridPane.rowIndex="1">
                                              <image>
-                                                <Image fx:id="tile32" url="@../img/tiles/32.jpg" />
+                                                <Image fx:id="tile32" url="@../../ressources/img/tiles/32.jpg" />
                                              </image>
                                           </ImageView>
                                           <ImageView fx:id="grid1_cell11" fitHeight="53.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                              <image>
-                                                <Image fx:id="tile41" url="@../img/tiles/41.jpg" />
+                                                <Image fx:id="tile41" url="@../../ressources/img/tiles/41.jpg" />
                                              </image>
                                           </ImageView>
                                           <ImageView fx:id="grid1_cell21" fitHeight="53.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
                                              <image>
-                                                <Image fx:id="tile42" url="@../img/tiles/42.jpg" />
+                                                <Image fx:id="tile42" url="@../../ressources/img/tiles/42.jpg" />
                                              </image>
                                           </ImageView>
                                           <ImageView fx:id="grid1_cell31" fitHeight="53.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="1">
                                              <image>
-                                                <Image fx:id="tile51" url="@../img/tiles/51.jpg" />
+                                                <Image fx:id="tile51" url="@../../ressources/img/tiles/51.jpg" />
                                              </image>
                                           </ImageView>
                                           <ImageView fx:id="grid1_cell41" fitHeight="53.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="1">
                                              <image>
-                                                <Image fx:id="tile52" url="@../img/tiles/52.jpg" />
+                                                <Image fx:id="tile52" url="@../../ressources/img/tiles/52.jpg" />
                                              </image>
                                           </ImageView>
                                           <ImageView fx:id="grid1_cell02" fitHeight="53.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="0" GridPane.rowIndex="2">
                                              <image>
-                                                <Image fx:id="tile61" url="@../img/tiles/61.jpg" />
+                                                <Image fx:id="tile61" url="@../../ressources/img/tiles/61.jpg" />
                                              </image>
                                           </ImageView>
                                           <ImageView fx:id="grid1_cell12" fitHeight="53.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="2">
                                              <image>
-                                                <Image fx:id="tile62" url="@../img/tiles/62.jpg" />
+                                                <Image fx:id="tile62" url="@../../ressources/img/tiles/62.jpg" />
                                              </image>
                                           </ImageView>
                                           <ImageView fx:id="grid1_cell22" fitHeight="53.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="2">
                                              <image>
-                                                <Image fx:id="tile71" url="@../img/tiles/71.jpg" />
+                                                <Image fx:id="tile71" url="@../../ressources/img/tiles/71.jpg" />
                                              </image>
                                           </ImageView>
                                           <ImageView fx:id="grid1_cell32" fitHeight="53.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="2">
                                              <image>
-                                                <Image fx:id="tile72" url="@../img/tiles/72.jpg" />
+                                                <Image fx:id="tile72" url="@../../ressources/img/tiles/72.jpg" />
                                              </image>
                                           </ImageView>
                                           <ImageView fx:id="grid1_cell42" fitHeight="53.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="2">
                                              <image>
-                                                <Image fx:id="tile81" url="@../img/tiles/81.jpg" />
+                                                <Image fx:id="tile81" url="@../../ressources/img/tiles/81.jpg" />
                                              </image>
                                           </ImageView>
                                           <ImageView fx:id="grid1_cell03" fitHeight="53.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="0" GridPane.rowIndex="3">
                                              <image>
-                                                <Image fx:id="tile82" url="@../img/tiles/82.jpg" />
+                                                <Image fx:id="tile82" url="@../../ressources/img/tiles/82.jpg" />
                                              </image>
                                           </ImageView>
                                           <ImageView fx:id="grid1_cell13" fitHeight="53.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="3">
                                              <image>
-                                                <Image fx:id="tile91" url="@../img/tiles/91.jpg" />
+                                                <Image fx:id="tile91" url="@../../ressources/img/tiles/91.jpg" />
                                              </image>
                                           </ImageView>
                                           <ImageView fx:id="grid1_cell23" fitHeight="53.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="3">
                                              <image>
-                                                <Image fx:id="tile92" url="@../img/tiles/92.jpg" />
+                                                <Image fx:id="tile92" url="@../../ressources/img/tiles/92.jpg" />
                                              </image>
                                           </ImageView>
                                           <ImageView fx:id="grid1_cell33" fitHeight="53.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="3">
                                              <image>
-                                                <Image fx:id="tile101" url="@../img/tiles/101.jpg" />
+                                                <Image fx:id="tile101" url="@../../ressources/img/tiles/101.jpg" />
                                              </image>
                                           </ImageView>
                                           <ImageView fx:id="grid1_cell43" fitHeight="53.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="3">
                                              <image>
-                                                <Image fx:id="tile102" url="@../img/tiles/102.jpg" />
+                                                <Image fx:id="tile102" url="@../../ressources/img/tiles/102.jpg" />
                                              </image>
                                           </ImageView>
                                           <ImageView fx:id="grid1_cell04" fitHeight="53.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="0" GridPane.rowIndex="4">
                                              <image>
-                                                <Image fx:id="tile111" url="@../img/tiles/111.jpg" />
+                                                <Image fx:id="tile111" url="@../../ressources/img/tiles/111.jpg" />
                                              </image>
                                           </ImageView>
                                           <ImageView fx:id="grid1_cell14" fitHeight="53.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="4">
                                              <image>
-                                                <Image fx:id="tile112" url="@../img/tiles/112.jpg" />
+                                                <Image fx:id="tile112" url="@../../ressources/img/tiles/112.jpg" />
                                              </image>
                                           </ImageView>
                                           <ImageView fx:id="grid1_cell24" fitHeight="53.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="4">
                                              <image>
-                                                <Image fx:id="tile121" url="@../img/tiles/121.jpg" />
+                                                <Image fx:id="tile121" url="@../../ressources/img/tiles/121.jpg" />
                                              </image>
                                           </ImageView>
                                           <ImageView fx:id="grid1_cell34" fitHeight="53.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="4">
                                              <image>
-                                                <Image fx:id="tile122" url="@../img/tiles/122.jpg" />
+                                                <Image fx:id="tile122" url="@../../ressources/img/tiles/122.jpg" />
                                              </image>
                                           </ImageView>
                                           <ImageView fx:id="grid1_cell44" fitHeight="53.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="4">
                                              <image>
-                                                <Image fx:id="tile131" url="@../img/tiles/131.jpg" />
+                                                <Image fx:id="tile131" url="@../../ressources/img/tiles/131.jpg" />
                                              </image>
                                           </ImageView>
                                        </children>
@@ -206,7 +206,7 @@
                                     </Text>
                                     <ImageView fx:id="king11" fitHeight="70.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image fx:id="greenKing1" url="@../img/kings/greenKing.png" />
+                                          <Image fx:id="greenKing1" url="@../../ressources/img/kings/greenKing.png" />
                                        </image>
                                        <VBox.margin>
                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -214,7 +214,7 @@
                                     </ImageView>
                                     <ImageView fx:id="king12" fitHeight="70.0" fitWidth="42.0" layoutX="36.0" layoutY="145.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image fx:id="greenKing2" url="@../img/kings/greenKing.png" />
+                                          <Image fx:id="greenKing2" url="@../../ressources/img/kings/greenKing.png" />
                                        </image>
                                        <VBox.margin>
                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -287,127 +287,127 @@
                                        <children>
                                           <ImageView fx:id="grid3_cell00" fitHeight="53.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="0" GridPane.rowIndex="0">
                                              <image>
-                                                <Image fx:id="tile261" url="@../img/tiles/261.jpg" />
+                                                <Image fx:id="tile261" url="@../../ressources/img/tiles/261.jpg" />
                                              </image>
                                           </ImageView>
                                           <ImageView fx:id="grid3_cell10" fitHeight="53.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="0">
                                              <image>
-                                                <Image fx:id="tile262" url="@../img/tiles/262.jpg" />
+                                                <Image fx:id="tile262" url="@../../ressources/img/tiles/262.jpg" />
                                              </image>
                                           </ImageView>
                                           <ImageView fx:id="grid3_cell20" fitHeight="53.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="0">
                                              <image>
-                                                <Image fx:id="tile271" url="@../img/tiles/271.jpg" />
+                                                <Image fx:id="tile271" url="@../../ressources/img/tiles/271.jpg" />
                                              </image>
                                           </ImageView>
                                           <ImageView fx:id="grid3_cell30" fitHeight="53.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="0">
                                              <image>
-                                                <Image fx:id="tile272" url="@../img/tiles/272.jpg" />
+                                                <Image fx:id="tile272" url="@../../ressources/img/tiles/272.jpg" />
                                              </image>
                                           </ImageView>
                                           <ImageView fx:id="grid3_cell40" fitHeight="53.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="0">
                                              <image>
-                                                <Image fx:id="tile281" url="@../img/tiles/281.jpg" />
+                                                <Image fx:id="tile281" url="@../../ressources/img/tiles/281.jpg" />
                                              </image>
                                           </ImageView>
                                           <ImageView fx:id="grid3_cell01" fitHeight="53.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="0" GridPane.rowIndex="1">
                                              <image>
-                                                <Image fx:id="tile282" url="@../img/tiles/282.jpg" />
+                                                <Image fx:id="tile282" url="@../../ressources/img/tiles/282.jpg" />
                                              </image>
                                           </ImageView>
                                           <ImageView fx:id="grid3_cell11" fitHeight="53.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                              <image>
-                                                <Image fx:id="tile291" url="@../img/tiles/291.jpg" />
+                                                <Image fx:id="tile291" url="@../../ressources/img/tiles/291.jpg" />
                                              </image>
                                           </ImageView>
                                           <ImageView fx:id="grid3_cell21" fitHeight="53.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
                                              <image>
-                                                <Image fx:id="tile292" url="@../img/tiles/292.jpg" />
+                                                <Image fx:id="tile292" url="@../../ressources/img/tiles/292.jpg" />
                                              </image>
                                           </ImageView>
                                           <ImageView fx:id="grid3_cell31" fitHeight="53.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="1">
                                              <image>
-                                                <Image fx:id="tile301" url="@../img/tiles/301.jpg" />
+                                                <Image fx:id="tile301" url="@../../ressources/img/tiles/301.jpg" />
                                              </image>
                                           </ImageView>
                                           <ImageView fx:id="grid3_cell41" fitHeight="53.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="1">
                                              <image>
-                                                <Image fx:id="tile302" url="@../img/tiles/302.jpg" />
+                                                <Image fx:id="tile302" url="@../../ressources/img/tiles/302.jpg" />
                                              </image>
                                           </ImageView>
                                           <ImageView fx:id="grid3_cell02" fitHeight="53.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="0" GridPane.rowIndex="2">
                                              <image>
-                                                <Image fx:id="tile311" url="@../img/tiles/311.jpg" />
+                                                <Image fx:id="tile311" url="@../../ressources/img/tiles/311.jpg" />
                                              </image>
                                           </ImageView>
                                           <ImageView fx:id="grid3_cell12" fitHeight="53.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="2">
                                              <image>
-                                                <Image fx:id="tile312" url="@../img/tiles/312.jpg" />
+                                                <Image fx:id="tile312" url="@../../ressources/img/tiles/312.jpg" />
                                              </image>
                                           </ImageView>
                                           <ImageView fx:id="grid3_cell22" fitHeight="53.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="2">
                                              <image>
-                                                <Image fx:id="tile321" url="@../img/tiles/321.jpg" />
+                                                <Image fx:id="tile321" url="@../../ressources/img/tiles/321.jpg" />
                                              </image>
                                           </ImageView>
                                           <ImageView fx:id="grid3_cell32" fitHeight="53.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="2">
                                              <image>
-                                                <Image fx:id="tile322" url="@../img/tiles/322.jpg" />
+                                                <Image fx:id="tile322" url="@../../ressources/img/tiles/322.jpg" />
                                              </image>
                                           </ImageView>
                                           <ImageView fx:id="grid3_cell42" fitHeight="53.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="2">
                                              <image>
-                                                <Image fx:id="tile331" url="@../img/tiles/331.jpg" />
+                                                <Image fx:id="tile331" url="@../../ressources/img/tiles/331.jpg" />
                                              </image>
                                           </ImageView>
                                           <ImageView fx:id="grid3_cell03" fitHeight="53.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="0" GridPane.rowIndex="3">
                                              <image>
-                                                <Image fx:id="tile332" url="@../img/tiles/332.jpg" />
+                                                <Image fx:id="tile332" url="@../../ressources/img/tiles/332.jpg" />
                                              </image>
                                           </ImageView>
                                           <ImageView fx:id="grid3_cell13" fitHeight="53.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="3">
                                              <image>
-                                                <Image fx:id="tile341" url="@../img/tiles/341.jpg" />
+                                                <Image fx:id="tile341" url="@../../ressources/img/tiles/341.jpg" />
                                              </image>
                                           </ImageView>
                                           <ImageView fx:id="grid3_cell23" fitHeight="53.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="3">
                                              <image>
-                                                <Image fx:id="tile342" url="@../img/tiles/342.jpg" />
+                                                <Image fx:id="tile342" url="@../../ressources/img/tiles/342.jpg" />
                                              </image>
                                           </ImageView>
                                           <ImageView fx:id="grid3_cell33" fitHeight="53.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="3">
                                              <image>
-                                                <Image fx:id="tile351" url="@../img/tiles/351.jpg" />
+                                                <Image fx:id="tile351" url="@../../ressources/img/tiles/351.jpg" />
                                              </image>
                                           </ImageView>
                                           <ImageView fx:id="grid3_cell43" fitHeight="53.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="3">
                                              <image>
-                                                <Image fx:id="tile352" url="@../img/tiles/352.jpg" />
+                                                <Image fx:id="tile352" url="@../../ressources/img/tiles/352.jpg" />
                                              </image>
                                           </ImageView>
                                           <ImageView fx:id="grid3_cell04" fitHeight="53.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="0" GridPane.rowIndex="4">
                                              <image>
-                                                <Image fx:id="tile361" url="@../img/tiles/361.jpg" />
+                                                <Image fx:id="tile361" url="@../../ressources/img/tiles/361.jpg" />
                                              </image>
                                           </ImageView>
                                           <ImageView fx:id="grid3_cell14" fitHeight="53.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="4">
                                              <image>
-                                                <Image fx:id="tile362" url="@../img/tiles/362.jpg" />
+                                                <Image fx:id="tile362" url="@../../ressources/img/tiles/362.jpg" />
                                              </image>
                                           </ImageView>
                                           <ImageView fx:id="grid3_cell24" fitHeight="53.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="4">
                                              <image>
-                                                <Image fx:id="tile371" url="@../img/tiles/371.jpg" />
+                                                <Image fx:id="tile371" url="@../../ressources/img/tiles/371.jpg" />
                                              </image>
                                           </ImageView>
                                           <ImageView fx:id="grid3_cell34" fitHeight="53.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="4">
                                              <image>
-                                                <Image fx:id="tile372" url="@../img/tiles/372.jpg" />
+                                                <Image fx:id="tile372" url="@../../ressources/img/tiles/372.jpg" />
                                              </image>
                                           </ImageView>
                                           <ImageView fx:id="grid3_cell44" fitHeight="53.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="4">
                                              <image>
-                                                <Image fx:id="tile381" url="@../img/tiles/381.jpg" />
+                                                <Image fx:id="tile381" url="@../../ressources/img/tiles/381.jpg" />
                                              </image>
                                           </ImageView>
                                        </children>
@@ -458,7 +458,7 @@
                                     </GridPane>
                                     <ImageView fx:id="king31" fitHeight="70.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image fx:id="blueKing1" url="@../img/kings/blueKing.png" />
+                                          <Image fx:id="blueKing1" url="@../../ressources/img/kings/blueKing.png" />
                                        </image>
                                        <VBox.margin>
                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -466,7 +466,7 @@
                                     </ImageView>
                                     <ImageView fx:id="king32" fitHeight="70.0" fitWidth="42.0" layoutX="36.0" layoutY="145.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image fx:id="blueKing2" url="@../img/kings/blueKing.png" />
+                                          <Image fx:id="blueKing2" url="@../../ressources/img/kings/blueKing.png" />
                                        </image>
                                        <VBox.margin>
                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -789,7 +789,7 @@
                                     </Text>
                                     <ImageView fx:id="king21" fitHeight="70.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image fx:id="yellowKing1" url="@../img/kings/yellowKing.png" />
+                                          <Image fx:id="yellowKing1" url="@../../ressources/img/kings/yellowKing.png" />
                                        </image>
                                        <VBox.margin>
                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -797,7 +797,7 @@
                                     </ImageView>
                                     <ImageView fx:id="king22" fitHeight="70.0" fitWidth="42.0" layoutX="35.0" layoutY="145.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image fx:id="yellowKing2" url="@../img/kings/yellowKing.png" />
+                                          <Image fx:id="yellowKing2" url="@../../ressources/img/kings/yellowKing.png" />
                                        </image>
                                        <VBox.margin>
                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -868,127 +868,127 @@
                                        <children>
                                           <ImageView fx:id="grid2_cell00" fitHeight="53.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="0" GridPane.rowIndex="0">
                                              <image>
-                                                <Image fx:id="tile132" url="@../img/tiles/132.jpg" />
+                                                <Image fx:id="tile132" url="@../../ressources/img/tiles/132.jpg" />
                                              </image>
                                           </ImageView>
                                           <ImageView fx:id="grid2_cell10" fitHeight="53.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="0">
                                              <image>
-                                                <Image fx:id="tile141" url="@../img/tiles/141.jpg" />
+                                                <Image fx:id="tile141" url="@../../ressources/img/tiles/141.jpg" />
                                              </image>
                                           </ImageView>
                                           <ImageView fx:id="grid2_cell20" fitHeight="53.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="0">
                                              <image>
-                                                <Image fx:id="tile142" url="@../img/tiles/142.jpg" />
+                                                <Image fx:id="tile142" url="@../../ressources/img/tiles/142.jpg" />
                                              </image>
                                           </ImageView>
                                           <ImageView fx:id="grid2_cell30" fitHeight="53.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="0">
                                              <image>
-                                                <Image fx:id="tile151" url="@../img/tiles/151.jpg" />
+                                                <Image fx:id="tile151" url="@../../ressources/img/tiles/151.jpg" />
                                              </image>
                                           </ImageView>
                                           <ImageView fx:id="grid2_cell40" fitHeight="53.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="0">
                                              <image>
-                                                <Image fx:id="tile152" url="@../img/tiles/152.jpg" />
+                                                <Image fx:id="tile152" url="@../../ressources/img/tiles/152.jpg" />
                                              </image>
                                           </ImageView>
                                           <ImageView fx:id="grid2_cell01" fitHeight="53.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="0" GridPane.rowIndex="1">
                                              <image>
-                                                <Image fx:id="tile161" url="@../img/tiles/161.jpg" />
+                                                <Image fx:id="tile161" url="@../../ressources/img/tiles/161.jpg" />
                                              </image>
                                           </ImageView>
                                           <ImageView fx:id="grid2_cell11" fitHeight="53.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                              <image>
-                                                <Image fx:id="tile162" url="@../img/tiles/162.jpg" />
+                                                <Image fx:id="tile162" url="@../../ressources/img/tiles/162.jpg" />
                                              </image>
                                           </ImageView>
                                           <ImageView fx:id="grid2_cell21" fitHeight="53.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
                                              <image>
-                                                <Image fx:id="tile171" url="@../img/tiles/171.jpg" />
+                                                <Image fx:id="tile171" url="@../../ressources/img/tiles/171.jpg" />
                                              </image>
                                           </ImageView>
                                           <ImageView fx:id="grid2_cell31" fitHeight="53.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="1">
                                              <image>
-                                                <Image fx:id="tile172" url="@../img/tiles/172.jpg" />
+                                                <Image fx:id="tile172" url="@../../ressources/img/tiles/172.jpg" />
                                              </image>
                                           </ImageView>
                                           <ImageView fx:id="grid2_cell41" fitHeight="53.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="1">
                                              <image>
-                                                <Image fx:id="tile181" url="@../img/tiles/181.jpg" />
+                                                <Image fx:id="tile181" url="@../../ressources/img/tiles/181.jpg" />
                                              </image>
                                           </ImageView>
                                           <ImageView fx:id="grid2_cell02" fitHeight="53.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="0" GridPane.rowIndex="2">
                                              <image>
-                                                <Image fx:id="tile182" url="@../img/tiles/182.jpg" />
+                                                <Image fx:id="tile182" url="@../../ressources/img/tiles/182.jpg" />
                                              </image>
                                           </ImageView>
                                           <ImageView fx:id="grid2_cell12" fitHeight="53.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="2">
                                              <image>
-                                                <Image fx:id="tile191" url="@../img/tiles/191.jpg" />
+                                                <Image fx:id="tile191" url="@../../ressources/img/tiles/191.jpg" />
                                              </image>
                                           </ImageView>
                                           <ImageView fx:id="grid2_cell22" fitHeight="53.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="2">
                                              <image>
-                                                <Image fx:id="tile192" url="@../img/tiles/192.jpg" />
+                                                <Image fx:id="tile192" url="@../../ressources/img/tiles/192.jpg" />
                                              </image>
                                           </ImageView>
                                           <ImageView fx:id="grid2_cell32" fitHeight="53.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="2">
                                              <image>
-                                                <Image fx:id="tile201" url="@../img/tiles/201.jpg" />
+                                                <Image fx:id="tile201" url="@../../ressources/img/tiles/201.jpg" />
                                              </image>
                                           </ImageView>
                                           <ImageView fx:id="grid2_cell42" fitHeight="53.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="2">
                                              <image>
-                                                <Image fx:id="tile202" url="@../img/tiles/202.jpg" />
+                                                <Image fx:id="tile202" url="@../../ressources/img/tiles/202.jpg" />
                                              </image>
                                           </ImageView>
                                           <ImageView fx:id="grid2_cell03" fitHeight="53.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="0" GridPane.rowIndex="3">
                                              <image>
-                                                <Image fx:id="tile211" url="@../img/tiles/211.jpg" />
+                                                <Image fx:id="tile211" url="@../../ressources/img/tiles/211.jpg" />
                                              </image>
                                           </ImageView>
                                           <ImageView fx:id="grid2_cell13" fitHeight="53.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="3">
                                              <image>
-                                                <Image fx:id="tile212" url="@../img/tiles/212.jpg" />
+                                                <Image fx:id="tile212" url="@../../ressources/img/tiles/212.jpg" />
                                              </image>
                                           </ImageView>
                                           <ImageView fx:id="grid2_cell23" fitHeight="53.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="3">
                                              <image>
-                                                <Image fx:id="tile221" url="@../img/tiles/221.jpg" />
+                                                <Image fx:id="tile221" url="@../../ressources/img/tiles/221.jpg" />
                                              </image>
                                           </ImageView>
                                           <ImageView fx:id="grid2_cell33" fitHeight="53.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="3">
                                              <image>
-                                                <Image fx:id="tile222" url="@../img/tiles/222.jpg" />
+                                                <Image fx:id="tile222" url="@../../ressources/img/tiles/222.jpg" />
                                              </image>
                                           </ImageView>
                                           <ImageView fx:id="grid2_cell43" fitHeight="53.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="3">
                                              <image>
-                                                <Image fx:id="tile231" url="@../img/tiles/231.jpg" />
+                                                <Image fx:id="tile231" url="@../../ressources/img/tiles/231.jpg" />
                                              </image>
                                           </ImageView>
                                           <ImageView fx:id="grid2_cell04" fitHeight="53.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="0" GridPane.rowIndex="4">
                                              <image>
-                                                <Image fx:id="tile232" url="@../img/tiles/232.jpg" />
+                                                <Image fx:id="tile232" url="@../../ressources/img/tiles/232.jpg" />
                                              </image>
                                           </ImageView>
                                           <ImageView fx:id="grid2_cell14" fitHeight="53.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="4">
                                              <image>
-                                                <Image fx:id="tile241" url="@../img/tiles/241.jpg" />
+                                                <Image fx:id="tile241" url="@../../ressources/img/tiles/241.jpg" />
                                              </image>
                                           </ImageView>
                                           <ImageView fx:id="grid2_cell24" fitHeight="53.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="4">
                                              <image>
-                                                <Image fx:id="tile242" url="@../img/tiles/242.jpg" />
+                                                <Image fx:id="tile242" url="@../../ressources/img/tiles/242.jpg" />
                                              </image>
                                           </ImageView>
                                           <ImageView fx:id="grid2_cell34" fitHeight="53.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="4">
                                              <image>
-                                                <Image fx:id="tile251" url="@../img/tiles/251.jpg" />
+                                                <Image fx:id="tile251" url="@../../ressources/img/tiles/251.jpg" />
                                              </image>
                                           </ImageView>
                                           <ImageView fx:id="grid2_cell44" fitHeight="53.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="4">
                                              <image>
-                                                <Image fx:id="tile252" url="@../img/tiles/252.jpg" />
+                                                <Image fx:id="tile252" url="@../../ressources/img/tiles/252.jpg" />
                                              </image>
                                           </ImageView>
                                        </children>
@@ -1044,7 +1044,7 @@
                                     </GridPane>
                                     <ImageView fx:id="king41" fitHeight="70.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image fx:id="redKing1" url="@../img/kings/redKing.png" />
+                                          <Image fx:id="redKing1" url="@../../ressources/img/kings/redKing.png" />
                                        </image>
                                        <VBox.margin>
                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -1052,7 +1052,7 @@
                                     </ImageView>
                                     <ImageView fx:id="king42" fitHeight="70.0" fitWidth="42.0" layoutX="35.0" layoutY="145.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image fx:id="redKing2" url="@../img/kings/redKing.png" />
+                                          <Image fx:id="redKing2" url="@../../ressources/img/kings/redKing.png" />
                                        </image>
                                        <VBox.margin>
                                           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -1091,127 +1091,127 @@
                                        <children>
                                           <ImageView fx:id="grid4_cell00" fitHeight="53.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="0" GridPane.rowIndex="0">
                                              <image>
-                                                <Image fx:id="tile382" url="@../img/tiles/382.jpg" />
+                                                <Image fx:id="tile382" url="@../../ressources/img/tiles/382.jpg" />
                                              </image>
                                           </ImageView>
                                           <ImageView fx:id="grid4_cell10" fitHeight="53.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="0">
                                              <image>
-                                                <Image fx:id="tile391" url="@../img/tiles/391.jpg" />
+                                                <Image fx:id="tile391" url="@../../ressources/img/tiles/391.jpg" />
                                              </image>
                                           </ImageView>
                                           <ImageView fx:id="grid4_cell20" fitHeight="53.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="0">
                                              <image>
-                                                <Image fx:id="tile392" url="@../img/tiles/392.jpg" />
+                                                <Image fx:id="tile392" url="@../../ressources/img/tiles/392.jpg" />
                                              </image>
                                           </ImageView>
                                           <ImageView fx:id="grid4_cell30" fitHeight="53.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="0">
                                              <image>
-                                                <Image fx:id="tile401" url="@../img/tiles/401.jpg" />
+                                                <Image fx:id="tile401" url="@../../ressources/img/tiles/401.jpg" />
                                              </image>
                                           </ImageView>
                                           <ImageView fx:id="grid4_cell40" fitHeight="53.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="0">
                                              <image>
-                                                <Image fx:id="tile402" url="@../img/tiles/402.jpg" />
+                                                <Image fx:id="tile402" url="@../../ressources/img/tiles/402.jpg" />
                                              </image>
                                           </ImageView>
                                           <ImageView fx:id="grid4_cell01" fitHeight="53.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="0" GridPane.rowIndex="1">
                                              <image>
-                                                <Image fx:id="tile411" url="@../img/tiles/411.jpg" />
+                                                <Image fx:id="tile411" url="@../../ressources/img/tiles/411.jpg" />
                                              </image>
                                           </ImageView>
                                           <ImageView fx:id="grid4_cell11" fitHeight="53.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                              <image>
-                                                <Image fx:id="tile412" url="@../img/tiles/412.jpg" />
+                                                <Image fx:id="tile412" url="@../../ressources/img/tiles/412.jpg" />
                                              </image>
                                           </ImageView>
                                           <ImageView fx:id="grid4_cell21" fitHeight="53.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
                                              <image>
-                                                <Image fx:id="tile421" url="@../img/tiles/421.jpg" />
+                                                <Image fx:id="tile421" url="@../../ressources/img/tiles/421.jpg" />
                                              </image>
                                           </ImageView>
                                           <ImageView fx:id="grid4_cell31" fitHeight="53.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="1">
                                              <image>
-                                                <Image fx:id="tile422" url="@../img/tiles/422.jpg" />
+                                                <Image fx:id="tile422" url="@../../ressources/img/tiles/422.jpg" />
                                              </image>
                                           </ImageView>
                                           <ImageView fx:id="grid4_cell41" fitHeight="53.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="1">
                                              <image>
-                                                <Image fx:id="tile431" url="@../img/tiles/431.jpg" />
+                                                <Image fx:id="tile431" url="@../../ressources/img/tiles/431.jpg" />
                                              </image>
                                           </ImageView>
                                           <ImageView fx:id="grid4_cell02" fitHeight="53.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="0" GridPane.rowIndex="2">
                                              <image>
-                                                <Image fx:id="tile432" url="@../img/tiles/432.jpg" />
+                                                <Image fx:id="tile432" url="@../../ressources/img/tiles/432.jpg" />
                                              </image>
                                           </ImageView>
                                           <ImageView fx:id="grid4_cell12" fitHeight="53.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="2">
                                              <image>
-                                                <Image fx:id="tile441" url="@../img/tiles/441.jpg" />
+                                                <Image fx:id="tile441" url="@../../ressources/img/tiles/441.jpg" />
                                              </image>
                                           </ImageView>
                                           <ImageView fx:id="grid4_cell22" fitHeight="53.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="2">
                                              <image>
-                                                <Image fx:id="tile442" url="@../img/tiles/442.jpg" />
+                                                <Image fx:id="tile442" url="@../../ressources/img/tiles/442.jpg" />
                                              </image>
                                           </ImageView>
                                           <ImageView fx:id="grid4_cell32" fitHeight="53.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="2">
                                              <image>
-                                                <Image fx:id="tile451" url="@../img/tiles/451.jpg" />
+                                                <Image fx:id="tile451" url="@../../ressources/img/tiles/451.jpg" />
                                              </image>
                                           </ImageView>
                                           <ImageView fx:id="grid4_cell42" fitHeight="53.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="2">
                                              <image>
-                                                <Image fx:id="tile452" url="@../img/tiles/452.jpg" />
+                                                <Image fx:id="tile452" url="@../../ressources/img/tiles/452.jpg" />
                                              </image>
                                           </ImageView>
                                           <ImageView fx:id="grid4_cell03" fitHeight="53.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="0" GridPane.rowIndex="3">
                                              <image>
-                                                <Image fx:id="tile461" url="@../img/tiles/461.jpg" />
+                                                <Image fx:id="tile461" url="@../../ressources/img/tiles/461.jpg" />
                                              </image>
                                           </ImageView>
                                           <ImageView fx:id="grid4_cell13" fitHeight="53.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="3">
                                              <image>
-                                                <Image fx:id="tile462" url="@../img/tiles/462.jpg" />
+                                                <Image fx:id="tile462" url="@../../ressources/img/tiles/462.jpg" />
                                              </image>
                                           </ImageView>
                                           <ImageView fx:id="grid4_cell23" fitHeight="53.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="3">
                                              <image>
-                                                <Image fx:id="tile471" url="@../img/tiles/471.jpg" />
+                                                <Image fx:id="tile471" url="@../../ressources/img/tiles/471.jpg" />
                                              </image>
                                           </ImageView>
                                           <ImageView fx:id="grid4_cell33" fitHeight="53.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="3">
                                              <image>
-                                                <Image fx:id="tile472" url="@../img/tiles/472.jpg" />
+                                                <Image fx:id="tile472" url="@../../ressources/img/tiles/472.jpg" />
                                              </image>
                                           </ImageView>
                                           <ImageView fx:id="grid4_cell43" fitHeight="53.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="3">
                                              <image>
-                                                <Image fx:id="tile481" url="@../img/tiles/481.jpg" />
+                                                <Image fx:id="tile481" url="@../../ressources/img/tiles/481.jpg" />
                                              </image>
                                           </ImageView>
                                           <ImageView fx:id="grid4_cell04" fitHeight="53.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="0" GridPane.rowIndex="4">
                                              <image>
-                                                <Image fx:id="tile482" url="@../img/tiles/482.jpg" />
+                                                <Image fx:id="tile482" url="@../../ressources/img/tiles/482.jpg" />
                                              </image>
                                           </ImageView>
                                           <ImageView fx:id="grid4_cell14" fitHeight="53.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="4">
                                              <image>
-                                                <Image fx:id="yellowCastle" url="@../img/castleTiles/yellowCastle.jpg" />
+                                                <Image fx:id="yellowCastle" url="@../../ressources/img/castleTiles/yellowCastle.jpg" />
                                              </image>
                                           </ImageView>
                                           <ImageView fx:id="grid4_cell24" fitHeight="53.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="4">
                                              <image>
-                                                <Image fx:id="redCastle" url="@../img/castleTiles/redCastle.jpg" />
+                                                <Image fx:id="redCastle" url="@../../ressources/img/castleTiles/redCastle.jpg" />
                                              </image>
                                           </ImageView>
                                           <ImageView fx:id="grid4_cell34" fitHeight="53.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="4">
                                              <image>
-                                                <Image fx:id="blueCastle" url="@../img/castleTiles/blueCastle.jpg" />
+                                                <Image fx:id="blueCastle" url="@../../ressources/img/castleTiles/blueCastle.jpg" />
                                              </image>
                                           </ImageView>
                                           <ImageView fx:id="grid4_cell44" fitHeight="53.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="4">
                                              <image>
-                                                <Image fx:id="greenCastle" url="@../img/castleTiles/greenCastle.jpg" />
+                                                <Image fx:id="greenCastle" url="@../../ressources/img/castleTiles/greenCastle.jpg" />
                                              </image>
                                           </ImageView>
                                        </children>

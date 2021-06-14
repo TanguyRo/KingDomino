@@ -363,7 +363,7 @@ public class Game {
 
     public void initialiseDrawPile(int nbPlayers, ArrayList<ArrayList<Image>> dominosImages) throws FileNotFoundException {
         // scanner va lire le contenu du fichier .csv
-        Scanner scanner = new Scanner(new File("src/dominos.csv"));
+        Scanner scanner = new Scanner(new File("src/ressources/dominos.csv"));
         scanner.nextLine();		// On saute la ligne d'en-tête
 
         // stringBuilder va stocker le contenu du fichier

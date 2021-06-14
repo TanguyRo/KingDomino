@@ -1,10 +1,13 @@
 package DomiNations;
 
+import DomiNations.controller.JavaFxGameController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+
+import java.io.IOException;
 
 public class Main extends Application {
 
@@ -13,10 +16,16 @@ public class Main extends Application {
     }
 
     @Override
-    public void start(Stage gameStage) throws Exception {
+    public void start(Stage stage) throws IOException {
 
+        Parent root = FXMLLoader.load(getClass().getResource("view/Start.fxml"));
+        stage.setTitle("DomiNations");
+        stage.setScene(new Scene(root, 1280, 720));
+        stage.show();
+
+        /*
         // Initialisation du jeu
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("GameScene.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("view/GameScene.fxml"));
         Parent root = loader.load();
         JavaFxGameController gameController = (JavaFxGameController) loader.getController();
 
@@ -24,6 +33,8 @@ public class Main extends Application {
         gameStage.setScene(new Scene(root, 1280, 720));
         gameStage.show();
 
+
+         */
 
         // Début du jeu : configuration du premier tour
         // gameController.chooseDominosFirstRound();

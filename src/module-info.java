@@ -3,4 +3,5 @@ module JavaFxGameTest {
     requires javafx.controls;
     requires javafx.graphics;
     opens DomiNations;
+    opens DomiNations.controller;
 }
