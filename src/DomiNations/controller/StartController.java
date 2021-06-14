@@ -15,7 +15,7 @@ import java.util.Objects;
 public class StartController {
 
     public void nextScene(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/DomiNations/view/GameScene.fxml")));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/DomiNations/view/PlayerNumber.fxml")));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root, 1280, 720);
         stage.setScene(scene);
