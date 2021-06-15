@@ -16,6 +16,15 @@ public class Game {
     private int nbPlayers;
     private int nbKings;
 
+    public void setPlayers(Player[] players) {
+        this.players = players;
+        this.nbPlayers = players.length;
+    }
+
+    public void setKings(King[] kings) {
+        this.kings = kings;
+    }
+
     // Rules :
     private final boolean EmpireDuMilieu;
     private final boolean Harmonie;

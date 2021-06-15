@@ -14,7 +14,7 @@ import javafx.scene.text.Text;
 import java.io.FileNotFoundException;
 import java.util.*;
 
-public class JavaFxGameController {
+public class GameController {
     private final Game game = new Game(true,true);
     private Player[] players;
     private Kingdom[] kingdoms;
@@ -22,7 +22,18 @@ public class JavaFxGameController {
     private LinkedList<Domino> drawPile;
     private Bench bench;
     private int nbPlayers;
+    private int nbNPC;
     private int nbKings;
+
+    private ArrayList<String> names;
+    private ArrayList<Integer> colors;
+
+    public void setAll(int nbPlayers, int nbNPC, ArrayList<String> names, ArrayList<Integer> colors){
+        this.nbPlayers = nbPlayers;
+        this.nbNPC = nbNPC;
+        this.names = names;
+        this.colors = colors;
+    }
 
     @FXML
     private Button startButton;
@@ -108,7 +119,7 @@ public class JavaFxGameController {
     private Label textPrompt;
 
     @FXML
-    private void initialize() {
+    public void initializeDisplay() {
         // Création des joueurs
         createPlayersAndKings();
 
@@ -135,13 +146,68 @@ public class JavaFxGameController {
         setButtonsEvents();
     }
 
-    private void createPlayersAndKings(){
-        game.createPlayersAndKings(kingsImages);
-        nbPlayers = game.getNbPlayers();        // On actualise
-        players = game.getPlayers();
-        nbKings = game.getNbKings();
-        kings = game.getKings();
-        System.out.println("Les joueurs ont bien été créés.");
+    public void createPlayersAndKings() {
+        String[] colorsNames = {"Rose", "Jaune", "Vert", "Bleu"};
+        HashMap<String, Integer> colorsToSelect = new HashMap<>();
+        for (int i=1; i<=4; i++){
+            colorsToSelect.put(colorsNames[i-1],i);
+        }
+
+        this.players = new Player[nbPlayers];
+        this.nbKings = (nbPlayers==3 ? 3 : 4);   // Taille 3 si 3 joueurs, taille 4 si 2 ou 4 joueurs
+        this.kings = new King[nbKings];
+
+        // Noms et couleurs des joueurs "rééls":
+        for(int i = 1; i<=nbPlayers-nbNPC; i++) {
+            // On crée le joueur
+            Player playerInCreation = new Player();
+
+            // On définit son nom
+            playerInCreation.setName(names.get(i-1));
+
+            // On définit la couleur
+            playerInCreation.setColor(new Color(colors.get(i-1)+1));
+            colorsToSelect.remove(playerInCreation.getColorName());
+            players[i-1] = playerInCreation;
+
+            // Création des rois en fonction du nombre de joueurs
+            createKing(playerInCreation, i, kingsImages.get(i-1));
+        }
+        // Noms et couleurs des NPC
+        for(int i = nbPlayers-nbNPC+1; i<=nbPlayers; i++) {
+            // On crée le joueur
+            NPC playerInCreation = new NPC();
+
+            // On définit son nom (aléatoire dans la liste) et sa couleur (aléatoire dans la liste des couleurs restantes)
+            playerInCreation.chooseName();
+            playerInCreation.chooseColor(colorsToSelect);
+            System.out.println(playerInCreation.getName() + " sera le joueur " + i + ". Il/elle jouera en " + playerInCreation.getColorName().toLowerCase() + ".");
+
+            players[i-1] = playerInCreation;
+
+            // Création des rois en fonction du nombre de joueurs
+            createKing(playerInCreation, i, kingsImages.get(i-1));
+        }
+
+        game.setPlayers(players);
+        game.setKings(kings);
+    }
+
+    // Fonction de base utilisée pour créer les kings dans createPlayersAndKings
+    private void createKing(Player playerInCreation, int i, ArrayList<Image> kingsImagesOfPlayer){
+        if (nbPlayers==3 || nbPlayers==4){
+            King onlyKing = new King(players[i-1]);
+            onlyKing.setImage(kingsImagesOfPlayer.get(0));
+            kings[i-1] = onlyKing;
+        }
+        else if (nbPlayers == 2){
+            King firstKing = new King(playerInCreation);
+            firstKing.setImage(kingsImagesOfPlayer.get(0));
+            kings[2*i-2] = firstKing;                           // 0 pour le joueur 1 et 3 pour le joueur 2
+            King secondKing = new King(playerInCreation);
+            secondKing.setImage(kingsImagesOfPlayer.get(1));
+            kings[2*i-1] = secondKing;                          // 1 pour le joueur 1 et 2 pour le joueur 2
+        }
     }
 
     private void initialiseKingdoms(){

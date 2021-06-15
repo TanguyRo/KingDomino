@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<?import java.util.ArrayList?>
+<GridPane alignment="center" hgap="10" prefHeight="720.0" prefWidth="1280.0" vgap="10" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="DomiNations.controller.PlayerNamesColorsController">
+   <columnConstraints>
+      <ColumnConstraints />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints />
+   </rowConstraints>
+   <children>
+      <AnchorPane prefHeight="720.0" prefWidth="1280.0">
+         <children>
+            <ImageView fitHeight="720.0" fitWidth="1280.0" preserveRatio="true">
+               <image>
+                  <Image url="@../../ressources/img/menus/playerNumber.jpg" />
+               </image>
+            </ImageView>
+            <VBox alignment="CENTER" layoutX="303.0" layoutY="260.0" prefHeight="368.0" prefWidth="673.0">
+               <padding>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </padding>
+               <children>
+                  <VBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="100.0">
+                     <children>
+                        <Label fx:id="consigne" text="Choisir les noms et les couleurs des 4 joueurs :">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Label>
+                        <Label text="(les ordinateurs choisiront automatiquement)">
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                     </children>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </VBox>
+                  <VBox fx:id="linesVBox" alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <GridPane fx:id="player1" alignment="CENTER">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="257.6636962890625" minWidth="10.0" prefWidth="156.27359008789062" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="326.062744140625" minWidth="10.0" prefWidth="261.67169189453125" />
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="214.32830810546875" minWidth="10.0" prefWidth="214.32830810546875" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <Label text="Joueur 1 :">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                                 <GridPane.margin>
+                                    <Insets left="20.0" right="20.0" />
+                                 </GridPane.margin>
+                              </Label>
+                              <TextField fx:id="nameChoicePlayer1" prefWidth="145.0" promptText="Nom" GridPane.columnIndex="1">
+                                 <GridPane.margin>
+                                    <Insets left="20.0" right="20.0" />
+                                 </GridPane.margin>
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </TextField>
+                              <ChoiceBox fx:id="colorChoicePlayer1" prefHeight="40.0" prefWidth="150.0" GridPane.columnIndex="2">
+                                 <GridPane.margin>
+                                    <Insets left="20.0" right="20.0" />
+                                 </GridPane.margin>
+                              </ChoiceBox>
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="10.0" top="10.0" />
+                           </VBox.margin>
+                        </GridPane>
+                        <GridPane fx:id="player2" alignment="CENTER">
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="257.6636962890625" minWidth="10.0" prefWidth="156.27359008789062" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="326.062744140625" minWidth="10.0" prefWidth="261.67169189453125" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="214.32830810546875" minWidth="10.0" prefWidth="214.32830810546875" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <children>
+                              <Label text="Joueur 2 :">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                                 <GridPane.margin>
+                                    <Insets left="20.0" right="20.0" />
+                                 </GridPane.margin>
+                              </Label>
+                              <TextField fx:id="nameChoicePlayer2" prefWidth="145.0" promptText="Nom" GridPane.columnIndex="1">
+                                 <GridPane.margin>
+                                    <Insets left="20.0" right="20.0" />
+                                 </GridPane.margin>
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </TextField>
+                              <ChoiceBox fx:id="colorChoicePlayer2" prefHeight="40.0" prefWidth="150.0" GridPane.columnIndex="2">
+                                 <GridPane.margin>
+                                    <Insets left="20.0" right="20.0" />
+                                 </GridPane.margin>
+                              </ChoiceBox>
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="10.0" top="10.0" />
+                           </VBox.margin>
+                        </GridPane>
+                        <GridPane fx:id="player3" alignment="CENTER">
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="257.6636962890625" minWidth="10.0" prefWidth="156.27359008789062" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="326.062744140625" minWidth="10.0" prefWidth="261.67169189453125" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="214.32830810546875" minWidth="10.0" prefWidth="214.32830810546875" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <children>
+                              <Label text="Joueur 3 :">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                                 <GridPane.margin>
+                                    <Insets left="20.0" right="20.0" />
+                                 </GridPane.margin>
+                              </Label>
+                              <TextField fx:id="nameChoicePlayer3" prefWidth="145.0" promptText="Nom" GridPane.columnIndex="1">
+                                 <GridPane.margin>
+                                    <Insets left="20.0" right="20.0" />
+                                 </GridPane.margin>
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </TextField>
+                              <ChoiceBox fx:id="colorChoicePlayer3" prefHeight="40.0" prefWidth="150.0" GridPane.columnIndex="2">
+                                 <GridPane.margin>
+                                    <Insets left="20.0" right="20.0" />
+                                 </GridPane.margin>
+                              </ChoiceBox>
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="10.0" top="10.0" />
+                           </VBox.margin>
+                        </GridPane>
+                        <GridPane fx:id="player4" alignment="CENTER">
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="257.6636962890625" minWidth="10.0" prefWidth="156.27359008789062" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="326.062744140625" minWidth="10.0" prefWidth="261.67169189453125" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="214.32830810546875" minWidth="10.0" prefWidth="214.32830810546875" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <children>
+                              <Label text="Joueur 4 :">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                                 <GridPane.margin>
+                                    <Insets left="20.0" right="20.0" />
+                                 </GridPane.margin>
+                              </Label>
+                              <TextField fx:id="nameChoicePlayer4" prefWidth="145.0" promptText="Nom" GridPane.columnIndex="1">
+                                 <GridPane.margin>
+                                    <Insets left="20.0" right="20.0" />
+                                 </GridPane.margin>
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </TextField>
+                              <ChoiceBox fx:id="colorChoicePlayer4" prefHeight="40.0" prefWidth="150.0" GridPane.columnIndex="2">
+                                 <GridPane.margin>
+                                    <Insets left="20.0" right="20.0" />
+                                 </GridPane.margin>
+                              </ChoiceBox>
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="10.0" top="10.0" />
+                           </VBox.margin>
+                        </GridPane>
+                     </children>
+                  </VBox>
+                  <VBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="100.0">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#nextScene" text="Jouer">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets top="20.0" />
+                           </VBox.margin>
+                        </Button>
+                     </children>
+                  </VBox>
+               </children>
+            </VBox>
+         </children>
+      </AnchorPane>
+   </children>
+   <fx:define>
+      <ArrayList fx:id="playerLines">
+         <fx:reference source="player1" />
+         <fx:reference source="player2" />
+         <fx:reference source="player3" />
+         <fx:reference source="player4" />
+      </ArrayList>
+   </fx:define>
+   <fx:define>
+      <ArrayList fx:id="colorChoices">
+         <fx:reference source="colorChoicePlayer1" />
+         <fx:reference source="colorChoicePlayer2" />
+         <fx:reference source="colorChoicePlayer3" />
+         <fx:reference source="colorChoicePlayer4" />
+      </ArrayList>
+   </fx:define>
+   <fx:define>
+      <ArrayList fx:id="nameChoices">
+         <fx:reference source="nameChoicePlayer1" />
+         <fx:reference source="nameChoicePlayer2" />
+         <fx:reference source="nameChoicePlayer3" />
+         <fx:reference source="nameChoicePlayer4" />
+      </ArrayList>
+   </fx:define>
+</GridPane>

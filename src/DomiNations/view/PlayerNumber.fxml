@@ -115,7 +115,7 @@
                   </GridPane>
                   <HBox alignment="CENTER" prefHeight="68.0" prefWidth="573.0">
                      <children>
-                        <Button mnemonicParsing="false" onAction="#nextScene" text="Jouer">
+                        <Button mnemonicParsing="false" onAction="#nextScene" text="Continuer">
                            <font>
                               <Font size="24.0" />
                            </font>

@@ -21,6 +21,14 @@ public class Player {
         directionsMap.put("droite","right");
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setColor(Color color) {
+        this.color = color;
+    }
+
     public String getName() {
         return name;
     }

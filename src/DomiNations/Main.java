@@ -1,6 +1,5 @@
 package DomiNations;
 
-import DomiNations.controller.JavaFxGameController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

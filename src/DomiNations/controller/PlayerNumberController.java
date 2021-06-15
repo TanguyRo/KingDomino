@@ -59,7 +59,42 @@ public class PlayerNumberController {
     }
 
     public void nextScene(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/DomiNations/view/GameScene.fxml")));
+        int nbPlayers = -1;
+        if (twoPlayersChoice.isSelected()){
+            nbPlayers = 2;
+        }
+        else if (threePlayersChoice.isSelected()){
+            nbPlayers = 3;
+        }
+        else if (fourPlayersChoice.isSelected()){
+            nbPlayers = 4;
+        }
+
+        int nbNPC = -1;
+        if (zeroNPCChoice.isSelected()){
+            nbNPC = 0;
+        }
+        else if (oneNPCChoice.isSelected()){
+            nbNPC = 1;
+        }
+        else if (twoNPCChoice.isSelected()){
+            nbNPC = 2;
+        }
+        else if (threeNPCChoice.isSelected()){
+            nbNPC = 3;
+        }
+
+        if (nbPlayers == -1 || nbNPC == -1){
+            throw new IllegalStateException("Une valeur est incorrecte");
+        }
+
+        FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource("/DomiNations/view/PlayerNamesColors.fxml")));
+        Parent root = loader.load();
+
+        PlayerNamesColorsController nextSceneController = loader.getController();
+        nextSceneController.setNbPlayers(nbPlayers, nbNPC);
+        nextSceneController.initDisplay();
+
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root, 1280, 720);
         stage.setScene(scene);
