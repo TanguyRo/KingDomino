@@ -24,6 +24,7 @@ public class GameController {
     private int nbPlayers;
     private int nbNPC;
     private int nbKings;
+    private boolean firstDrawRight;
 
     private ArrayList<String> names;
     private ArrayList<Integer> colors;
@@ -34,9 +35,6 @@ public class GameController {
         this.names = names;
         this.colors = colors;
     }
-
-    @FXML
-    private Button startButton;
 
     // AnchorPane principal et différents fonds
     @FXML
@@ -118,6 +116,10 @@ public class GameController {
     @FXML
     private Label textPrompt;
 
+    // Bouton pour la pioche
+    @FXML
+    private Button drawButton;
+
     @FXML
     public void initializeDisplay() {
         // Création des joueurs
@@ -141,7 +143,10 @@ public class GameController {
         // Création et remplissage avec les premiers dominos
         bench = new Bench(nbKings);
         bench.drawFirstLane(drawPile);        // On rempli la lane de gauche pour la première fois en piochant au hasard des dominos
+
+        chooseDominosFirstRound();
         actualiseBench();
+        firstDrawRight = true;
 
         setButtonsEvents();
     }
@@ -345,6 +350,8 @@ public class GameController {
     }
 
     public void setButtonsEvents(){
+
+        // Pour les flèches
         for (int i=0; i<nbPlayers; i++){
             ArrayList<Button> playerButtons = moveButtons.get(i);
             Kingdom kingdom = kingdoms[i];
@@ -380,6 +387,25 @@ public class GameController {
             }
 
         }
+
+        // Pour le bouton de pioche
+        drawButton.setOnAction((event) -> {
+            if (drawPile.size()>0){
+                if (firstDrawRight){
+                    bench.drawSecondLane(drawPile);
+                    actualiseBench();
+                    firstDrawRight = false;
+                }
+                else {
+                    bench.drawDominos(drawPile); // On actualise le banc en piochant des nouveaux dominos
+                    actualiseBench();
+                }
+                textPrompt.setText(bench.getSize() + " nouveaux dominos ont été piochés.");
+            }
+            else{
+                textPrompt.setText("La pioche est vide.");
+            }
+        });
     }
 
     public void chooseDominosFirstRound(){

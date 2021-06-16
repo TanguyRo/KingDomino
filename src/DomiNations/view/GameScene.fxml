@@ -490,20 +490,20 @@
             </VBox>
             <VBox fx:id="centerPanel" alignment="CENTER" layoutX="410.0" prefHeight="720.0" prefWidth="460.0">
                <children>
-                  <HBox alignment="CENTER" prefHeight="180.0" prefWidth="460.0">
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
+                  <VBox alignment="TOP_CENTER" prefHeight="180.0" prefWidth="460.0">
                      <children>
-                        <Label fx:id="textPrompt" alignment="CENTER" textAlignment="CENTER" textFill="WHITE" textOverrun="CENTER_ELLIPSIS">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
+                        <HBox alignment="CENTER" prefHeight="140.0" prefWidth="460.0">
+                           <children>
+                              <Label fx:id="textPrompt" alignment="CENTER" textAlignment="CENTER" textFill="WHITE" textOverrun="CENTER_ELLIPSIS">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <Button fx:id="drawButton" mnemonicParsing="false" text="Pioche" />
                      </children>
-                     <padding>
-                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
-                     </padding></HBox>
+                  </VBox>
                   <VBox fx:id="benchVBox" alignment="CENTER" prefHeight="540.0" prefWidth="460.0">
                      <children>
                         <HBox alignment="CENTER" prefHeight="90.0" prefWidth="460.0">
