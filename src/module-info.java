@@ -1,4 +1,4 @@
-module JavaFxGameTest {
+module DomiNations {
     requires javafx.fxml;
     requires javafx.controls;
     requires javafx.graphics;
