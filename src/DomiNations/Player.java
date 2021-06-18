@@ -49,11 +49,11 @@ public class Player {
         this.kingdom = kingdom;
     }
 
-    // Le nom est directement atttribué au Player
+    // Le nom est directement attribué au Player
     public void chooseName(int i){
         System.out.println("Saisir le nom du joueur " + i + " : ");
         String nameInput = scanner.nextLine();
-        nameInput = nameInput.substring(0, 1).toUpperCase() + nameInput.substring(1).toLowerCase();   // On met la première lettre en majuscules et le reste en minsucules
+        nameInput = nameInput.substring(0, 1).toUpperCase() + nameInput.substring(1).toLowerCase();   // On met la première lettre en majuscules et le reste en minuscules
         name = nameInput;
     }
 
@@ -64,7 +64,7 @@ public class Player {
             String colorsList = String.join(", ", colorsToSelect.keySet()).replaceAll(", (?=[A-Za-z]*$)"," ou ");
             System.out.println("Saisir la couleur du joueur " + i + " parmi " + colorsList + " : ");
             String colorInput = scanner.nextLine();
-            colorInput = colorInput.substring(0, 1).toUpperCase() + colorInput.substring(1).toLowerCase();   // On met la première lettre en majuscules et le reste en minsucules
+            colorInput = colorInput.substring(0, 1).toUpperCase() + colorInput.substring(1).toLowerCase();   // On met la première lettre en majuscules et le reste en minuscules
 
             if (colorsToSelect.containsKey(colorInput)) {
                 colorNumber = colorsToSelect.get(colorInput);
@@ -116,7 +116,7 @@ public class Player {
             // Premier essai
         try {
             System.out.println("Saisir l'orientation du domino (1, 2, 3 ou 4) : ");
-            System.out.println("(1 correpond au domino horizontal tel quel, 2 correpond au domino pivoté de 90° dans le sens des aiguilles d'une montre, 3 au domino pivoté de 180° et 4 au domino pivoté de -90°)");
+            System.out.println("(1 correspond au domino horizontal tel quel, 2 correspond au domino pivoté de 90° dans le sens des aiguilles d'une montre, 3 au domino pivoté de 180° et 4 au domino pivoté de -90°)");
             orientation = scanner.nextInt();
             scanner.nextLine();
             if (orientation<1 || orientation>4) {
